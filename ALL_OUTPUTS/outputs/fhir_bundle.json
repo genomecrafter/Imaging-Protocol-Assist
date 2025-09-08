@@ -1,0 +1,212 @@
+{
+  "resourceType": "Bundle",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "CarePlan",
+        "id": "careplan-imaging-recommendations",
+        "status": "active",
+        "intent": "plan",
+        "title": "Imaging Recommendations and Rationale",
+        "description": "Comprehensive recommendations and their underlying rationale for diagnostic imaging in a critically ill patient.",
+        "activity": [
+          {
+            "detail": {
+              "kind": "Task",
+              "description": "Perform a focused, contrast-enhanced CT angiography of the chest (arterial phase) to specifically assess the thoracic aorta. Omit abdominal and pelvic imaging unless clinically indicated.",
+              "status": "not-started"
+            }
+          },
+          {
+            "detail": {
+              "kind": "Task",
+              "description": "Utilize a low-volume, weight-based contrast dose (approximately 80-100 mL of high-iodine-concentration agent) with a split-bolus or single-phase arterial protocol to minimize iodine load.",
+              "status": "not-started"
+            }
+          },
+          {
+            "detail": {
+              "kind": "Task",
+              "description": "If hemodynamic instability precludes safe transport, consider bedside transesophageal echocardiography (TEE) or focused cardiac ultrasound as an alternative imaging modality.",
+              "status": "not-started"
+            }
+          },
+          {
+            "detail": {
+              "kind": "Task",
+              "description": "Schedule follow-up renal labs (creatinine, eGFR) at 24 and 48 hours post-contrast to monitor for acute kidney injury.",
+              "status": "not-started"
+            }
+          }
+        ],
+        "note": [
+          {
+            "text": "Tailors imaging to the primary diagnosis of thoracic aorta injury, reducing unnecessary contrast exposure and scan time."
+          },
+          {
+            "text": "Minimizes nephrotoxic load in a hypotensive patient, aligning with ACR guidelines for contrast media."
+          },
+          {
+            "text": "Addresses the risk of transport in a critically ill, hypotensive patient by suggesting alternatives."
+          },
+          {
+            "text": "Essential for early detection of contrast-induced nephropathy (CIN) in a patient with hemodynamic instability."
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "PlanDefinition",
+        "id": "plandefinition-ct-chest-angio-thoracic-aorta",
+        "url": "http://example.org/fhir/PlanDefinition/CTChestAngioThoracicAorta",
+        "version": "1.0.0",
+        "name": "CTChestAngioThoracicAorta",
+        "title": "CT Angiography — Thoracic Aorta",
+        "status": "active",
+        "experimental": false,
+        "date": "2023-10-27",
+        "description": "Contrast-enhanced CT of the chest optimized for evaluation of the thoracic aorta, including aortic arch and descending aorta. Timed for arterial phase to best visualize lumen and wall.",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "indication",
+              "display": "Indication"
+            },
+            "valueCodeableConcept": {
+              "text": "Traumatic aortic injury, Suspected aortic dissection, Aortic aneurysm evaluation"
+            }
+          }
+        ],
+        "purpose": "Provides guidance for CT Angiography of the Thoracic Aorta, indicated for Traumatic aortic injury, Suspected aortic dissection, and Aortic aneurysm evaluation.",
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "108252007",
+                "display": "Diagnostic imaging procedure"
+              },
+              {
+                "system": "http://snomed.info/sct",
+                "code": "416999002",
+                "display": "Computed tomography angiography"
+              }
+            ]
+          }
+        ],
+        "relatedArtifact": [
+          {
+            "type": "documentation",
+            "display": "ACR Manual on Contrast Media"
+          },
+          {
+            "type": "documentation",
+            "display": "Traumatic Aortic Injury Protocol (Internal Hospital Guideline)"
+          }
+        ],
+        "action": [
+          {
+            "id": "ct-protocol-details",
+            "title": "CT Angiography — Thoracic Aorta Protocol Details",
+            "description": "Details for performing Contrast-enhanced CT of the chest optimized for evaluation of the thoracic aorta.",
+            "action": [
+              {
+                "title": "Indications",
+                "description": "Traumatic aortic injury, Suspected aortic dissection, Aortic aneurysm evaluation"
+              },
+              {
+                "title": "Contrast Timing",
+                "description": "Arterial phase: ∼20–30 seconds post-injection."
+              },
+              {
+                "title": "Contrast Dose",
+                "description": "Weight-based, ~80-100 mL of high-iodine-concentration (e.g., 370 mg I/mL) iodinated contrast. Consider split-bolus technique for optimal aortic opacification."
+              },
+              {
+                "title": "Renal Safety Notes",
+                "description": "Use lowest effective volume and concentration. Confirm contrast-to-eGFR ratio. Monitor for signs of CIN. Consider iso-osmolar contrast if patient is volume depleted and fluid overload is a concern."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "PlanDefinition",
+        "id": "plandefinition-bedside-echocardiography-focus",
+        "url": "http://example.org/fhir/PlanDefinition/BedsideEchocardiographyFocus",
+        "version": "1.0.0",
+        "name": "BedsideEchocardiographyFocus",
+        "title": "Focused Bedside Echocardiography",
+        "status": "active",
+        "experimental": false,
+        "date": "2023-10-27",
+        "description": "Point-of-care ultrasound performed at the bedside to assess cardiac function, identify gross structural abnormalities, and evaluate the aortic root and ascending aorta in cases where CT transport is contraindicated or delayed.",
+        "useContext": [
+          {
+            "code": {
+              "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+              "code": "indication",
+              "display": "Indication"
+            },
+            "valueCodeableConcept": {
+              "text": "Hemodynamic instability, Assessment of cardiac function, Evaluation of aortic root/ascending aorta (limited)"
+            }
+          }
+        ],
+        "purpose": "Provides guidance for Focused Bedside Echocardiography, indicated for Hemodynamic instability, Assessment of cardiac function, and Evaluation of aortic root/ascending aorta (limited).",
+        "topic": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "108252007",
+                "display": "Diagnostic imaging procedure"
+              },
+              {
+                "system": "http://snomed.info/sct",
+                "code": "449232007",
+                "display": "Echocardiography"
+              }
+            ]
+          }
+        ],
+        "relatedArtifact": [
+          {
+            "type": "documentation",
+            "display": "ACCF/ASE Guidelines for Performance Standards for Echocardiography"
+          }
+        ],
+        "action": [
+          {
+            "id": "echo-protocol-details",
+            "title": "Focused Bedside Echocardiography Protocol Details",
+            "description": "Details for performing Point-of-care ultrasound at the bedside.",
+            "action": [
+              {
+                "title": "Indications",
+                "description": "Hemodynamic instability, Assessment of cardiac function, Evaluation of aortic root/ascending aorta (limited)"
+              },
+              {
+                "title": "Contrast Timing",
+                "description": "N/A (non-contrast study)."
+              },
+              {
+                "title": "Contrast Dose",
+                "description": "N/A."
+              },
+              {
+                "title": "Renal Safety Notes",
+                "description": "No contrast or radiation exposure. Suitable for critically ill patients."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

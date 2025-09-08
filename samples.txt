@@ -60,7 +60,6 @@
     "los_icu_days": 3.7,
     "first_careunit": "Medical Intensive Care Unit (MICU)",
     "last_careunit": "Medical Intensive Care Unit (MICU)",
-
     "creatinine_mg_dl": 1.7,
     "bun_mg_dl": 34.0,
     "glucose_mg_dl": 142.0,
@@ -68,33 +67,25 @@
     "hematocrit_pct": 30.5,
     "platelet_count": 210.0,
     "wbc_count": 12.3,
-
     "sodium_meq_l": 135.0,
     "potassium_meq_l": 4.6,
     "chloride_meq_l": 100.0,
     "bicarbonate_meq_l": 21.0,
-
-    "egfr_ckd_epi": {
-  "sample_patient": {
-    "additionalProp1": {}
-  }
-}59.0,
+    "egfr_ckd_epi": 59.0,
     "ckd_stage": "Stage 3a (Mild-to-moderate CKD)",
     "bun_creatinine_ratio": 20.0,
-
     "heart_rate_bpm": 95,
     "systolic_bp_mmhg": 82,
     "diastolic_bp_mmhg": 48,
     "map_mmhg": 59.0,
     "pulse_pressure_mmhg": 34.0,
-
     "temperature_f": 98.9,
     "spo2_pct": 94.0,
     "respiratory_rate": 22,
-
     "data_completeness_pct": 0.92
   }
 }
+
 
 
 

@@ -21,6 +21,7 @@ load_dotenv()
 from agents.aps1 import run_enhanced_agent2_protocol
 from agents.agent2_2_protocol import run_agent2_2
 from agents.agent3_reviewer import run_review_agent
+from agents.fhir_converter import convert_with_gemini  # <-- FHIR converter
 
 TEMP_DIR = Path("temp")
 TEMP_DIR.mkdir(exist_ok=True)
@@ -30,6 +31,7 @@ OUTPUTS_DIR.mkdir(exist_ok=True)
 
 OUT_ENH = TEMP_DIR / "enhanced_context.json"
 FINAL_JSON = OUTPUTS_DIR / "final.json"
+FHIR_BUNDLE = OUTPUTS_DIR / "fhir_bundle.json"  # <-- output path for FHIR bundle
 
 
 class PatientInput(BaseModel):
@@ -94,6 +96,16 @@ def run_pipeline(patient_input: dict):
     # Save final output from Agent 2_2
     save_json(final_agent2_output, FINAL_JSON)
     print(f"\n[Pipeline] Final output saved to {FINAL_JSON}")
+
+    # --- Generate FHIR Bundle from final.json ---
+    try:
+        print("[FHIR] Converting final.json to FHIR Bundle via Gemini...")
+        convert_with_gemini(str(FINAL_JSON), str(FHIR_BUNDLE))
+        print(f"[FHIR] Bundle saved to {FHIR_BUNDLE}")
+    except Exception as e:
+        # Do not break the pipeline if FHIR generation fails; just log the error.
+        print(f"[FHIR] Conversion failed: {e}")
+
     print("=== PIPELINE COMPLETE ===")
     return {"final_output": final_agent2_output, "loops_run": loop_count}
 

@@ -1,15 +1,15 @@
 {
   "recommendations": [
-    "Consider a CT Chest with Angiography for detailed assessment of the thoracic aorta and vascular structures given the primary diagnosis.",
-    "Ensure adequate hydration prior to and following contrast administration to mitigate potential renal insult.",
-    "Monitor hemodynamic status closely, particularly blood pressure, during and after contrast administration.",
-    "Explore non-contrast imaging options if contrast administration is deemed too high risk given the severe hypotension."
+    "Consider CT Pulmonary Angiography (CTPA) for acute chest pain and shortness of breath, given the high clinical suspicion for pulmonary embolism.",
+    "Given the patient's severe CKD (Stage 4, eGFR 22.0) and hypotension (MAP 57.0 mmHg), carefully weigh the risks and benefits of intravenous contrast administration for CTPA.",
+    "If CTPA is pursued, ensure adequate hydration and consider a reduced contrast volume or an alternative non-contrast imaging strategy if feasible and diagnostically adequate.",
+    "If the primary concern is not pulmonary embolism but rather to assess for other cardiopulmonary etiologies, a non-contrast chest CT (such as Low-Dose CT Chest) might be a safer alternative in the context of severe renal impairment."
   ],
   "rationale": [
-    "Primary diagnosis of 'Injury to thoracic aorta' directly aligns with the indications for CT Chest Angiography.",
-    "Severe hypotension (MAP 49.3 mmHg) is a significant risk factor for contrast-induced nephropathy and requires careful consideration of hydration and contrast protocols.",
-    "Stage 1 CKD does not preclude contrast use, but the hemodynamic instability warrants enhanced vigilance and mitigation strategies.",
-    "The trauma protocol is less specific to the aortic injury, while CT Angiography is optimized for vascular assessment."
+    "Patient presents with acute symptoms (shortness of breath, chest pain) concerning for pulmonary embolism, a primary indication for CTPA.",
+    "Severe CKD (Stage 4, eGFR 22.0) and hypotension (MAP 57.0 mmHg) significantly increase the risk of contrast-induced nephropathy (CIN) and hemodynamic instability with contrast administration.",
+    "KDIGO and ACR guidelines emphasize caution with contrast in patients with compromised renal function and hemodynamic instability.",
+    "The option of a non-contrast study is highlighted as a safer alternative given the patient's renal status, aligning with ACR recommendations."
   ],
   "protocol_selection": [
     {
@@ -30,18 +30,18 @@
       ]
     },
     {
-      "protocol_id": "CT_TRAUMA_CHEST_ABD_PELVIS",
-      "name": "Trauma CT — Chest, Abdomen & Pelvis with Contrast",
+      "protocol_id": "CT_CHEST_LOW_DOSE_SCREENING",
+      "name": "Low-Dose CT Chest — Lung Cancer Screening",
       "indications": [
-        "blunt/penetrating trauma",
-        "active hemorrhage evaluation"
+        "lung cancer screening",
+        "high-risk cohorts"
       ],
-      "description": "Contrast CT of torso with trauma-focused reformats; may include delayed images as needed.",
-      "contrast_timing": "Portal venous phase, possible delayed imaging to assess hemorrhage.",
-      "contrast_dose": "Standard contrast dose; trauma protocols may include split bolus techniques.",
-      "renal_safety_notes": "Minimize field-of-view and dose; use alternative imaging if stable and renal risk high.",
+      "description": "Low-dose CT of lungs targeting <3 mGy radiation dose while maintaining image quality.",
+      "contrast_timing": "N/A — non-contrast low-dose protocol.",
+      "contrast_dose": "None.",
+      "renal_safety_notes": "Ideal in patients with renal dysfunction due to non-use of contrast.",
       "references": [
-        "UW Trauma protocol overview (PDF):contentReference[oaicite:7]{index=7}"
+        "Low-dose CT screening dose benchmarks PMC:contentReference[oaicite:6]{index=6}"
       ]
     }
   ]

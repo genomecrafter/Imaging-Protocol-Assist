@@ -1,27 +1,24 @@
 {
   "issues": [
-    "Renal tool flagged missing BMI and lab timestamps, limiting precise contrast dose calculation and renal risk assessment.",
-    "Agent 2 selected a CT Pulmonary Angiography protocol (CT_CHEST_ANGIO_PULMONARY_EMBOLISM) that is not optimized for evaluation of a traumatic thoracic aortic injury.",
-    "Severe hypotension (MAP 49.3 mmHg, SBP 78 mmHg) markedly increases the risk of contrast‑induced nephropathy and may predispose to hemodynamic decompensation during contrast administration, yet the recommendations focus mainly on renal hydration without addressing blood pressure stabilization.",
-    "No explicit plan for contrast dose reduction, use of low‑ or iso‑osmolar agents, or split‑bolus technique to minimize nephrotoxic load.",
-    "Lack of alternative imaging strategies (e.g., dedicated CT aortography, transesophageal echocardiography, MRI) despite the high‑risk hemodynamic profile.",
-    "Hydration recommendation is vague; no specific fluid type, rate, or timing relative to contrast is provided."
+    "Agent 2 selects a contrast‑enhanced CT Pulmonary Angiography (CTPA) despite critical hyperkalemia (K⁺ = 5.8 mmol/L) and severe hypotension (MAP = 57 mmHg), which significantly increase the risk of contrast‑induced nephropathy and hemodynamic decompensation.",
+    "Renal tool flags missing BMI and lab timestamps; these missing data could affect contrast dosing calculations and risk stratification.",
+    "Protocol description includes an unclear “contrast‑to‑eGFR ratio <1.1 g/(mL/min)” metric that is not referenced in KDIGO or ACR guidelines.",
+    "Agent 2 does not mention alternative non‑contrast imaging modalities such as a ventilation/perfusion (V/Q) scan, which is often preferred in patients with severe CKD and hemodynamic instability.",
+    "No explicit pre‑hydration, post‑hydration, or electrolyte management plan is provided to mitigate the risk of further renal injury and hyperkalemia after contrast administration.",
+    "The low‑dose non‑contrast CT protocol listed is for lung cancer screening, not for acute evaluation of PE; it would not address the clinical question."
   ],
   "recommendations": [
-    "Select a dedicated CT Aortography protocol (e.g., 'CT Thoracic Aorta Angiography') rather than a pulmonary embolism CTA; this protocol provides optimal arterial phase timing for aortic injury assessment.",
-    "Obtain the patient’s weight and calculate BMI to enable weight‑based contrast dosing; aim for the lowest effective iodine load (e.g., 1.5 mL/kg of low‑ or iso‑osmolar contrast, maximum 100 mL).",
-    "Stabilize hemodynamics before contrast administration: initiate vasopressor support as needed to achieve MAP ≥65 mmHg, then proceed with imaging.",
-    "Implement aggressive IV hydration: 1 L isotonic saline over 30 min pre‑contrast, followed by 1 L over the next 2 h post‑contrast, adjusting for cardiac status.",
-    "Use low‑ or iso‑osmolar, non‑ionic contrast agents and consider a split‑bolus technique to reduce peak iodine concentration.",
-    "Monitor renal function (serum creatinine, eGFR) at baseline, 24 h, and 48 h after contrast exposure; have a contingency plan for dialysis if acute kidney injury develops.",
-    "Document exact timestamps for all relevant labs (creatinine, BUN, electrolytes) to improve future renal risk assessments.",
-    "If MAP cannot be safely corrected, consider non‑contrast imaging alternatives: transesophageal echocardiography (TEE) for aortic injury, or MRI angiography if feasible.",
-    "Include a post‑procedure hemodynamic monitoring order set: continuous arterial blood pressure, urine output, and repeat labs.",
-    "Educate the care team on the specific renal safety notes from the chosen protocol, ensuring contrast‑to‑eGFR ratio remains <1.0 g/(mL·min)."
+    "Re‑evaluate the need for CTPA; if clinical suspicion for PE is moderate, consider a V/Q scan or bedside transthoracic echocardiography as first‑line alternatives that avoid iodinated contrast.",
+    "If CTPA is deemed essential, implement aggressive renal protection: isotonic IV saline (unless contraindicated by heart failure), use iso‑osmolar, low‑iodine‑concentration contrast, and reduce volume to the minimum required (e.g., 70 mL for a 70‑kg patient).",
+    "Correct hyperkalemia before contrast administration (e.g., IV insulin‑glucose, calcium gluconate, or potassium‑binding agents) and monitor cardiac rhythm continuously.",
+    "Document patient’s BMI to allow accurate weight‑based contrast dosing; if BMI is unavailable, use an estimated weight based on height and age.",
+    "Obtain precise timestamps for all relevant labs (creatinine, BUN, potassium) within 24 h of the scan to ensure up‑to‑date risk assessment.",
+    "Amend the protocol notes to reference KDIGO and ACR guidelines for contrast use in eGFR < 30 mL/min/1.73 m², removing the non‑standard contrast‑to‑eGFR ratio metric.",
+    "Include post‑scan monitoring: repeat serum creatinine and potassium at 24–48 h, and consider nephrology consult for ongoing renal management."
   ],
   "confidence": 0.78,
   "agent2_confidence": 0.45,
-  "timestamp": "2025-08-26T10:42:27.089664Z",
+  "timestamp": "2025-09-08T05:34:26.792416Z",
   "tool_outputs": {
     "renal": {
       "tool_id": "renal_tool_v2",
@@ -29,232 +26,215 @@
         {
           "id": "egfr_ckd_epi",
           "units": "ml/min/1.73m2",
-          "timestamp": "2025-08-26T10:42:23.853828Z",
+          "timestamp": "2025-09-08T05:34:23.584268Z",
           "priority": "critical",
-          "value": 135.1,
-          "status": "pass",
-          "reason": "Low renal risk for contrast."
+          "value": 22.0,
+          "status": "fail",
+          "reason": "High renal risk; contrast caution."
         },
         {
           "id": "creatinine_mg_dl",
           "units": "mg/dL",
-          "timestamp": "2025-08-26T10:42:23.853836Z",
+          "timestamp": "2025-09-08T05:34:23.584276Z",
           "priority": "critical",
-          "value": 0.5,
-          "status": "pass",
-          "reason": "Creatinine within normal range."
+          "value": 3.2,
+          "status": "fail",
+          "reason": "Creatinine significantly elevated."
         },
         {
           "id": "bun_creatinine_ratio",
-          "timestamp": "2025-08-26T10:42:23.853842Z",
+          "timestamp": "2025-09-08T05:34:23.584280Z",
           "priority": "important",
-          "value": 16.0,
-          "status": "pass",
-          "reason": "BUN/Cr ratio normal."
+          "value": 20.3,
+          "status": "warning",
+          "reason": "BUN/Cr ratio suggests prerenal azotemia."
         },
         {
           "id": "potassium_mmol_l",
           "units": "mEq/L",
-          "timestamp": "2025-08-26T10:42:23.853851Z",
+          "timestamp": "2025-09-08T05:34:23.584287Z",
           "priority": "important",
-          "value": 3.6,
-          "status": "pass",
-          "reason": "Potassium normal."
+          "value": 5.8,
+          "status": "fail",
+          "reason": "Critical hyperkalemia."
         }
       ],
       "summary": {
-        "overall": "pass",
+        "overall": "fail",
         "reasons": [
+          "High renal risk; contrast caution.",
+          "Creatinine significantly elevated.",
+          "BUN/Cr ratio suggests prerenal azotemia.",
+          "Critical hyperkalemia.",
           "Missing BMI or creatinine.",
           "No lab timestamps provided."
         ],
-        "confidence": 0.92
+        "confidence": 0.52
       },
       "metadata": {
         "version": "2.0.0",
-        "run_ts": "2025-08-26T10:42:23.853870Z"
+        "run_ts": "2025-09-08T05:34:23.584305Z"
       }
     }
   },
-  "llm_raw": "{\n  \"issues\": [\n    \"Renal tool flagged missing BMI and lab timestamps, limiting precise contrast dose calculation and renal risk assessment.\",\n    \"Agent 2 selected a CT Pulmonary Angiography protocol (CT_CHEST_ANGIO_PULMONARY_EMBOLISM) that is not optimized for evaluation of a traumatic thoracic aortic injury.\",\n    \"Severe hypotension (MAP 49.3 mmHg, SBP 78 mmHg) markedly increases the risk of contrast‑induced nephropathy and may predispose to hemodynamic decompensation during contrast administration, yet the recommendations focus mainly on renal hydration without addressing blood pressure stabilization.\",\n    \"No explicit plan for contrast dose reduction, use of low‑ or iso‑osmolar agents, or split‑bolus technique to minimize nephrotoxic load.\",\n    \"Lack of alternative imaging strategies (e.g., dedicated CT aortography, transesophageal echocardiography, MRI) despite the high‑risk hemodynamic profile.\",\n    \"Hydration recommendation is vague; no specific fluid type, rate, or timing relative to contrast is provided.\"\n  ],\n  \"recommendations\": [\n    \"Select a dedicated CT Aortography protocol (e.g., 'CT Thoracic Aorta Angiography') rather than a pulmonary embolism CTA; this protocol provides optimal arterial phase timing for aortic injury assessment.\",\n    \"Obtain the patient’s weight and calculate BMI to enable weight‑based contrast dosing; aim for the lowest effective iodine load (e.g., 1.5 mL/kg of low‑ or iso‑osmolar contrast, maximum 100 mL).\",\n    \"Stabilize hemodynamics before contrast administration: initiate vasopressor support as needed to achieve MAP ≥65 mmHg, then proceed with imaging.\",\n    \"Implement aggressive IV hydration: 1 L isotonic saline over 30 min pre‑contrast, followed by 1 L over the next 2 h post‑contrast, adjusting for cardiac status.\",\n    \"Use low‑ or iso‑osmolar, non‑ionic contrast agents and consider a split‑bolus technique to reduce peak iodine concentration.\",\n    \"Monitor renal function (serum creatinine, eGFR) at baseline, 24 h, and 48 h after contrast exposure; have a contingency plan for dialysis if acute kidney injury develops.\",\n    \"Document exact timestamps for all relevant labs (creatinine, BUN, electrolytes) to improve future renal risk assessments.\",\n    \"If MAP cannot be safely corrected, consider non‑contrast imaging alternatives: transesophageal echocardiography (TEE) for aortic injury, or MRI angiography if feasible.\",\n    \"Include a post‑procedure hemodynamic monitoring order set: continuous arterial blood pressure, urine output, and repeat labs.\",\n    \"Educate the care team on the specific renal safety notes from the chosen protocol, ensuring contrast‑to‑eGFR ratio remains <1.0 g/(mL·min).\"\n  ],\n  \"confidence\": 0.88\n}",
+  "llm_raw": "{\n  \"issues\": [\n    \"Agent 2 selects a contrast‑enhanced CT Pulmonary Angiography (CTPA) despite critical hyperkalemia (K⁺ = 5.8 mmol/L) and severe hypotension (MAP = 57 mmHg), which significantly increase the risk of contrast‑induced nephropathy and hemodynamic decompensation.\",\n    \"Renal tool flags missing BMI and lab timestamps; these missing data could affect contrast dosing calculations and risk stratification.\",\n    \"Protocol description includes an unclear “contrast‑to‑eGFR ratio <1.1 g/(mL/min)” metric that is not referenced in KDIGO or ACR guidelines.\",\n    \"Agent 2 does not mention alternative non‑contrast imaging modalities such as a ventilation/perfusion (V/Q) scan, which is often preferred in patients with severe CKD and hemodynamic instability.\",\n    \"No explicit pre‑hydration, post‑hydration, or electrolyte management plan is provided to mitigate the risk of further renal injury and hyperkalemia after contrast administration.\",\n    \"The low‑dose non‑contrast CT protocol listed is for lung cancer screening, not for acute evaluation of PE; it would not address the clinical question.\"\n  ],\n  \"recommendations\": [\n    \"Re‑evaluate the need for CTPA; if clinical suspicion for PE is moderate, consider a V/Q scan or bedside transthoracic echocardiography as first‑line alternatives that avoid iodinated contrast.\",\n    \"If CTPA is deemed essential, implement aggressive renal protection: isotonic IV saline (unless contraindicated by heart failure), use iso‑osmolar, low‑iodine‑concentration contrast, and reduce volume to the minimum required (e.g., 70 mL for a 70‑kg patient).\",\n    \"Correct hyperkalemia before contrast administration (e.g., IV insulin‑glucose, calcium gluconate, or potassium‑binding agents) and monitor cardiac rhythm continuously.\",\n    \"Document patient’s BMI to allow accurate weight‑based contrast dosing; if BMI is unavailable, use an estimated weight based on height and age.\",\n    \"Obtain precise timestamps for all relevant labs (creatinine, BUN, potassium) within 24 h of the scan to ensure up‑to‑date risk assessment.\",\n    \"Amend the protocol notes to reference KDIGO and ACR guidelines for contrast use in eGFR < 30 mL/min/1.73 m², removing the non‑standard contrast‑to‑eGFR ratio metric.\",\n    \"Include post‑scan monitoring: repeat serum creatinine and potassium at 24–48 h, and consider nephrology consult for ongoing renal management.\"\n  ],\n  \"confidence\": 0.78\n}",
   "hallucination_analysis": {
     "statement_assessments": [
       {
-        "text": "Renal tool flagged missing BMI and lab timestamps, limiting precise contrast dose calculation and renal risk assessment.",
+        "text": "Agent 2 selects a contrast‑enhanced CT Pulmonary Angiography (CTPA) despite critical hyperkalemia (K⁺ = 5.8 mmol/L) and severe hypotension (MAP = 57 mmHg), which significantly increase the risk of contrast‑induced nephropathy and hemodynamic decompensation.",
         "type": "issue",
         "classification": "supported",
         "rationale": "matches known fact 'f'"
       },
       {
-        "text": "Agent 2 selected a CT Pulmonary Angiography protocol (CT_CHEST_ANGIO_PULMONARY_EMBOLISM) that is not optimized for evaluation of a traumatic thoracic aortic injury.",
+        "text": "Renal tool flags missing BMI and lab timestamps; these missing data could affect contrast dosing calculations and risk stratification.",
         "type": "issue",
         "classification": "supported",
         "rationale": "matches known fact 'f'"
       },
       {
-        "text": "Severe hypotension (MAP 49.3 mmHg, SBP 78 mmHg) markedly increases the risk of contrast‑induced nephropathy and may predispose to hemodynamic decompensation during contrast administration, yet the recommendations focus mainly on renal hydration without addressing blood pressure stabilization.",
-        "type": "issue",
-        "classification": "supported",
-        "rationale": "matches known fact '49.3'"
-      },
-      {
-        "text": "No explicit plan for contrast dose reduction, use of low‑ or iso‑osmolar agents, or split‑bolus technique to minimize nephrotoxic load.",
+        "text": "Protocol description includes an unclear “contrast‑to‑eGFR ratio <1.1 g/(mL/min)” metric that is not referenced in KDIGO or ACR guidelines.",
         "type": "issue",
         "classification": "supported",
         "rationale": "matches known fact 'f'"
       },
       {
-        "text": "Lack of alternative imaging strategies (e.g., dedicated CT aortography, transesophageal echocardiography, MRI) despite the high‑risk hemodynamic profile.",
+        "text": "Agent 2 does not mention alternative non‑contrast imaging modalities such as a ventilation/perfusion (V/Q) scan, which is often preferred in patients with severe CKD and hemodynamic instability.",
         "type": "issue",
         "classification": "supported",
         "rationale": "matches known fact 'f'"
       },
       {
-        "text": "Hydration recommendation is vague; no specific fluid type, rate, or timing relative to contrast is provided.",
+        "text": "No explicit pre‑hydration, post‑hydration, or electrolyte management plan is provided to mitigate the risk of further renal injury and hyperkalemia after contrast administration.",
         "type": "issue",
         "classification": "supported",
         "rationale": "matches known fact 'f'"
       },
       {
-        "text": "Select a dedicated CT Aortography protocol (e.g., 'CT Thoracic Aorta Angiography') rather than a pulmonary embolism CTA; this protocol provides optimal arterial phase timing for aortic injury assessment.",
+        "text": "The low‑dose non‑contrast CT protocol listed is for lung cancer screening, not for acute evaluation of PE; it would not address the clinical question.",
+        "type": "issue",
+        "classification": "supported",
+        "rationale": "matches known fact 'f'"
+      },
+      {
+        "text": "Re‑evaluate the need for CTPA; if clinical suspicion for PE is moderate, consider a V/Q scan or bedside transthoracic echocardiography as first‑line alternatives that avoid iodinated contrast.",
         "type": "recommendation",
         "classification": "supported",
         "rationale": "matches known fact 'f'"
       },
       {
-        "text": "Obtain the patient’s weight and calculate BMI to enable weight‑based contrast dosing; aim for the lowest effective iodine load (e.g., 1.5 mL/kg of low‑ or iso‑osmolar contrast, maximum 100 mL).",
-        "type": "recommendation",
-        "classification": "supported",
-        "rationale": "matches known fact '0'"
-      },
-      {
-        "text": "Stabilize hemodynamics before contrast administration: initiate vasopressor support as needed to achieve MAP ≥65 mmHg, then proceed with imaging.",
+        "text": "If CTPA is deemed essential, implement aggressive renal protection: isotonic IV saline (unless contraindicated by heart failure), use iso‑osmolar, low‑iodine‑concentration contrast, and reduce volume to the minimum required (e.g., 70 mL for a 70‑kg patient).",
         "type": "recommendation",
         "classification": "supported",
         "rationale": "matches known fact 'f'"
       },
       {
-        "text": "Implement aggressive IV hydration: 1 L isotonic saline over 30 min pre‑contrast, followed by 1 L over the next 2 h post‑contrast, adjusting for cardiac status.",
-        "type": "recommendation",
-        "classification": "supported",
-        "rationale": "matches known fact '0'"
-      },
-      {
-        "text": "Use low‑ or iso‑osmolar, non‑ionic contrast agents and consider a split‑bolus technique to reduce peak iodine concentration.",
-        "type": "recommendation",
-        "classification": "unverified",
-        "rationale": "no direct or inferred support found"
-      },
-      {
-        "text": "Monitor renal function (serum creatinine, eGFR) at baseline, 24 h, and 48 h after contrast exposure; have a contingency plan for dialysis if acute kidney injury develops.",
+        "text": "Correct hyperkalemia before contrast administration (e.g., IV insulin‑glucose, calcium gluconate, or potassium‑binding agents) and monitor cardiac rhythm continuously.",
         "type": "recommendation",
         "classification": "supported",
         "rationale": "matches known fact 'f'"
       },
       {
-        "text": "Document exact timestamps for all relevant labs (creatinine, BUN, electrolytes) to improve future renal risk assessments.",
+        "text": "Document patient’s BMI to allow accurate weight‑based contrast dosing; if BMI is unavailable, use an estimated weight based on height and age.",
         "type": "recommendation",
         "classification": "supported",
         "rationale": "matches known fact 'f'"
       },
       {
-        "text": "If MAP cannot be safely corrected, consider non‑contrast imaging alternatives: transesophageal echocardiography (TEE) for aortic injury, or MRI angiography if feasible.",
+        "text": "Obtain precise timestamps for all relevant labs (creatinine, BUN, potassium) within 24 h of the scan to ensure up‑to‑date risk assessment.",
         "type": "recommendation",
         "classification": "supported",
         "rationale": "matches known fact 'f'"
       },
       {
-        "text": "Include a post‑procedure hemodynamic monitoring order set: continuous arterial blood pressure, urine output, and repeat labs.",
+        "text": "Amend the protocol notes to reference KDIGO and ACR guidelines for contrast use in eGFR < 30 mL/min/1.73 m², removing the non‑standard contrast‑to‑eGFR ratio metric.",
         "type": "recommendation",
         "classification": "supported",
-        "rationale": "hemodynamic instability supported by MAP 49.3"
+        "rationale": "matches known fact 'f'"
       },
       {
-        "text": "Educate the care team on the specific renal safety notes from the chosen protocol, ensuring contrast‑to‑eGFR ratio remains <1.0 g/(mL·min).",
+        "text": "Include post‑scan monitoring: repeat serum creatinine and potassium at 24–48 h, and consider nephrology consult for ongoing renal management.",
         "type": "recommendation",
         "classification": "supported",
-        "rationale": "matches known fact '0'"
+        "rationale": "matches known fact 'f'"
       }
     ],
     "counts": {
-      "supported": 15,
+      "supported": 13,
       "inferred": 0,
       "domain_safe": 0,
-      "unverified": 1,
+      "unverified": 0,
       "contradicted": 0
     },
-    "hallucination_score": 0.031,
+    "hallucination_score": 0.0,
     "recommendation": {
       "force_revision": false,
-      "confidence_reduction": 0.1
+      "confidence_reduction": 0.0
     },
     "knowledge_base_summary": {
       "numbers": {
-        "subject_id": 10014729.0,
-        "hadm_id": 28889419.0,
-        "stay_id": 33558396.0,
-        "age": 21.0,
+        "subject_id": 30045678.0,
+        "hadm_id": 45678912.0,
+        "stay_id": 55661234.0,
+        "age": 72.0,
         "hospital_expire_flag": 0.0,
-        "los_hospital_days": 2.47,
-        "los_icu_days": 2.47,
-        "creatinine_mg_dl": 0.5,
-        "bun_mg_dl": 8.0,
-        "glucose_mg_dl": 76.0,
-        "hemoglobin_g_dl": 10.3,
-        "hematocrit_pct": 29.9,
-        "platelet_count": 229.0,
-        "wbc_count": 6.9,
-        "sodium_meq_l": 137.0,
-        "potassium_mmol_l": 3.6,
-        "chloride_meq_l": 97.0,
-        "bicarbonate_meq_l": 25.0,
-        "egfr_ckd_epi": 135.1,
-        "ckd_stage": 1.0,
-        "bun_creatinine_ratio": 16.0,
-        "heart_rate_bpm": 107.0,
-        "systolic_bp_mmhg": 78.0,
-        "diastolic_bp_mmhg": 35.0,
-        "map_mmhg": 49.3,
-        "pulse_pressure_mmhg": 43.0,
-        "temperature_f": 99.1,
-        "spo2_pct": 98.0,
-        "respiratory_rate": 18.0,
-        "data_completeness_pct": 0.95
+        "los_hospital_days": 5.1,
+        "los_icu_days": 4.6,
+        "creatinine_mg_dl": 3.2,
+        "bun_mg_dl": 65.0,
+        "glucose_mg_dl": 180.0,
+        "hemoglobin_g_dl": 9.5,
+        "hematocrit_pct": 28.2,
+        "platelet_count": 198.0,
+        "wbc_count": 14.7,
+        "sodium_meq_l": 134.0,
+        "potassium_mmol_l": 5.8,
+        "chloride_meq_l": 102.0,
+        "bicarbonate_meq_l": 18.0,
+        "egfr_ckd_epi": 22.0,
+        "ckd_stage": 4.0,
+        "bun_creatinine_ratio": 20.3,
+        "heart_rate_bpm": 102.0,
+        "systolic_bp_mmhg": 86.0,
+        "diastolic_bp_mmhg": 42.0,
+        "map_mmhg": 57.0,
+        "pulse_pressure_mmhg": 44.0,
+        "temperature_f": 100.2,
+        "spo2_pct": 92.0,
+        "respiratory_rate": 26.0,
+        "data_completeness_pct": 0.91
       },
       "raw_strings_sample": [
-        "135.1",
-        "33558396",
-        "creatinine within normal range.",
-        "43.0",
-        "0.95",
-        "49.3",
-        "stage 1 (normal)",
-        "bun/cr ratio normal.",
-        "injury to thoracic aorta",
-        "229.0"
+        "18.0",
+        "100.2",
+        "86",
+        "57.0",
+        "102.0",
+        "55661234",
+        "3.2",
+        "30045678",
+        "20.3",
+        "72"
       ]
     }
   },
   "feedback": {
     "issues": [
-      "Renal tool flagged missing BMI and lab timestamps, limiting precise contrast dose calculation and renal risk assessment.",
-      "Agent 2 selected a CT Pulmonary Angiography protocol (CT_CHEST_ANGIO_PULMONARY_EMBOLISM) that is not optimized for evaluation of a traumatic thoracic aortic injury.",
-      "Severe hypotension (MAP 49.3 mmHg, SBP 78 mmHg) markedly increases the risk of contrast‑induced nephropathy and may predispose to hemodynamic decompensation during contrast administration, yet the recommendations focus mainly on renal hydration without addressing blood pressure stabilization.",
-      "No explicit plan for contrast dose reduction, use of low‑ or iso‑osmolar agents, or split‑bolus technique to minimize nephrotoxic load.",
-      "Lack of alternative imaging strategies (e.g., dedicated CT aortography, transesophageal echocardiography, MRI) despite the high‑risk hemodynamic profile.",
-      "Hydration recommendation is vague; no specific fluid type, rate, or timing relative to contrast is provided."
+      "Agent 2 selects a contrast‑enhanced CT Pulmonary Angiography (CTPA) despite critical hyperkalemia (K⁺ = 5.8 mmol/L) and severe hypotension (MAP = 57 mmHg), which significantly increase the risk of contrast‑induced nephropathy and hemodynamic decompensation.",
+      "Renal tool flags missing BMI and lab timestamps; these missing data could affect contrast dosing calculations and risk stratification.",
+      "Protocol description includes an unclear “contrast‑to‑eGFR ratio <1.1 g/(mL/min)” metric that is not referenced in KDIGO or ACR guidelines.",
+      "Agent 2 does not mention alternative non‑contrast imaging modalities such as a ventilation/perfusion (V/Q) scan, which is often preferred in patients with severe CKD and hemodynamic instability.",
+      "No explicit pre‑hydration, post‑hydration, or electrolyte management plan is provided to mitigate the risk of further renal injury and hyperkalemia after contrast administration.",
+      "The low‑dose non‑contrast CT protocol listed is for lung cancer screening, not for acute evaluation of PE; it would not address the clinical question."
     ],
     "recommendations": [
-      "Select a dedicated CT Aortography protocol (e.g., 'CT Thoracic Aorta Angiography') rather than a pulmonary embolism CTA; this protocol provides optimal arterial phase timing for aortic injury assessment.",
-      "Obtain the patient’s weight and calculate BMI to enable weight‑based contrast dosing; aim for the lowest effective iodine load (e.g., 1.5 mL/kg of low‑ or iso‑osmolar contrast, maximum 100 mL).",
-      "Stabilize hemodynamics before contrast administration: initiate vasopressor support as needed to achieve MAP ≥65 mmHg, then proceed with imaging.",
-      "Implement aggressive IV hydration: 1 L isotonic saline over 30 min pre‑contrast, followed by 1 L over the next 2 h post‑contrast, adjusting for cardiac status.",
-      "Use low‑ or iso‑osmolar, non‑ionic contrast agents and consider a split‑bolus technique to reduce peak iodine concentration.",
-      "Monitor renal function (serum creatinine, eGFR) at baseline, 24 h, and 48 h after contrast exposure; have a contingency plan for dialysis if acute kidney injury develops.",
-      "Document exact timestamps for all relevant labs (creatinine, BUN, electrolytes) to improve future renal risk assessments.",
-      "If MAP cannot be safely corrected, consider non‑contrast imaging alternatives: transesophageal echocardiography (TEE) for aortic injury, or MRI angiography if feasible.",
-      "Include a post‑procedure hemodynamic monitoring order set: continuous arterial blood pressure, urine output, and repeat labs.",
-      "Educate the care team on the specific renal safety notes from the chosen protocol, ensuring contrast‑to‑eGFR ratio remains <1.0 g/(mL·min)."
+      "Re‑evaluate the need for CTPA; if clinical suspicion for PE is moderate, consider a V/Q scan or bedside transthoracic echocardiography as first‑line alternatives that avoid iodinated contrast.",
+      "If CTPA is deemed essential, implement aggressive renal protection: isotonic IV saline (unless contraindicated by heart failure), use iso‑osmolar, low‑iodine‑concentration contrast, and reduce volume to the minimum required (e.g., 70 mL for a 70‑kg patient).",
+      "Correct hyperkalemia before contrast administration (e.g., IV insulin‑glucose, calcium gluconate, or potassium‑binding agents) and monitor cardiac rhythm continuously.",
+      "Document patient’s BMI to allow accurate weight‑based contrast dosing; if BMI is unavailable, use an estimated weight based on height and age.",
+      "Obtain precise timestamps for all relevant labs (creatinine, BUN, potassium) within 24 h of the scan to ensure up‑to‑date risk assessment.",
+      "Amend the protocol notes to reference KDIGO and ACR guidelines for contrast use in eGFR < 30 mL/min/1.73 m², removing the non‑standard contrast‑to‑eGFR ratio metric.",
+      "Include post‑scan monitoring: repeat serum creatinine and potassium at 24–48 h, and consider nephrology consult for ongoing renal management."
     ],
     "confidence": 0.78
   }
