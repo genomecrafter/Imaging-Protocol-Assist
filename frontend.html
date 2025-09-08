@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Imaging Protocol System</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2em;
+            font-weight: 300;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .input-section, .results-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3498db;
+        }
+
+        .form-group h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-field label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #555;
+            font-size: 0.9em;
+        }
+
+        .form-field input, .form-field select {
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 0.9em;
+            transition: border-color 0.3s;
+        }
+
+        .form-field input:focus, .form-field select:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+        }
+
+        .submit-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+        }
+
+        .loading i {
+            font-size: 3em;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .results-content {
+            display: none;
+        }
+
+        .result-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #e74c3c;
+        }
+
+        .result-card h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .protocol-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .confidence-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .confidence-high {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .confidence-medium {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .confidence-low {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-stethoscope"></i> Medical Imaging Protocol System</h1>
+            <p class="subtitle">Advanced AI-Powered Medical Imaging Protocol Selection</p>
+        </div>
+
+        <div class="main-content">
+            <div class="input-section">
+                <h2 class="section-title">
+                    <i class="fas fa-user-md"></i>
+                    Patient Information
+                </h2>
+
+                <div style="margin-bottom: 20px;">
+                    <button type="button" id="formModeBtn" class="submit-btn" style="background: #3498db; margin-bottom: 15px;">
+                        <i class="fas fa-exchange-alt"></i>
+                        Switch to FHIR Format
+                    </button>
+                </div>
+
+                <div id="standardForm">
+                    <form id="patientForm">
+                    <div class="form-group">
+                        <h3><i class="fas fa-id-card"></i> Patient Demographics</h3>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label>Patient ID</label>
+                                <input type="number" name="subject_id" placeholder="e.g., 10014729">
+                            </div>
+                            <div class="form-field">
+                                <label>Age (years)</label>
+                                <input type="number" name="age" placeholder="e.g., 21" min="0" max="150">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label>Gender</label>
+                                <select name="gender">
+                                    <option value="">Select Gender</option>
+                                    <option value="F">Female</option>
+                                    <option value="M">Male</option>
+                                </select>
+                            </div>
+                            <div class="form-field">
+                                <label>Race/Ethnicity</label>
+                                <input type="text" name="race" placeholder="e.g., WHITE - OTHER EUROPEAN">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <h3><i class="fas fa-hospital"></i> Admission Details</h3>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label>Admission Type</label>
+                                <select name="admission_type">
+                                    <option value="">Select Type</option>
+                                    <option value="EMERGENCY">Emergency</option>
+                                    <option value="ELECTIVE">Elective</option>
+                                    <option value="SURGICAL SAME DAY ADMISSION">Surgical Same Day</option>
+                                    <option value="URGENT">Urgent</option>
+                                </select>
+                            </div>
+                            <div class="form-field">
+                                <label>Primary Diagnosis</label>
+                                <input type="text" name="primary_diagnosis" placeholder="e.g., Injury to thoracic aorta">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <h3><i class="fas fa-heartbeat"></i> Vital Signs</h3>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label>Heart Rate (bpm)</label>
+                                <input type="number" name="heart_rate_bpm" placeholder="e.g., 107">
+                            </div>
+                            <div class="form-field">
+                                <label>Systolic BP (mmHg)</label>
+                                <input type="number" name="systolic_bp_mmhg" placeholder="e.g., 78">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label>Diastolic BP (mmHg)</label>
+                                <input type="number" name="diastolic_bp_mmhg" placeholder="e.g., 35">
+                            </div>
+                            <div class="form-field">
+                                <label>Temperature (°F)</label>
+                                <input type="number" name="temperature_f" placeholder="e.g., 99.1" step="0.1">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label>Oxygen Saturation (%)</label>
+                                <input type="number" name="spo2_pct" placeholder="e.g., 98" min="0" max="100">
+                            </div>
+                            <div class="form-field">
+                                <label>Respiratory Rate</label>
+                                <input type="number" name="respiratory_rate" placeholder="e.g., 18">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <h3><i class="fas fa-vial"></i> Laboratory Values</h3>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label>Creatinine (mg/dL)</label>
+                                <input type="number" name="creatinine_mg_dl" placeholder="e.g., 0.5" step="0.1">
+                            </div>
+                            <div class="form-field">
+                                <label>BUN (mg/dL)</label>
+                                <input type="number" name="bun_mg_dl" placeholder="e.g., 8.0" step="0.1">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label>Hemoglobin (g/dL)</label>
+                                <input type="number" name="hemoglobin_g_dl" placeholder="e.g., 10.3" step="0.1">
+                            </div>
+                            <div class="form-field">
+                                <label>White Blood Cell Count</label>
+                                <input type="number" name="wbc_count" placeholder="e.g., 6.9" step="0.1">
+                            </div>
+                        </div>
+                    </div>
+
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            Generate Imaging Protocol
+                        </button>
+                    </form>
+                </div>
+
+                <div id="fhirForm" style="display: none;">
+                    <div class="form-group">
+                        <h3><i class="fas fa-code"></i> FHIR Patient Resource</h3>
+                        <p style="color: #7f8c8d; margin-bottom: 15px;">
+                            Paste a FHIR R4 Patient resource JSON. The system will extract relevant clinical data.
+                        </p>
+                        <textarea id="fhirInput" rows="15" style="width: 100%; padding: 15px; border: 2px solid #e0e0e0; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 0.9em;" placeholder='{
+  "resourceType": "Patient",
+  "id": "example-patient",
+  "gender": "female",
+  "birthDate": "2002-01-01",
+  "identifier": [
+    {
+      "value": "10014729"
+    }
+  ],
+  ...
+}'></textarea>
+                        <button type="button" id="fhirSubmitBtn" class="submit-btn">
+                            <i class="fas fa-stethoscope"></i>
+                            Process FHIR Data
+                        </button>
+                    </div>
+                </div>
+
+                <div class="error-message" id="errorMessage"></div>
+            </div>
+
+            <div class="results-section">
+                <h2 class="section-title">
+                    <i class="fas fa-clipboard-list"></i>
+                    Imaging Protocol Results
+                </h2>
+
+                <div class="loading" id="loadingIndicator">
+                    <i class="fas fa-spinner"></i>
+                    <p>Analyzing patient data and generating optimal imaging protocols...</p>
+                    <small>This may take a few moments as our AI agents collaborate to provide the best recommendations.</small>
+                </div>
+
+                <div class="results-content" id="resultsContent">
+                    <div class="result-card">
+                        <h4><i class="fas fa-robot"></i> AI Analysis Summary</h4>
+                        <div id="analysisSummary"></div>
+                    </div>
+
+                    <div class="result-card">
+                        <h4><i class="fas fa-procedures"></i> Recommended Imaging Protocols</h4>
+                        <div id="protocolList"></div>
+                    </div>
+
+                    <div class="result-card">
+                        <h4><i class="fas fa-lightbulb"></i> Clinical Rationale</h4>
+                        <div id="clinicalRationale"></div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; color: #7f8c8d; margin-top: 20px;">
+                    <small>Results will appear here after submitting patient information</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('patientForm');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const resultsContent = document.getElementById('resultsContent');
+        const errorMessage = document.getElementById('errorMessage');
+        const submitBtn = form.querySelector('.submit-btn');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Show loading state
+            loadingIndicator.style.display = 'block';
+            resultsContent.style.display = 'none';
+            errorMessage.style.display = 'none';
+            submitBtn.disabled = true;
+
+            // Collect form data
+            const formData = new FormData(form);
+            const patientData = {};
+            
+            for (let [key, value] of formData.entries()) {
+                if (value) {
+                    // Convert numeric fields
+                    if (['age', 'subject_id', 'heart_rate_bpm', 'systolic_bp_mmhg', 'diastolic_bp_mmhg', 
+                         'temperature_f', 'spo2_pct', 'respiratory_rate', 'creatinine_mg_dl', 
+                         'bun_mg_dl', 'hemoglobin_g_dl', 'wbc_count'].includes(key)) {
+                        patientData[key] = parseFloat(value);
+                    } else {
+                        patientData[key] = value;
+                    }
+                }
+            }
+
+            try {
+                const response = await fetch('/run_pipeline', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        sample_patient: patientData
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                displayResults(result);
+
+            } catch (error) {
+                console.error('Error:', error);
+                errorMessage.textContent = `Error: ${error.message}. Please check your input and try again.`;
+                errorMessage.style.display = 'block';
+            } finally {
+                loadingIndicator.style.display = 'none';
+                submitBtn.disabled = false;
+            }
+        });
+
+        function displayResults(result) {
+            const { final_output, loops_run } = result;
+            
+            // Analysis Summary
+            document.getElementById('analysisSummary').innerHTML = `
+                <p><strong>Analysis completed after ${loops_run} AI agent iterations</strong></p>
+                <p>Our multi-agent system has analyzed the patient data and generated optimized imaging recommendations.</p>
+            `;
+
+            // Protocol List - Fixed parsing
+            let protocolsHtml = '';
+            if (final_output.protocol_selection && final_output.protocol_selection.length > 0) {
+                final_output.protocol_selection.forEach((protocol, index) => {
+                    const indications = Array.isArray(protocol.indications) 
+                        ? protocol.indications.join(', ') 
+                        : protocol.indications || 'Not specified';
+                    
+                    protocolsHtml += `
+                        <div class="protocol-item">
+                            <h5><i class="fas fa-procedures"></i> ${protocol.name || protocol.protocol_name || `Protocol ${index + 1}`}</h5>
+                            <p><strong>Protocol ID:</strong> ${protocol.protocol_id || 'Not specified'}</p>
+                            <p><strong>Indications:</strong> ${indications}</p>
+                            <p><strong>Description:</strong> ${protocol.description || 'Not specified'}</p>
+                            <p><strong>Contrast Timing:</strong> ${protocol.contrast_timing || 'Not specified'}</p>
+                            <p><strong>Contrast Dose:</strong> ${protocol.contrast_dose || 'Not specified'}</p>
+                            <div style="background: #fff3cd; padding: 10px; border-radius: 5px; margin-top: 10px;">
+                                <strong>⚠️ Renal Safety Notes:</strong> ${protocol.renal_safety_notes || 'Standard precautions apply'}
+                            </div>
+                        </div>
+                    `;
+                });
+            } else {
+                protocolsHtml = '<p>No specific protocols generated. Please review the clinical rationale below.</p>';
+            }
+            document.getElementById('protocolList').innerHTML = protocolsHtml;
+
+            // Recommendations - Fixed parsing
+            let recommendationsHtml = '';
+            if (final_output.recommendations && Array.isArray(final_output.recommendations)) {
+                recommendationsHtml = '<ol>';
+                final_output.recommendations.forEach(rec => {
+                    recommendationsHtml += `<li style="margin-bottom: 10px;">${rec}</li>`;
+                });
+                recommendationsHtml += '</ol>';
+            } else {
+                recommendationsHtml = '<p>No specific recommendations provided.</p>';
+            }
+
+            // Clinical Rationale - Fixed parsing
+            let rationaleHtml = '';
+            if (final_output.rationale && Array.isArray(final_output.rationale)) {
+                rationaleHtml = '<ul>';
+                final_output.rationale.forEach(reason => {
+                    rationaleHtml += `<li style="margin-bottom: 8px;">${reason}</li>`;
+                });
+                rationaleHtml += '</ul>';
+            } else if (typeof final_output.rationale === 'string') {
+                rationaleHtml = `<p>${final_output.rationale}</p>`;
+            } else {
+                rationaleHtml = '<p>No detailed rationale provided.</p>';
+            }
+
+            document.getElementById('clinicalRationale').innerHTML = `
+                <h5> Clinical Recommendations:</h5>
+                ${recommendationsHtml}
+                <h5 style="margin-top: 20px;"> Medical Rationale:</h5>
+                ${rationaleHtml}
+            `;
+
+            resultsContent.style.display = 'block';
+        }
+
+        // Auto-fill sample data for testing
+        function fillSampleData() {
+            const sampleData = {
+                subject_id: 10014729,
+                age: 21,
+                gender: 'F',
+                race: 'WHITE - OTHER EUROPEAN',
+                admission_type: 'SURGICAL SAME DAY ADMISSION',
+                primary_diagnosis: 'Injury to thoracic aorta',
+                heart_rate_bpm: 107,
+                systolic_bp_mmhg: 78,
+                diastolic_bp_mmhg: 35,
+                temperature_f: 99.1,
+                spo2_pct: 98,
+                respiratory_rate: 18,
+                creatinine_mg_dl: 0.5,
+                bun_mg_dl: 8.0,
+                hemoglobin_g_dl: 10.3,
+                wbc_count: 6.9
+            };
+
+            for (let [key, value] of Object.entries(sampleData)) {
+                const input = form.querySelector(`[name="${key}"]`);
+                if (input) {
+                    input.value = value;
+                }
+            }
+        }
+
+        // Add sample data button (for testing)
+        const sampleBtn = document.createElement('button');
+        sampleBtn.type = 'button';
+        sampleBtn.className = 'submit-btn';
+        sampleBtn.style.background = '#95a5a6';
+        sampleBtn.style.marginBottom = '10px';
+        sampleBtn.innerHTML = '<i class="fas fa-flask"></i> Load Sample Data (Testing)';
+        sampleBtn.onclick = fillSampleData;
+        form.insertBefore(sampleBtn, form.querySelector('.submit-btn'));
+
+        // FHIR Mode Switching
+        const formModeBtn = document.getElementById('formModeBtn');
+        const standardForm = document.getElementById('standardForm');
+        const fhirForm = document.getElementById('fhirForm');
+        const fhirSubmitBtn = document.getElementById('fhirSubmitBtn');
+        let isFhirMode = false;
+
+        formModeBtn.addEventListener('click', () => {
+            isFhirMode = !isFhirMode;
+            if (isFhirMode) {
+                standardForm.style.display = 'none';
+                fhirForm.style.display = 'block';
+                formModeBtn.innerHTML = '<i class="fas fa-exchange-alt"></i> Switch to Standard Form';
+                formModeBtn.style.background = '#e67e22';
+            } else {
+                standardForm.style.display = 'block';
+                fhirForm.style.display = 'none';
+                formModeBtn.innerHTML = '<i class="fas fa-exchange-alt"></i> Switch to FHIR Format';
+                formModeBtn.style.background = '#3498db';
+            }
+        });
+
+        // FHIR Processing
+        fhirSubmitBtn.addEventListener('click', async () => {
+            const fhirInput = document.getElementById('fhirInput');
+            const fhirText = fhirInput.value.trim();
+            
+            if (!fhirText) {
+                alert('Please enter FHIR data');
+                return;
+            }
+
+            try {
+                const fhirData = JSON.parse(fhirText);
+                const extractedData = extractDataFromFHIR(fhirData);
+                
+                // Process the extracted data
+                loadingIndicator.style.display = 'block';
+                resultsContent.style.display = 'none';
+                errorMessage.style.display = 'none';
+                fhirSubmitBtn.disabled = true;
+
+                const response = await fetch('/run_pipeline', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        sample_patient: extractedData
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                displayResults(result);
+
+            } catch (error) {
+                console.error('Error:', error);
+                errorMessage.textContent = `Error processing FHIR data: ${error.message}`;
+                errorMessage.style.display = 'block';
+            } finally {
+                loadingIndicator.style.display = 'none';
+                fhirSubmitBtn.disabled = false;
+            }
+        });
+
+        // Extract data from FHIR Bundle or Patient resource
+        function extractDataFromFHIR(fhirData) {
+            const extracted = {};
+            let patient, encounter, conditions = [], labObs = [], vitalObs = [];
+
+            // Handle Bundle vs single Patient resource
+            if (fhirData.resourceType === "Bundle" && fhirData.entry) {
+                // Extract resources from Bundle
+                fhirData.entry.forEach(entry => {
+                    const resource = entry.resource;
+                    switch(resource.resourceType) {
+                        case "Patient":
+                            patient = resource;
+                            break;
+                        case "Encounter":
+                            encounter = resource;
+                            break;
+                        case "Condition":
+                            conditions.push(resource);
+                            break;
+                        case "Observation":
+                            if (resource.category?.some(cat => 
+                                cat.coding?.some(code => code.code === "laboratory"))) {
+                                labObs.push(resource);
+                            } else if (resource.category?.some(cat => 
+                                cat.coding?.some(code => code.code === "vital-signs"))) {
+                                vitalObs.push(resource);
+                            }
+                            break;
+                    }
+                });
+            } else if (fhirData.resourceType === "Patient") {
+                // Single Patient resource
+                patient = fhirData;
+            }
+
+            // Extract Patient data
+            if (patient) {
+                if (patient.id) extracted.subject_id = parseInt(patient.id) || 0;
+                if (patient.gender) extracted.gender = patient.gender.toUpperCase().charAt(0);
+                
+                // Calculate age from birthDate
+                if (patient.birthDate) {
+                    const birthDate = new Date(patient.birthDate);
+                    const today = new Date();
+                    extracted.age = Math.floor((today - birthDate) / (365.25 * 24 * 60 * 60 * 1000));
+                }
+
+                // Extract race from extensions
+                if (patient.extension) {
+                    patient.extension.forEach(ext => {
+                        if (ext.url === "http://hl7.org/fhir/StructureDefinition/patient-race") {
+                            extracted.race = ext.valueString;
+                        }
+                    });
+                }
+            }
+
+            // Extract Encounter data
+            if (encounter) {
+                if (encounter.id) extracted.hadm_id = parseInt(encounter.id) || 0;
+                if (encounter.type?.[0]?.text) extracted.admission_type = encounter.type[0].text;
+                if (encounter.serviceProvider?.display) {
+                    extracted.first_careunit = encounter.serviceProvider.display;
+                    extracted.last_careunit = encounter.serviceProvider.display;
+                }
+            }
+
+            // Extract Conditions
+            if (conditions.length > 0) {
+                extracted.primary_diagnosis = conditions[0].code?.text || conditions[0].code?.coding?.[0]?.display;
+            }
+
+            // Extract Lab Values
+            labObs.forEach(obs => {
+                if (obs.component) {
+                    obs.component.forEach(comp => {
+                        const name = comp.code?.text?.toLowerCase();
+                        const value = comp.valueQuantity?.value;
+                        
+                        if (name && value !== undefined) {
+                            switch(name) {
+                                case "creatinine":
+                                    extracted.creatinine_mg_dl = value;
+                                    break;
+                                case "bun":
+                                    extracted.bun_mg_dl = value;
+                                    break;
+                                case "glucose":
+                                    extracted.glucose_mg_dl = value;
+                                    break;
+                                case "hemoglobin":
+                                    extracted.hemoglobin_g_dl = value;
+                                    break;
+                                case "hematocrit":
+                                    extracted.hematocrit_pct = value;
+                                    break;
+                                case "platelets":
+                                    extracted.platelet_count = value;
+                                    break;
+                                case "wbc":
+                                    extracted.wbc_count = value;
+                                    break;
+                                case "sodium":
+                                    extracted.sodium_meq_l = value;
+                                    break;
+                                case "potassium":
+                                    extracted.potassium_meq_l = value;
+                                    break;
+                                case "chloride":
+                                    extracted.chloride_meq_l = value;
+                                    break;
+                                case "bicarbonate":
+                                    extracted.bicarbonate_meq_l = value;
+                                    break;
+                                case "egfr (ckd-epi)":
+                                    extracted.egfr_ckd_epi = value;
+                                    break;
+                            }
+                        }
+                    });
+                }
+            });
+
+            // Extract Vital Signs
+            vitalObs.forEach(obs => {
+                if (obs.component) {
+                    obs.component.forEach(comp => {
+                        const name = comp.code?.text?.toLowerCase();
+                        const value = comp.valueQuantity?.value;
+                        
+                        if (name && value !== undefined) {
+                            switch(name) {
+                                case "heart rate":
+                                    extracted.heart_rate_bpm = value;
+                                    break;
+                                case "systolic bp":
+                                    extracted.systolic_bp_mmhg = value;
+                                    break;
+                                case "diastolic bp":
+                                    extracted.diastolic_bp_mmhg = value;
+                                    break;
+                                case "map":
+                                    extracted.map_mmhg = value;
+                                    break;
+                                case "pulse pressure":
+                                    extracted.pulse_pressure_mmhg = value;
+                                    break;
+                                case "temperature":
+                                    extracted.temperature_f = value;
+                                    break;
+                                case "spo₂":
+                                    extracted.spo2_pct = value;
+                                    break;
+                                case "respiratory rate":
+                                    extracted.respiratory_rate = value;
+                                    break;
+                            }
+                        }
+                    });
+                }
+            });
+
+            // Calculate derived values
+            if (extracted.bun_mg_dl && extracted.creatinine_mg_dl) {
+                extracted.bun_creatinine_ratio = extracted.bun_mg_dl / extracted.creatinine_mg_dl;
+            }
+
+            // Set defaults
+            extracted.insurance = extracted.insurance || "Other";
+            extracted.hospital_expire_flag = 0;
+            extracted.data_completeness_pct = 0.95;
+            
+            return extracted;
+        }
+
+        // Sample FHIR data
+        function loadSampleFHIR() {
+            document.getElementById('fhirInput').value = JSON.stringify({
+                "resourceType": "Bundle",
+                "type": "collection",
+                "entry": [
+                    {
+                        "resource": {
+                            "resourceType": "Patient",
+                            "id": "10014729",
+                            "gender": "female",
+                            "birthDate": "2002-01-01",
+                            "extension": [
+                                {
+                                    "url": "http://hl7.org/fhir/StructureDefinition/patient-race",
+                                    "valueString": "WHITE - OTHER EUROPEAN"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Encounter",
+                            "id": "28889419",
+                            "status": "finished",
+                            "type": [{ "text": "SURGICAL SAME DAY ADMISSION" }],
+                            "subject": { "reference": "Patient/10014729" },
+                            "serviceProvider": { "display": "Cardiac Vascular Intensive Care Unit (CVICU)" }
+                        }
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Condition",
+                            "id": "cond1",
+                            "subject": { "reference": "Patient/10014729" },
+                            "code": { "text": "Injury to thoracic aorta" },
+                            "clinicalStatus": {
+                                "coding": [{ "system": "http://terminology.hl7.org/CodeSystem/condition-clinical", "code": "active" }]
+                            }
+                        }
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "obs-labs",
+                            "status": "final",
+                            "category": [{ "coding": [{ "system": "http://terminology.hl7.org/CodeSystem/observation-category", "code": "laboratory" }] }],
+                            "subject": { "reference": "Patient/10014729" },
+                            "component": [
+                                { "code": { "text": "Creatinine" }, "valueQuantity": { "value": 0.5, "unit": "mg/dL" } },
+                                { "code": { "text": "BUN" }, "valueQuantity": { "value": 8.0, "unit": "mg/dL" } },
+                                { "code": { "text": "Hemoglobin" }, "valueQuantity": { "value": 10.3, "unit": "g/dL" } },
+                                { "code": { "text": "eGFR (CKD-EPI)" }, "valueQuantity": { "value": 135.1, "unit": "mL/min/1.73m²" } }
+                            ]
+                        }
+                    },
+                    {
+                        "resource": {
+                            "resourceType": "Observation",
+                            "id": "obs-vitals",
+                            "status": "final",
+                            "category": [{ "coding": [{ "system": "http://terminology.hl7.org/CodeSystem/observation-category", "code": "vital-signs" }] }],
+                            "subject": { "reference": "Patient/10014729" },
+                            "component": [
+                                { "code": { "text": "Heart rate" }, "valueQuantity": { "value": 107, "unit": "bpm" } },
+                                { "code": { "text": "Systolic BP" }, "valueQuantity": { "value": 78, "unit": "mmHg" } },
+                                { "code": { "text": "Diastolic BP" }, "valueQuantity": { "value": 35, "unit": "mmHg" } },
+                                { "code": { "text": "Temperature" }, "valueQuantity": { "value": 99.1, "unit": "°F" } }
+                            ]
+                        }
+                    }
+                ]
+            }, null, 2);
+        }
+
+        // Add sample FHIR button
+        const sampleFhirBtn = document.createElement('button');
+        sampleFhirBtn.type = 'button';
+        sampleFhirBtn.className = 'submit-btn';
+        sampleFhirBtn.style.background = '#9b59b6';
+        sampleFhirBtn.style.marginTop = '10px';
+        sampleFhirBtn.innerHTML = '<i class="fas fa-flask"></i> Load Sample FHIR';
+        sampleFhirBtn.onclick = loadSampleFHIR;
+        fhirForm.appendChild(sampleFhirBtn);
+    </script>
+</body>
+</html>

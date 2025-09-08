@@ -5,95 +5,54 @@
     {
       "resource": {
         "resourceType": "CarePlan",
-        "id": "d5a4b3c2-e1f0-4a7b-8c9d-1e2f3a4b5c6d",
+        "id": "careplan-imaging-recommendations",
         "status": "active",
         "intent": "plan",
-        "title": "Imaging Recommendations for Suspected Pulmonary Embolism",
-        "description": "Comprehensive imaging recommendations for suspected Pulmonary Embolism (PE) considering patient-specific risks due to severe CKD and hypotension.",
+        "title": "Imaging Protocol Recommendations",
         "note": [
           {
-            "text": "Patient has Stage 4 CKD (eGFR 22) and significant hypotension (MAP 57), increasing risk of CIN and hemodynamic decompensation with contrast."
+            "text": "Patient presents with hypotension (MAP 59 mmHg), increasing risk of contrast-induced nephropathy."
           },
           {
-            "text": "Critical hyperkalemia (K+ 5.8 mEq/L) requires urgent management before contrast administration."
+            "text": "eGFR of 59 mL/min/1.73m² indicates CKD, warranting renal protective measures."
           },
           {
-            "text": "V/Q scan is the preferred alternative to CTPA in patients with severe renal dysfunction and hemodynamic instability, as it avoids iodinated contrast."
+            "text": "Emergency admission for chest pain necessitates prompt evaluation, but patient safety is paramount."
           },
           {
-            "text": "Aggressive renal protection strategies are mandatory if contrast-enhanced imaging is pursued."
+            "text": "ACR guidelines recommend hydration and risk assessment for contrast media administration in patients with compromised renal function and hemodynamic instability."
           },
           {
-            "text": "Low-dose screening CT protocols are not suitable for acute diagnostic imaging of PE."
-          },
-          {
-            "text": "Bedside echocardiography offers a contrast-free assessment for PE and cardiac strain."
+            "text": "Carotid CTA protocol is not indicated for the current clinical presentation."
           }
         ],
         "activity": [
           {
             "detail": {
-              "kind": "ServiceRequest",
-              "description": "Prioritize a Ventilation/Perfusion (V/Q) scan for suspected Pulmonary Embolism (PE) given the patient's severe CKD (eGFR 22) and hypotension (MAP 57), avoiding iodinated contrast.",
-              "status": "scheduled",
-              "intent": "plan",
-              "code": {
-                "coding": [
-                  {
-                    "system": "http://snomed.info/sct",
-                    "code": "394740003",
-                    "display": "Ventilation/Perfusion scan (procedure)"
-                  }
-                ],
-                "text": "V/Q Scan"
-              }
+              "kind": "Task",
+              "description": "Prioritize hemodynamic stabilization before contrast-enhanced imaging, aiming for MAP > 65 mmHg to mitigate contrast-induced nephropathy risk.",
+              "status": "not-started"
             }
           },
           {
             "detail": {
-              "kind": "ServiceRequest",
-              "description": "If CT Pulmonary Angiography (CTPA) is absolutely essential and non-contrast alternatives are insufficient, implement aggressive pre-hydration with isotonic saline (if no contraindications like heart failure), use iso-osmolar, low-iodine concentration contrast, and administer the minimum effective volume. Correction of hyperkalemia (K+ 5.8 mEq/L) must be prioritized before contrast administration.",
-              "status": "scheduled",
-              "intent": "plan",
-              "code": {
-                "coding": [
-                  {
-                    "system": "http://snomed.info/sct",
-                    "code": "416827008",
-                    "display": "Computed tomography angiography of pulmonary artery (procedure)"
-                  }
-                ],
-                "text": "CT Pulmonary Angiography"
-              }
+              "kind": "Task",
+              "description": "If CT Pulmonary Angiography (CTA PE) is essential, implement pre-hydration with isotonic saline and consider a reduced or split contrast dose protocol with a lower injection rate.",
+              "status": "not-started"
             }
           },
           {
             "detail": {
-              "kind": "ServiceRequest",
-              "description": "Consider bedside transthoracic echocardiography as an alternative to assess for right heart strain and rule out massive PE in the setting of hemodynamic instability, avoiding contrast entirely.",
-              "status": "scheduled",
-              "intent": "plan",
-              "code": {
-                "coding": [
-                  {
-                    "system": "http://snomed.info/sct",
-                    "code": "113064000",
-                    "display": "Transthoracic echocardiography"
-                  }
-                ],
-                "text": "Transthoracic Echocardiography"
-              }
+              "kind": "Task",
+              "description": "Evaluate the clinical necessity of CTA PE by assessing pre-test probability (e.g., Wells score) and consider alternative imaging modalities like V/Q scan if suspicion is low or contrast administration is contraindicated.",
+              "status": "not-started"
             }
           },
           {
             "detail": {
-              "kind": "ServiceRequest",
-              "description": "If CTPA is performed, a low-dose, non-contrast CT chest protocol for lung cancer screening should NOT be selected as it is inappropriate for acute PE evaluation.",
-              "status": "scheduled",
-              "intent": "plan",
-              "code": {
-                "text": "CT Chest Protocol Selection Guidance"
-              }
+              "kind": "Task",
+              "description": "Obtain baseline renal labs immediately prior to contrast administration and plan for post-procedure creatinine monitoring (24-48 hours).",
+              "status": "not-started"
             }
           }
         ]
@@ -102,58 +61,12 @@
     {
       "resource": {
         "resourceType": "PlanDefinition",
-        "id": "8f7e6d5c-4b3a-21e0-9d8c-7b6a5d4e3f21",
-        "status": "active",
-        "name": "CT_CHEST_LOW_DOSE_SCREENING",
-        "title": "Low-Dose CT Chest — Lung Cancer Screening",
-        "type": {
-          "coding": [
-            {
-              "system": "http://terminology.hl7.org/CodeSystem/plan-definition-type",
-              "code": "protocol",
-              "display": "Protocol"
-            }
-          ],
-          "text": "Clinical Protocol"
-        },
-        "description": "Low-dose CT of lungs targeting <3 mGy radiation dose while maintaining image quality.",
-        "topic": [
-          {
-            "text": "lung cancer screening"
-          },
-          {
-            "text": "high-risk cohorts"
-          }
-        ],
-        "note": [
-          {
-            "text": "Contrast Timing: N/A — non-contrast low-dose protocol."
-          },
-          {
-            "text": "Contrast Dose: None."
-          },
-          {
-            "text": "Renal Safety Notes: Ideal in patients with renal dysfunction due to non-use of contrast."
-          },
-          {
-            "text": "Rationale for Selection: This protocol is included as a non-contrast option, which is generally preferred given the patient's renal status. However, it is NOT suitable for acute evaluation of shortness of breath or chest pain suggestive of PE."
-          }
-        ],
-        "relatedArtifact": [
-          {
-            "type": "documentation",
-            "display": "Low-dose CT screening dose benchmarks"
-          }
-        ]
-      }
-    },
-    {
-      "resource": {
-        "resourceType": "PlanDefinition",
-        "id": "1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
-        "status": "active",
-        "name": "CT_CHEST_ANGIO_PULMONARY_EMBOLISM",
+        "id": "plandefinition-ct-chest-angio-pulmonary-embolism",
+        "url": "http://example.org/fhir/PlanDefinition/ct-chest-angio-pulmonary-embolism",
+        "version": "1.0",
+        "name": "CTChestAngioPulmonaryEmbolism",
         "title": "CT Pulmonary Angiography (Chest CTA for PE)",
+        "status": "active",
         "type": {
           "coding": [
             {
@@ -161,8 +74,7 @@
               "code": "protocol",
               "display": "Protocol"
             }
-          ],
-          "text": "Clinical Protocol"
+          ]
         },
         "description": "CT angiography timed for pulmonary arterial phase (6–13 sec post-contrast) to evaluate pulmonary arteries for embolism.",
         "topic": [
@@ -176,28 +88,30 @@
             "text": "shortness of breath"
           }
         ],
-        "note": [
-          {
-            "text": "Contrast Timing: Pulmonary arterial phase: ~6–13 sec post-injection."
-          },
-          {
-            "text": "Contrast Dose: Weight-based; ~100–150 mL iodinated contrast (300 mg I/mL); follow ACR Manual."
-          },
-          {
-            "text": "Renal Safety Notes: Ensure contrast-to-eGFR ratio <1.1 g/(mL/min); if eGFR <30, consider non-contrast alternatives or weigh risks carefully."
-          },
-          {
-            "text": "Rationale for Selection: This protocol is indicated for the patient's symptoms. However, its use is highly cautioned due to severe CKD and hypotension. If chosen, stringent renal protection measures and hyperkalemia management are imperative, and alternative modalities like V/Q scan should be considered first."
-          }
-        ],
         "relatedArtifact": [
           {
             "type": "documentation",
+            "url": "http://example.org/fhir/documentation/oaicite-0",
             "display": "Contrast CT phases overview (Wikipedia)"
           },
           {
             "type": "documentation",
+            "url": "http://example.org/fhir/documentation/oaicite-1",
             "display": "CT pulmonary angiogram practical notes (Wikipedia)"
+          }
+        ],
+        "action": [
+          {
+            "title": "Contrast Timing",
+            "description": "Pulmonary arterial phase: <6–13 sec post-injection."
+          },
+          {
+            "title": "Contrast Dose",
+            "description": "Weight-based; ~100–150 mL iodinated contrast (300 mg I/mL); follow ACR Manual."
+          },
+          {
+            "title": "Renal Safety Notes",
+            "description": "Ensure contrast-to-eGFR ratio <1.1 g/(mL/min); if eGFR <30, consider non-contrast alternatives or weigh risks carefully."
           }
         ]
       }

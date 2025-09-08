@@ -1,0 +1,15 @@
+{
+  "recommendations": [
+    "Obtain up-to-date renal function labs (eGFR, serum creatinine, BUN, potassium) with documented timestamps before any contrast-enhanced CT.",
+    "Clarify the primary clinical question for imaging and the urgency (emergent vs. non-emergent).",
+    "Defer contrast-enhanced CT until renal function is assessed; consider non-contrast CT or MRI if the study is non-emergent.",
+    "If contrast-enhanced CT is emergent and renal function is available, select protocol based on eGFR thresholds and KDIGO guidelines."
+  ],
+  "rationale": [
+    "Missing critical renal function data for safe contrast administration.",
+    "Lack of clinical indication and urgency prevents appropriate protocol selection.",
+    "Contrast administration is contraindicated or requires significant modification without known renal function.",
+    "Selected protocols (LI-RADS and Trauma) are condition-specific and cannot be applied without indication."
+  ],
+  "protocol_selection": []
+}

@@ -1,24 +1,23 @@
 {
   "issues": [
-    "Agent 2 selects a contrast‑enhanced CT Pulmonary Angiography (CTPA) despite critical hyperkalemia (K⁺ = 5.8 mmol/L) and severe hypotension (MAP = 57 mmHg), which significantly increase the risk of contrast‑induced nephropathy and hemodynamic decompensation.",
-    "Renal tool flags missing BMI and lab timestamps; these missing data could affect contrast dosing calculations and risk stratification.",
-    "Protocol description includes an unclear “contrast‑to‑eGFR ratio <1.1 g/(mL/min)” metric that is not referenced in KDIGO or ACR guidelines.",
-    "Agent 2 does not mention alternative non‑contrast imaging modalities such as a ventilation/perfusion (V/Q) scan, which is often preferred in patients with severe CKD and hemodynamic instability.",
-    "No explicit pre‑hydration, post‑hydration, or electrolyte management plan is provided to mitigate the risk of further renal injury and hyperkalemia after contrast administration.",
-    "The low‑dose non‑contrast CT protocol listed is for lung cancer screening, not for acute evaluation of PE; it would not address the clinical question."
+    "Renal tool output contains contradictory assessments: it flags creatinine as 'fail' despite a value (1.7 mg/dL) that is only modestly elevated and an eGFR of 59 mL/min/1.73m² which the tool itself marks as a 'pass'.",
+    "Renal tool summary lists \"Missing BMI or creatinine\" and \"No lab timestamps provided\" even though creatinine is present and timestamps are included for each check.",
+    "Agent 2 recommends a CT Pulmonary Angiography (CTA) without addressing the patient's significant hypotension (MAP 59 mmHg) which increases the risk of contrast‑induced nephropathy and may contraindicate immediate contrast administration.",
+    "Agent 2 includes an irrelevant carotid CTA protocol in the selection output, which does not pertain to the current clinical question.",
+    "No explicit plan for managing the patient’s low blood pressure before contrast administration is provided."
   ],
   "recommendations": [
-    "Re‑evaluate the need for CTPA; if clinical suspicion for PE is moderate, consider a V/Q scan or bedside transthoracic echocardiography as first‑line alternatives that avoid iodinated contrast.",
-    "If CTPA is deemed essential, implement aggressive renal protection: isotonic IV saline (unless contraindicated by heart failure), use iso‑osmolar, low‑iodine‑concentration contrast, and reduce volume to the minimum required (e.g., 70 mL for a 70‑kg patient).",
-    "Correct hyperkalemia before contrast administration (e.g., IV insulin‑glucose, calcium gluconate, or potassium‑binding agents) and monitor cardiac rhythm continuously.",
-    "Document patient’s BMI to allow accurate weight‑based contrast dosing; if BMI is unavailable, use an estimated weight based on height and age.",
-    "Obtain precise timestamps for all relevant labs (creatinine, BUN, potassium) within 24 h of the scan to ensure up‑to‑date risk assessment.",
-    "Amend the protocol notes to reference KDIGO and ACR guidelines for contrast use in eGFR < 30 mL/min/1.73 m², removing the non‑standard contrast‑to‑eGFR ratio metric.",
-    "Include post‑scan monitoring: repeat serum creatinine and potassium at 24–48 h, and consider nephrology consult for ongoing renal management."
+    "Re‑evaluate the necessity of CTA PE: assess clinical probability (e.g., Wells score) and consider alternative imaging (ventilation‑perfusion scan) if PE suspicion is low or if the patient cannot tolerate contrast due to hypotension.",
+    "If CTA is deemed essential, implement renal protective measures: pre‑hydrate with isotonic saline (e.g., 1 mL/kg/hr for 6–12 hours) unless contraindicated by cardiac status, and use low‑osmolar or iso‑osmolar contrast at the minimal effective volume (≈80–100 mL).",
+    "Consider a reduced contrast dose or split‑dose protocol, and employ automated injector with a lower injection rate to lessen peak renal exposure.",
+    "Monitor hemodynamics closely: stabilize MAP > 65 mmHg before contrast (e.g., with cautious fluid bolus or vasopressor support) to mitigate prerenal azotemia risk.",
+    "Obtain baseline renal labs immediately before the study and repeat serum creatinine 24–48 hours post‑procedure to detect contrast‑induced nephropathy early.",
+    "Document a clear justification for contrast use in the electronic health record, referencing the emergent nature of the suspected PE and the renal protection strategy.",
+    "Remove the carotid CTA protocol from the recommendation list as it is not relevant to the current indication."
   ],
-  "confidence": 0.78,
-  "agent2_confidence": 0.45,
-  "timestamp": "2025-09-08T05:34:26.792416Z",
+  "confidence": 0.68,
+  "agent2_confidence": 0.62,
+  "timestamp": "2025-09-08T17:20:14.827000Z",
   "tool_outputs": {
     "renal": {
       "tool_id": "renal_tool_v2",
@@ -26,46 +25,44 @@
         {
           "id": "egfr_ckd_epi",
           "units": "ml/min/1.73m2",
-          "timestamp": "2025-09-08T05:34:23.584268Z",
+          "timestamp": "2025-09-08T17:20:11.161113Z",
           "priority": "critical",
-          "value": 22.0,
-          "status": "fail",
-          "reason": "High renal risk; contrast caution."
+          "value": 59.0,
+          "status": "pass",
+          "reason": "Low renal risk for contrast."
         },
         {
           "id": "creatinine_mg_dl",
           "units": "mg/dL",
-          "timestamp": "2025-09-08T05:34:23.584276Z",
+          "timestamp": "2025-09-08T17:20:11.161153Z",
           "priority": "critical",
-          "value": 3.2,
+          "value": 1.7,
           "status": "fail",
           "reason": "Creatinine significantly elevated."
         },
         {
           "id": "bun_creatinine_ratio",
-          "timestamp": "2025-09-08T05:34:23.584280Z",
+          "timestamp": "2025-09-08T17:20:11.161173Z",
           "priority": "important",
-          "value": 20.3,
+          "value": 20.0,
           "status": "warning",
           "reason": "BUN/Cr ratio suggests prerenal azotemia."
         },
         {
           "id": "potassium_mmol_l",
           "units": "mEq/L",
-          "timestamp": "2025-09-08T05:34:23.584287Z",
+          "timestamp": "2025-09-08T17:20:11.161202Z",
           "priority": "important",
-          "value": 5.8,
-          "status": "fail",
-          "reason": "Critical hyperkalemia."
+          "value": 4.6,
+          "status": "pass",
+          "reason": "Potassium normal."
         }
       ],
       "summary": {
         "overall": "fail",
         "reasons": [
-          "High renal risk; contrast caution.",
           "Creatinine significantly elevated.",
           "BUN/Cr ratio suggests prerenal azotemia.",
-          "Critical hyperkalemia.",
           "Missing BMI or creatinine.",
           "No lab timestamps provided."
         ],
@@ -73,169 +70,158 @@
       },
       "metadata": {
         "version": "2.0.0",
-        "run_ts": "2025-09-08T05:34:23.584305Z"
+        "run_ts": "2025-09-08T17:20:11.161291Z"
       }
     }
   },
-  "llm_raw": "{\n  \"issues\": [\n    \"Agent 2 selects a contrast‑enhanced CT Pulmonary Angiography (CTPA) despite critical hyperkalemia (K⁺ = 5.8 mmol/L) and severe hypotension (MAP = 57 mmHg), which significantly increase the risk of contrast‑induced nephropathy and hemodynamic decompensation.\",\n    \"Renal tool flags missing BMI and lab timestamps; these missing data could affect contrast dosing calculations and risk stratification.\",\n    \"Protocol description includes an unclear “contrast‑to‑eGFR ratio <1.1 g/(mL/min)” metric that is not referenced in KDIGO or ACR guidelines.\",\n    \"Agent 2 does not mention alternative non‑contrast imaging modalities such as a ventilation/perfusion (V/Q) scan, which is often preferred in patients with severe CKD and hemodynamic instability.\",\n    \"No explicit pre‑hydration, post‑hydration, or electrolyte management plan is provided to mitigate the risk of further renal injury and hyperkalemia after contrast administration.\",\n    \"The low‑dose non‑contrast CT protocol listed is for lung cancer screening, not for acute evaluation of PE; it would not address the clinical question.\"\n  ],\n  \"recommendations\": [\n    \"Re‑evaluate the need for CTPA; if clinical suspicion for PE is moderate, consider a V/Q scan or bedside transthoracic echocardiography as first‑line alternatives that avoid iodinated contrast.\",\n    \"If CTPA is deemed essential, implement aggressive renal protection: isotonic IV saline (unless contraindicated by heart failure), use iso‑osmolar, low‑iodine‑concentration contrast, and reduce volume to the minimum required (e.g., 70 mL for a 70‑kg patient).\",\n    \"Correct hyperkalemia before contrast administration (e.g., IV insulin‑glucose, calcium gluconate, or potassium‑binding agents) and monitor cardiac rhythm continuously.\",\n    \"Document patient’s BMI to allow accurate weight‑based contrast dosing; if BMI is unavailable, use an estimated weight based on height and age.\",\n    \"Obtain precise timestamps for all relevant labs (creatinine, BUN, potassium) within 24 h of the scan to ensure up‑to‑date risk assessment.\",\n    \"Amend the protocol notes to reference KDIGO and ACR guidelines for contrast use in eGFR < 30 mL/min/1.73 m², removing the non‑standard contrast‑to‑eGFR ratio metric.\",\n    \"Include post‑scan monitoring: repeat serum creatinine and potassium at 24–48 h, and consider nephrology consult for ongoing renal management.\"\n  ],\n  \"confidence\": 0.78\n}",
+  "llm_raw": "{\n  \"issues\": [\n    \"Renal tool output contains contradictory assessments: it flags creatinine as 'fail' despite a value (1.7 mg/dL) that is only modestly elevated and an eGFR of 59 mL/min/1.73m² which the tool itself marks as a 'pass'.\",\n    \"Renal tool summary lists \\\"Missing BMI or creatinine\\\" and \\\"No lab timestamps provided\\\" even though creatinine is present and timestamps are included for each check.\",\n    \"Agent 2 recommends a CT Pulmonary Angiography (CTA) without addressing the patient's significant hypotension (MAP 59 mmHg) which increases the risk of contrast‑induced nephropathy and may contraindicate immediate contrast administration.\",\n    \"Agent 2 includes an irrelevant carotid CTA protocol in the selection output, which does not pertain to the current clinical question.\",\n    \"No explicit plan for managing the patient’s low blood pressure before contrast administration is provided.\"\n  ],\n  \"recommendations\": [\n    \"Re‑evaluate the necessity of CTA PE: assess clinical probability (e.g., Wells score) and consider alternative imaging (ventilation‑perfusion scan) if PE suspicion is low or if the patient cannot tolerate contrast due to hypotension.\",\n    \"If CTA is deemed essential, implement renal protective measures: pre‑hydrate with isotonic saline (e.g., 1 mL/kg/hr for 6–12 hours) unless contraindicated by cardiac status, and use low‑osmolar or iso‑osmolar contrast at the minimal effective volume (≈80–100 mL).\",\n    \"Consider a reduced contrast dose or split‑dose protocol, and employ automated injector with a lower injection rate to lessen peak renal exposure.\",\n    \"Monitor hemodynamics closely: stabilize MAP > 65 mmHg before contrast (e.g., with cautious fluid bolus or vasopressor support) to mitigate prerenal azotemia risk.\",\n    \"Obtain baseline renal labs immediately before the study and repeat serum creatinine 24–48 hours post‑procedure to detect contrast‑induced nephropathy early.\",\n    \"Document a clear justification for contrast use in the electronic health record, referencing the emergent nature of the suspected PE and the renal protection strategy.\",\n    \"Remove the carotid CTA protocol from the recommendation list as it is not relevant to the current indication.\"\n  ],\n  \"confidence\": 0.78\n}",
   "hallucination_analysis": {
     "statement_assessments": [
       {
-        "text": "Agent 2 selects a contrast‑enhanced CT Pulmonary Angiography (CTPA) despite critical hyperkalemia (K⁺ = 5.8 mmol/L) and severe hypotension (MAP = 57 mmHg), which significantly increase the risk of contrast‑induced nephropathy and hemodynamic decompensation.",
+        "text": "Renal tool output contains contradictory assessments: it flags creatinine as 'fail' despite a value (1.7 mg/dL) that is only modestly elevated and an eGFR of 59 mL/min/1.73m² which the tool itself marks as a 'pass'.",
+        "type": "issue",
+        "classification": "supported",
+        "rationale": "matches known fact '1.7'"
+      },
+      {
+        "text": "Renal tool summary lists \"Missing BMI or creatinine\" and \"No lab timestamps provided\" even though creatinine is present and timestamps are included for each check.",
         "type": "issue",
         "classification": "supported",
         "rationale": "matches known fact 'f'"
       },
       {
-        "text": "Renal tool flags missing BMI and lab timestamps; these missing data could affect contrast dosing calculations and risk stratification.",
+        "text": "Agent 2 recommends a CT Pulmonary Angiography (CTA) without addressing the patient's significant hypotension (MAP 59 mmHg) which increases the risk of contrast‑induced nephropathy and may contraindicate immediate contrast administration.",
         "type": "issue",
         "classification": "supported",
         "rationale": "matches known fact 'f'"
       },
       {
-        "text": "Protocol description includes an unclear “contrast‑to‑eGFR ratio <1.1 g/(mL/min)” metric that is not referenced in KDIGO or ACR guidelines.",
+        "text": "Agent 2 includes an irrelevant carotid CTA protocol in the selection output, which does not pertain to the current clinical question.",
+        "type": "issue",
+        "classification": "unverified",
+        "rationale": "no direct or inferred support found"
+      },
+      {
+        "text": "No explicit plan for managing the patient’s low blood pressure before contrast administration is provided.",
         "type": "issue",
         "classification": "supported",
         "rationale": "matches known fact 'f'"
       },
       {
-        "text": "Agent 2 does not mention alternative non‑contrast imaging modalities such as a ventilation/perfusion (V/Q) scan, which is often preferred in patients with severe CKD and hemodynamic instability.",
-        "type": "issue",
-        "classification": "supported",
-        "rationale": "matches known fact 'f'"
-      },
-      {
-        "text": "No explicit pre‑hydration, post‑hydration, or electrolyte management plan is provided to mitigate the risk of further renal injury and hyperkalemia after contrast administration.",
-        "type": "issue",
-        "classification": "supported",
-        "rationale": "matches known fact 'f'"
-      },
-      {
-        "text": "The low‑dose non‑contrast CT protocol listed is for lung cancer screening, not for acute evaluation of PE; it would not address the clinical question.",
-        "type": "issue",
-        "classification": "supported",
-        "rationale": "matches known fact 'f'"
-      },
-      {
-        "text": "Re‑evaluate the need for CTPA; if clinical suspicion for PE is moderate, consider a V/Q scan or bedside transthoracic echocardiography as first‑line alternatives that avoid iodinated contrast.",
+        "text": "Re‑evaluate the necessity of CTA PE: assess clinical probability (e.g., Wells score) and consider alternative imaging (ventilation‑perfusion scan) if PE suspicion is low or if the patient cannot tolerate contrast due to hypotension.",
         "type": "recommendation",
         "classification": "supported",
         "rationale": "matches known fact 'f'"
       },
       {
-        "text": "If CTPA is deemed essential, implement aggressive renal protection: isotonic IV saline (unless contraindicated by heart failure), use iso‑osmolar, low‑iodine‑concentration contrast, and reduce volume to the minimum required (e.g., 70 mL for a 70‑kg patient).",
+        "text": "If CTA is deemed essential, implement renal protective measures: pre‑hydrate with isotonic saline (e.g., 1 mL/kg/hr for 6–12 hours) unless contraindicated by cardiac status, and use low‑osmolar or iso‑osmolar contrast at the minimal effective volume (≈80–100 mL).",
+        "type": "recommendation",
+        "classification": "supported",
+        "rationale": "matches known fact '100'"
+      },
+      {
+        "text": "Consider a reduced contrast dose or split‑dose protocol, and employ automated injector with a lower injection rate to lessen peak renal exposure.",
+        "type": "recommendation",
+        "classification": "unverified",
+        "rationale": "no direct or inferred support found"
+      },
+      {
+        "text": "Monitor hemodynamics closely: stabilize MAP > 65 mmHg before contrast (e.g., with cautious fluid bolus or vasopressor support) to mitigate prerenal azotemia risk.",
         "type": "recommendation",
         "classification": "supported",
         "rationale": "matches known fact 'f'"
       },
       {
-        "text": "Correct hyperkalemia before contrast administration (e.g., IV insulin‑glucose, calcium gluconate, or potassium‑binding agents) and monitor cardiac rhythm continuously.",
+        "text": "Obtain baseline renal labs immediately before the study and repeat serum creatinine 24–48 hours post‑procedure to detect contrast‑induced nephropathy early.",
         "type": "recommendation",
         "classification": "supported",
         "rationale": "matches known fact 'f'"
       },
       {
-        "text": "Document patient’s BMI to allow accurate weight‑based contrast dosing; if BMI is unavailable, use an estimated weight based on height and age.",
+        "text": "Document a clear justification for contrast use in the electronic health record, referencing the emergent nature of the suspected PE and the renal protection strategy.",
         "type": "recommendation",
         "classification": "supported",
         "rationale": "matches known fact 'f'"
       },
       {
-        "text": "Obtain precise timestamps for all relevant labs (creatinine, BUN, potassium) within 24 h of the scan to ensure up‑to‑date risk assessment.",
-        "type": "recommendation",
-        "classification": "supported",
-        "rationale": "matches known fact 'f'"
-      },
-      {
-        "text": "Amend the protocol notes to reference KDIGO and ACR guidelines for contrast use in eGFR < 30 mL/min/1.73 m², removing the non‑standard contrast‑to‑eGFR ratio metric.",
-        "type": "recommendation",
-        "classification": "supported",
-        "rationale": "matches known fact 'f'"
-      },
-      {
-        "text": "Include post‑scan monitoring: repeat serum creatinine and potassium at 24–48 h, and consider nephrology consult for ongoing renal management.",
+        "text": "Remove the carotid CTA protocol from the recommendation list as it is not relevant to the current indication.",
         "type": "recommendation",
         "classification": "supported",
         "rationale": "matches known fact 'f'"
       }
     ],
     "counts": {
-      "supported": 13,
+      "supported": 10,
       "inferred": 0,
       "domain_safe": 0,
-      "unverified": 0,
+      "unverified": 2,
       "contradicted": 0
     },
-    "hallucination_score": 0.0,
+    "hallucination_score": 0.083,
     "recommendation": {
       "force_revision": false,
-      "confidence_reduction": 0.0
+      "confidence_reduction": 0.1
     },
     "knowledge_base_summary": {
       "numbers": {
-        "subject_id": 30045678.0,
-        "hadm_id": 45678912.0,
-        "stay_id": 55661234.0,
+        "subject_id": 20028931.0,
         "age": 72.0,
+        "hadm_id": 34567891.0,
+        "creatinine_mg_dl": 1.7,
+        "bun_mg_dl": 34.0,
+        "glucose_mg_dl": 142.0,
+        "hemoglobin_g_dl": 10.1,
+        "hematocrit_pct": 30.5,
+        "platelet_count": 210.0,
+        "wbc_count": 12.3,
+        "sodium_meq_l": 135.0,
+        "potassium_mmol_l": 4.6,
+        "chloride_meq_l": 100.0,
+        "bicarbonate_meq_l": 21.0,
+        "egfr_ckd_epi": 59.0,
+        "heart_rate_bpm": 95.0,
+        "systolic_bp_mmhg": 82.0,
+        "diastolic_bp_mmhg": 48.0,
+        "map_mmhg": 59.0,
+        "pulse_pressure_mmhg": 34.0,
+        "temperature_f": 98.9,
+        "spo2_pct": 94.0,
+        "respiratory_rate": 22.0,
+        "bun_creatinine_ratio": 20.0,
         "hospital_expire_flag": 0.0,
-        "los_hospital_days": 5.1,
-        "los_icu_days": 4.6,
-        "creatinine_mg_dl": 3.2,
-        "bun_mg_dl": 65.0,
-        "glucose_mg_dl": 180.0,
-        "hemoglobin_g_dl": 9.5,
-        "hematocrit_pct": 28.2,
-        "platelet_count": 198.0,
-        "wbc_count": 14.7,
-        "sodium_meq_l": 134.0,
-        "potassium_mmol_l": 5.8,
-        "chloride_meq_l": 102.0,
-        "bicarbonate_meq_l": 18.0,
-        "egfr_ckd_epi": 22.0,
-        "ckd_stage": 4.0,
-        "bun_creatinine_ratio": 20.3,
-        "heart_rate_bpm": 102.0,
-        "systolic_bp_mmhg": 86.0,
-        "diastolic_bp_mmhg": 42.0,
-        "map_mmhg": 57.0,
-        "pulse_pressure_mmhg": 44.0,
-        "temperature_f": 100.2,
-        "spo2_pct": 92.0,
-        "respiratory_rate": 26.0,
-        "data_completeness_pct": 0.91
+        "data_completeness_pct": 0.95
       },
       "raw_strings_sample": [
-        "18.0",
-        "100.2",
-        "86",
-        "57.0",
-        "102.0",
-        "55661234",
-        "3.2",
-        "30045678",
-        "20.3",
-        "72"
+        "72",
+        "bun_creatinine_ratio",
+        "potassium normal.",
+        "white",
+        "creatinine_mg_dl",
+        "210",
+        "20",
+        "1.7",
+        "20.0",
+        "34567891"
       ]
     }
   },
   "feedback": {
     "issues": [
-      "Agent 2 selects a contrast‑enhanced CT Pulmonary Angiography (CTPA) despite critical hyperkalemia (K⁺ = 5.8 mmol/L) and severe hypotension (MAP = 57 mmHg), which significantly increase the risk of contrast‑induced nephropathy and hemodynamic decompensation.",
-      "Renal tool flags missing BMI and lab timestamps; these missing data could affect contrast dosing calculations and risk stratification.",
-      "Protocol description includes an unclear “contrast‑to‑eGFR ratio <1.1 g/(mL/min)” metric that is not referenced in KDIGO or ACR guidelines.",
-      "Agent 2 does not mention alternative non‑contrast imaging modalities such as a ventilation/perfusion (V/Q) scan, which is often preferred in patients with severe CKD and hemodynamic instability.",
-      "No explicit pre‑hydration, post‑hydration, or electrolyte management plan is provided to mitigate the risk of further renal injury and hyperkalemia after contrast administration.",
-      "The low‑dose non‑contrast CT protocol listed is for lung cancer screening, not for acute evaluation of PE; it would not address the clinical question."
+      "Renal tool output contains contradictory assessments: it flags creatinine as 'fail' despite a value (1.7 mg/dL) that is only modestly elevated and an eGFR of 59 mL/min/1.73m² which the tool itself marks as a 'pass'.",
+      "Renal tool summary lists \"Missing BMI or creatinine\" and \"No lab timestamps provided\" even though creatinine is present and timestamps are included for each check.",
+      "Agent 2 recommends a CT Pulmonary Angiography (CTA) without addressing the patient's significant hypotension (MAP 59 mmHg) which increases the risk of contrast‑induced nephropathy and may contraindicate immediate contrast administration.",
+      "Agent 2 includes an irrelevant carotid CTA protocol in the selection output, which does not pertain to the current clinical question.",
+      "No explicit plan for managing the patient’s low blood pressure before contrast administration is provided."
     ],
     "recommendations": [
-      "Re‑evaluate the need for CTPA; if clinical suspicion for PE is moderate, consider a V/Q scan or bedside transthoracic echocardiography as first‑line alternatives that avoid iodinated contrast.",
-      "If CTPA is deemed essential, implement aggressive renal protection: isotonic IV saline (unless contraindicated by heart failure), use iso‑osmolar, low‑iodine‑concentration contrast, and reduce volume to the minimum required (e.g., 70 mL for a 70‑kg patient).",
-      "Correct hyperkalemia before contrast administration (e.g., IV insulin‑glucose, calcium gluconate, or potassium‑binding agents) and monitor cardiac rhythm continuously.",
-      "Document patient’s BMI to allow accurate weight‑based contrast dosing; if BMI is unavailable, use an estimated weight based on height and age.",
-      "Obtain precise timestamps for all relevant labs (creatinine, BUN, potassium) within 24 h of the scan to ensure up‑to‑date risk assessment.",
-      "Amend the protocol notes to reference KDIGO and ACR guidelines for contrast use in eGFR < 30 mL/min/1.73 m², removing the non‑standard contrast‑to‑eGFR ratio metric.",
-      "Include post‑scan monitoring: repeat serum creatinine and potassium at 24–48 h, and consider nephrology consult for ongoing renal management."
+      "Re‑evaluate the necessity of CTA PE: assess clinical probability (e.g., Wells score) and consider alternative imaging (ventilation‑perfusion scan) if PE suspicion is low or if the patient cannot tolerate contrast due to hypotension.",
+      "If CTA is deemed essential, implement renal protective measures: pre‑hydrate with isotonic saline (e.g., 1 mL/kg/hr for 6–12 hours) unless contraindicated by cardiac status, and use low‑osmolar or iso‑osmolar contrast at the minimal effective volume (≈80–100 mL).",
+      "Consider a reduced contrast dose or split‑dose protocol, and employ automated injector with a lower injection rate to lessen peak renal exposure.",
+      "Monitor hemodynamics closely: stabilize MAP > 65 mmHg before contrast (e.g., with cautious fluid bolus or vasopressor support) to mitigate prerenal azotemia risk.",
+      "Obtain baseline renal labs immediately before the study and repeat serum creatinine 24–48 hours post‑procedure to detect contrast‑induced nephropathy early.",
+      "Document a clear justification for contrast use in the electronic health record, referencing the emergent nature of the suspected PE and the renal protection strategy.",
+      "Remove the carotid CTA protocol from the recommendation list as it is not relevant to the current indication."
     ],
-    "confidence": 0.78
+    "confidence": 0.68
   }
 }

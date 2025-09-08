@@ -1,0 +1,15 @@
+{
+  "recommendations": [
+    "Obtain STAT renal function labs (eGFR, serum creatinine, BUN, potassium) with precise timestamps. Do not proceed with contrast-enhanced imaging until this data is available.",
+    "Clarify the primary clinical indication for imaging and document the urgency (emergent vs. non-emergent).",
+    "If the indication is non-emergent, defer contrast-enhanced CT. Consider non-contrast CT, MRI without contrast, or ultrasound as alternatives.",
+    "If the indication is emergent, proceed with contrast-enhanced CT using the lowest feasible iodine dose, split-bolus or reduced-volume techniques, and aggressive IV hydration according to KDIGO guidelines."
+  ],
+  "rationale": [
+    "Critical missing renal function data (eGFR, creatinine, BUN, potassium) prevents safe contrast administration.",
+    "Unclear clinical indication and urgency prevent appropriate protocol selection.",
+    "Contrast administration without known renal function poses a significant risk of contrast-induced nephropathy.",
+    "Placeholder patient data and references hinder definitive protocol selection and adherence to evidence-based standards."
+  ],
+  "protocol_selection": []
+}

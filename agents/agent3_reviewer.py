@@ -112,10 +112,41 @@ def extract_json_from_text(text):
         candidate = match.group(0)
         try:
             return json.loads(candidate)
-        except json.JSONDecodeError:
-            # Last-ditch attempt: flatten newlines
-            fixed = candidate.replace("\n", " ")
-            return json.loads(fixed)
+        except json.JSONDecodeError as e:
+            # Try multiple JSON fixes
+            try:
+                # Remove trailing commas
+                fixed = re.sub(r',(\s*[}\]])', r'\1', candidate)
+                return json.loads(fixed)
+            except json.JSONDecodeError:
+                try:
+                    # Flatten newlines and clean up
+                    fixed = candidate.replace("\n", " ").replace("\r", "")
+                    fixed = re.sub(r',(\s*[}\]])', r'\1', fixed)  # Remove trailing commas
+                    return json.loads(fixed)
+                except json.JSONDecodeError:
+                    # Extract just the first valid JSON object
+                    try:
+                        brace_count = 0
+                        start_idx = candidate.find('{')
+                        if start_idx == -1:
+                            return None
+                        
+                        for i, char in enumerate(candidate[start_idx:], start_idx):
+                            if char == '{':
+                                brace_count += 1
+                            elif char == '}':
+                                brace_count -= 1
+                                if brace_count == 0:
+                                    partial = candidate[start_idx:i+1]
+                                    partial = re.sub(r',(\s*[}\]])', r'\1', partial)
+                                    return json.loads(partial)
+                    except json.JSONDecodeError:
+                        pass
+                        
+            # If all fails, return a safe default
+            print(f"JSON parsing failed for agent3_reviewer: {str(e)[:200]}...")
+            return {"confidence": 0.5, "feedback": "JSON parsing error in review", "approved": False}
     return None
 
 def score_agent2(agent2_output, patient_data, renal_out):

@@ -1,15 +1,14 @@
 {
   "recommendations": [
-    "Consider CT Pulmonary Angiography (CTPA) for acute chest pain and shortness of breath, given the high clinical suspicion for pulmonary embolism.",
-    "Given the patient's severe CKD (Stage 4, eGFR 22.0) and hypotension (MAP 57.0 mmHg), carefully weigh the risks and benefits of intravenous contrast administration for CTPA.",
-    "If CTPA is pursued, ensure adequate hydration and consider a reduced contrast volume or an alternative non-contrast imaging strategy if feasible and diagnostically adequate.",
-    "If the primary concern is not pulmonary embolism but rather to assess for other cardiopulmonary etiologies, a non-contrast chest CT (such as Low-Dose CT Chest) might be a safer alternative in the context of severe renal impairment."
+    "Perform CT Pulmonary Angiography to evaluate for pulmonary embolism given acute chest pain.",
+    "Consider pre-hydration with intravenous fluids prior to contrast administration.",
+    "Monitor renal function closely post-procedure."
   ],
   "rationale": [
-    "Patient presents with acute symptoms (shortness of breath, chest pain) concerning for pulmonary embolism, a primary indication for CTPA.",
-    "Severe CKD (Stage 4, eGFR 22.0) and hypotension (MAP 57.0 mmHg) significantly increase the risk of contrast-induced nephropathy (CIN) and hemodynamic instability with contrast administration.",
-    "KDIGO and ACR guidelines emphasize caution with contrast in patients with compromised renal function and hemodynamic instability.",
-    "The option of a non-contrast study is highlighted as a safer alternative given the patient's renal status, aligning with ACR recommendations."
+    "Patient presents with acute right-sided chest pain, a primary indication for CTA PE.",
+    "The patient's eGFR of 59 mL/min/1.73m² is in CKD stage 3a, indicating a need for renal protection strategies.",
+    "Hypotension (MAP 59 mmHg) further elevates the risk of contrast-induced nephropathy, necessitating caution and potential hydration.",
+    "Emergency admission and chest pain suggest a potentially time-sensitive diagnosis is required."
   ],
   "protocol_selection": [
     {
@@ -21,7 +20,7 @@
         "shortness of breath"
       ],
       "description": "CT angiography timed for pulmonary arterial phase (6–13 sec post-contrast) to evaluate pulmonary arteries for embolism.",
-      "contrast_timing": "Pulmonary arterial phase: ∼6–13 sec post-injection.",
+      "contrast_timing": "Pulmonary arterial phase: 6–13 sec post-injection.",
       "contrast_dose": "Weight-based; ~100–150 mL iodinated contrast (300 mg I/mL); follow ACR Manual.",
       "renal_safety_notes": "Ensure contrast-to-eGFR ratio <1.1 g/(mL/min); if eGFR <30, consider non-contrast alternatives or weigh risks carefully.",
       "references": [
@@ -30,18 +29,19 @@
       ]
     },
     {
-      "protocol_id": "CT_CHEST_LOW_DOSE_SCREENING",
-      "name": "Low-Dose CT Chest — Lung Cancer Screening",
+      "protocol_id": "CT_CTA_CAROTIDS",
+      "name": "CT Angiography — Carotid Arteries (CTA Neck)",
       "indications": [
-        "lung cancer screening",
-        "high-risk cohorts"
+        "stroke workup",
+        "carotid stenosis",
+        "neurological symptoms"
       ],
-      "description": "Low-dose CT of lungs targeting <3 mGy radiation dose while maintaining image quality.",
-      "contrast_timing": "N/A — non-contrast low-dose protocol.",
-      "contrast_dose": "None.",
-      "renal_safety_notes": "Ideal in patients with renal dysfunction due to non-use of contrast.",
+      "description": "CTA through neck using bolus tracking; triggered at specified HU in vessels.",
+      "contrast_timing": "Start when arterial lumen reaches threshold (~150 HU trigger).",
+      "contrast_dose": "Adult: ~100 mL iodinated contrast at 4–5 mL/sec; pediatric: 2 mL/kg max.",
+      "renal_safety_notes": "Arterial studies have high contrast load; assess renal risk and consider MRI/MRA.",
       "references": [
-        "Low-dose CT screening dose benchmarks PMC:contentReference[oaicite:6]{index=6}"
+        "OHSU CTA head/neck details:contentReference[oaicite:8]{index=8}"
       ]
     }
   ]

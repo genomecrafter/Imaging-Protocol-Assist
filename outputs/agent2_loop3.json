@@ -1,0 +1,48 @@
+{
+  "recommendations": [
+    "STAT Renal Function Labs: Obtain STAT renal function labs (eGFR, serum creatinine, BUN, potassium) with documented timestamps before any contrast-enhanced study.",
+    "Defer Contrast if Non-Emergent: If the clinical scenario is non-emergent, defer contrast-enhanced CT until renal function is known; consider non-contrast CT or MRI without gadolinium in the interim.",
+    "Emergency Protocol: If the situation is emergent (e.g., active hemorrhage), proceed with the lowest feasible contrast dose, employ split-bolus or reduced-volume techniques, and ensure aggressive IV hydration per KDIGO guidelines.",
+    "Clarify Indication: Clarify the specific clinical indication (e.g., liver lesion evaluation, trauma assessment, infection work-up) before selecting a protocol."
+  ],
+  "rationale": [
+    "Missing renal function data prevents safe contrast administration.",
+    "Protocols were selected without a confirmed clinical indication.",
+    "Incomplete patient data and missing lab values lead to low confidence in current assessment.",
+    "Placeholder references require replacement with verifiable sources."
+  ],
+  "protocol_selection": [
+    {
+      "protocol_id": "CT_LIVER_LIRADS_MULTIPHASE",
+      "name": "Liver Lesion Characterization (LI-RADS Multiphase)",
+      "indications": [
+        "chronic liver disease",
+        "HCC evaluation",
+        "liver lesion follow-up"
+      ],
+      "description": "Includes non-contrast, arterial, portal venous, and delayed phases as per LI-RADS.",
+      "contrast_timing": "Arterial (1/435 sec), portal venous (1/70–1/80 sec), delayed (3–4 min).",
+      "contrast_dose": "As per abdomen protocol; adjust in renal impairment.",
+      "renal_safety_notes": "Consider MRI in patients with eGFR <30; use hydration and dose adjustment.",
+      "references": [
+        "Contrast CT phases overview (Wikipedia):contentReference[oaicite:4]{index=4}",
+        "LI-RADS explanation (Wikipedia):contentReference[oaicite:5]{index=5}"
+      ]
+    },
+    {
+      "protocol_id": "CT_TRAUMA_CHEST_ABD_PELVIS",
+      "name": "Trauma CT – Chest, Abdomen & Pelvis with Contrast",
+      "indications": [
+        "blunt/penetrating trauma",
+        "active hemorrhage evaluation"
+      ],
+      "description": "Contrast CT of torso with trauma-focused reformats; may include delayed images as needed.",
+      "contrast_timing": "Portal venous phase, possible delayed imaging to assess hemorrhage.",
+      "contrast_dose": "Standard contrast dose; trauma protocols may include split bolus techniques.",
+      "renal_safety_notes": "Minimize field-of-view and dose; use alternative imaging if stable and renal risk high.",
+      "references": [
+        "UW Trauma protocol overview (PDF):contentReference[oaicite:7]{index=7}"
+      ]
+    }
+  ]
+}

@@ -39,7 +39,7 @@ class PatientInput(BaseModel):
 
 
 def save_json(obj: dict, path: Path) -> None:
-    path.write_text(json.dumps(obj, indent=2, ensure_ascii=False))
+    path.write_text(json.dumps(obj, indent=2, ensure_ascii=False), encoding='utf-8')
 
 
 def run_pipeline(patient_input: dict):
@@ -113,6 +113,13 @@ def run_pipeline(patient_input: dict):
 # --- FastAPI setup ---
 app = FastAPI(title="Agentic Imaging System")
 
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+
+# Serve static files
+@app.get("/")
+def serve_frontend():
+    return FileResponse("frontend.html")
 
 @app.post("/run_pipeline")
 def run_pipeline_endpoint(input_data: PatientInput):
