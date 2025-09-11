@@ -1,14 +1,16 @@
 {
   "recommendations": [
-    "Perform CT Pulmonary Angiography to evaluate for pulmonary embolism given acute chest pain.",
-    "Consider pre-hydration with intravenous fluids prior to contrast administration.",
-    "Monitor renal function closely post-procedure."
+    "Perform CT Pulmonary Angiography (Chest CTA for PE) to rule out pulmonary embolism.",
+    "Obtain recent eGFR before administering contrast for CT Pulmonary Angiography.",
+    "If eGFR is < 30 mL/min/1.73m², consider non-contrast CT of the chest for alternative imaging if clinically appropriate, or proceed with caution and hydration as per ACR guidelines.",
+    "Consider a low-dose non-contrast CT chest if the primary concern shifts to lung cancer screening and renal function is a significant contraindication to contrast."
   ],
   "rationale": [
-    "Patient presents with acute right-sided chest pain, a primary indication for CTA PE.",
-    "The patient's eGFR of 59 mL/min/1.73m² is in CKD stage 3a, indicating a need for renal protection strategies.",
-    "Hypotension (MAP 59 mmHg) further elevates the risk of contrast-induced nephropathy, necessitating caution and potential hydration.",
-    "Emergency admission and chest pain suggest a potentially time-sensitive diagnosis is required."
+    "Patient presents with shortness of breath and chest pain, which are primary indications for CT Pulmonary Angiography.",
+    "Absence of eGFR necessitates verification to assess contrast safety, aligning with KDIGO and ACR guidelines.",
+    "Patient's history of diabetes and hypertension are risk factors for renal impairment, increasing the importance of eGFR assessment before contrast.",
+    "Non-emergency admission allows for standard protocol preparation and risk assessment.",
+    "Low-dose non-contrast CT chest is a viable alternative if contrast administration is contraindicated due to renal insufficiency and the clinical question can be addressed."
   ],
   "protocol_selection": [
     {
@@ -29,19 +31,18 @@
       ]
     },
     {
-      "protocol_id": "CT_CTA_CAROTIDS",
-      "name": "CT Angiography — Carotid Arteries (CTA Neck)",
+      "protocol_id": "CT_CHEST_LOW_DOSE_SCREENING",
+      "name": "Low-Dose CT Chest – Lung Cancer Screening",
       "indications": [
-        "stroke workup",
-        "carotid stenosis",
-        "neurological symptoms"
+        "lung cancer screening",
+        "high-risk cohorts"
       ],
-      "description": "CTA through neck using bolus tracking; triggered at specified HU in vessels.",
-      "contrast_timing": "Start when arterial lumen reaches threshold (~150 HU trigger).",
-      "contrast_dose": "Adult: ~100 mL iodinated contrast at 4–5 mL/sec; pediatric: 2 mL/kg max.",
-      "renal_safety_notes": "Arterial studies have high contrast load; assess renal risk and consider MRI/MRA.",
+      "description": "Low-dose CT of lungs targeting <3 mGy radiation dose while maintaining image quality.",
+      "contrast_timing": "N/A – non-contrast low-dose protocol.",
+      "contrast_dose": "None.",
+      "renal_safety_notes": "Ideal in patients with renal dysfunction due to non-use of contrast.",
       "references": [
-        "OHSU CTA head/neck details:contentReference[oaicite:8]{index=8}"
+        "Low-dose CT screening dose benchmarks PMC:contentReference[oaicite:6]{index=6}"
       ]
     }
   ]

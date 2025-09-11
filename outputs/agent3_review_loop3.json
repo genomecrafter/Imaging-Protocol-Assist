@@ -1,25 +1,25 @@
 {
   "issues": [
-    "Renal function labs (eGFR, serum creatinine, BUN, potassium) are missing; the renal tool flagged critical gaps.",
-    "The renal tool summary lists additional missing data (BMI, lab timestamps) that were not supplied in the patient record.",
-    "Agent 2 selected two contrast‑enhanced CT protocols (liver LI‑RADS and trauma torso) without a confirmed clinical indication for either study.",
-    "Both suggested protocols rely on contrast administration despite absent renal function data, which is unsafe for patients at risk of contrast‑induced nephropathy.",
-    "References cited in the protocol definitions are placeholder Wikipedia links and an internal PDF citation; they do not meet evidence‑based standards.",
-    "Patient‑level data (primary diagnosis, admission type) are placeholders (“Extracted from FHIR”), preventing any definitive assessment of urgency or appropriateness of contrast use."
+    "Critical renal function labs (serum creatinine, BUN, potassium) are missing, preventing eGFR calculation and safe contrast dosing.",
+    "Patient weight, height, and BMI are unavailable, hindering weight‑based contrast volume calculation.",
+    "Hydration protocol (1 mL/kg/h) may be unsafe in a 72‑year‑old MICU patient with hypertension, possible cardiac dysfunction, and diabetes; fluid overload risk not addressed.",
+    "No recent lab timestamps are provided, raising uncertainty about the timing of any future labs relative to contrast administration.",
+    "Potential contraindication for iodinated contrast in elderly patients with diabetes and hypertension if eGFR is <45 mL/min/1.73 m².",
+    "Alternative imaging (V/Q scan, MR pulmonary angiography) is mentioned but not prioritized if labs remain unavailable."
   ],
   "recommendations": [
-    "Obtain STAT renal function labs (eGFR, serum creatinine, BUN, potassium) with exact timestamps before planning any contrast‑enhanced study.",
-    "Clarify the precise clinical indication for imaging (e.g., suspected liver lesion, trauma evaluation, active hemorrhage) and document urgency (emergent vs. non‑emergent).",
-    "If the indication is non‑emergent, defer contrast‑enhanced CT until renal labs are available; consider non‑contrast CT, MRI without gadolinium, or ultrasound as alternatives.",
-    "If the indication is emergent (e.g., active intra‑abdominal hemorrhage), proceed with the lowest feasible iodine dose, employ split‑bolus or reduced‑volume techniques, and ensure aggressive IV hydration per KDIGO guidelines (e.g., isotonic saline 1 mL/kg/h beginning before contrast and continuing for 12 h).",
-    "Select a protocol only after renal function is known: for eGFR ≥60 mL/min/1.73 m², standard contrast dosing is acceptable; for eGFR 30‑59, use reduced dose and consider iso‑osmolar contrast; for eGFR <30, avoid iodinated contrast unless life‑threatening and no alternative exists.",
-    "Replace all placeholder references with peer‑reviewed sources (e.g., ACR Appropriateness Criteria, KDIGO 2024 guideline, ACR–SPR practice parameters).",
-    "Document renal safety notes explicitly in the order set, including hydration protocol, post‑contrast monitoring, and criteria for dialysis if needed.",
-    "Re‑evaluate the chosen CT protocols once the indication and renal status are confirmed; for liver lesion work‑up, a non‑contrast MRI with liver‑specific contrast (gadoxetate) may be safer in renal impairment."
+    "Immediately obtain serum creatinine, BUN, and potassium (preferably with a rapid point‑of‑care test) to calculate eGFR before any contrast administration.",
+    "Record patient weight and height (or at least an estimated weight) to enable accurate weight‑based contrast dosing; if unavailable, use a reduced standard dose (e.g., 80 mL) with low/iso‑osmolar contrast.",
+    "If eGFR ≥45 mL/min/1.73 m² and labs are recent (<48 h), proceed with CT Pulmonary Angiography using the standard 1.5 mL/kg contrast dose (max 150 mL).",
+    "If eGFR 30‑44 mL/min/1.73 m², use a reduced contrast volume (~0.8 mL/kg), low‑ or iso‑osmolar contrast, and tailor hydration to cardiac status (e.g., 0.5 mL/kg/h isotonic saline if heart failure risk).",
+    "If eGFR <30 mL/min/1.73 m² or labs remain unavailable, avoid iodinated contrast; select a ventilation‑perfusion (V/Q) scan or MR pulmonary angiography as the primary diagnostic modality.",
+    "Implement allergy screening and pre‑medication protocol for contrast allergy as per institutional guidelines.",
+    "Schedule repeat renal function testing (creatinine, BUN, potassium) at 24 h and 48 h post‑contrast if contrast is administered.",
+    "Document all decisions, lab results, and hydration parameters in the electronic health record before proceeding."
   ],
-  "confidence": 0.16999999999999998,
-  "agent2_confidence": 0.78,
-  "timestamp": "2025-09-08T16:56:16.736304Z",
+  "confidence": 0.78,
+  "agent2_confidence": 0.86,
+  "timestamp": "2025-09-10T16:18:17.547288Z",
   "tool_outputs": {
     "renal": {
       "tool_id": "renal_tool_v2",
@@ -27,7 +27,7 @@
         {
           "id": "egfr_ckd_epi",
           "units": "ml/min/1.73m2",
-          "timestamp": "2025-09-08T16:56:11.136277Z",
+          "timestamp": "2025-09-10T16:18:00.183778Z",
           "priority": "critical",
           "value": null,
           "status": "missing",
@@ -36,7 +36,7 @@
         {
           "id": "creatinine_mg_dl",
           "units": "mg/dL",
-          "timestamp": "2025-09-08T16:56:11.136297Z",
+          "timestamp": "2025-09-10T16:18:00.183814Z",
           "priority": "critical",
           "value": null,
           "status": "missing",
@@ -44,7 +44,7 @@
         },
         {
           "id": "bun_creatinine_ratio",
-          "timestamp": "2025-09-08T16:56:11.136307Z",
+          "timestamp": "2025-09-10T16:18:00.183835Z",
           "priority": "important",
           "value": null,
           "status": "missing",
@@ -53,7 +53,7 @@
         {
           "id": "potassium_mmol_l",
           "units": "mEq/L",
-          "timestamp": "2025-09-08T16:56:11.136316Z",
+          "timestamp": "2025-09-10T16:18:00.183852Z",
           "priority": "important",
           "value": null,
           "status": "missing",
@@ -74,145 +74,151 @@
       },
       "metadata": {
         "version": "2.0.0",
-        "run_ts": "2025-09-08T16:56:11.136374Z"
+        "run_ts": "2025-09-10T16:18:00.183958Z"
       }
     }
   },
-  "llm_raw": "{\n  \"issues\": [\n    \"Renal function labs (eGFR, serum creatinine, BUN, potassium) are missing; the renal tool flagged critical gaps.\",\n    \"The renal tool summary lists additional missing data (BMI, lab timestamps) that were not supplied in the patient record.\",\n    \"Agent 2 selected two contrast‑enhanced CT protocols (liver LI‑RADS and trauma torso) without a confirmed clinical indication for either study.\",\n    \"Both suggested protocols rely on contrast administration despite absent renal function data, which is unsafe for patients at risk of contrast‑induced nephropathy.\",\n    \"References cited in the protocol definitions are placeholder Wikipedia links and an internal PDF citation; they do not meet evidence‑based standards.\",\n    \"Patient‑level data (primary diagnosis, admission type) are placeholders (“Extracted from FHIR”), preventing any definitive assessment of urgency or appropriateness of contrast use.\"\n  ],\n  \"recommendations\": [\n    \"Obtain STAT renal function labs (eGFR, serum creatinine, BUN, potassium) with exact timestamps before planning any contrast‑enhanced study.\",\n    \"Clarify the precise clinical indication for imaging (e.g., suspected liver lesion, trauma evaluation, active hemorrhage) and document urgency (emergent vs. non‑emergent).\",\n    \"If the indication is non‑emergent, defer contrast‑enhanced CT until renal labs are available; consider non‑contrast CT, MRI without gadolinium, or ultrasound as alternatives.\",\n    \"If the indication is emergent (e.g., active intra‑abdominal hemorrhage), proceed with the lowest feasible iodine dose, employ split‑bolus or reduced‑volume techniques, and ensure aggressive IV hydration per KDIGO guidelines (e.g., isotonic saline 1 mL/kg/h beginning before contrast and continuing for 12 h).\",\n    \"Select a protocol only after renal function is known: for eGFR ≥60 mL/min/1.73 m², standard contrast dosing is acceptable; for eGFR 30‑59, use reduced dose and consider iso‑osmolar contrast; for eGFR <30, avoid iodinated contrast unless life‑threatening and no alternative exists.\",\n    \"Replace all placeholder references with peer‑reviewed sources (e.g., ACR Appropriateness Criteria, KDIGO 2024 guideline, ACR–SPR practice parameters).\",\n    \"Document renal safety notes explicitly in the order set, including hydration protocol, post‑contrast monitoring, and criteria for dialysis if needed.\",\n    \"Re‑evaluate the chosen CT protocols once the indication and renal status are confirmed; for liver lesion work‑up, a non‑contrast MRI with liver‑specific contrast (gadoxetate) may be safer in renal impairment.\"\n  ],\n  \"confidence\": 0.42\n}",
+  "llm_raw": "{\n  \"issues\": [\n    \"Critical renal function labs (serum creatinine, BUN, potassium) are missing, preventing eGFR calculation and safe contrast dosing.\",\n    \"Patient weight, height, and BMI are unavailable, hindering weight‑based contrast volume calculation.\",\n    \"Hydration protocol (1 mL/kg/h) may be unsafe in a 72‑year‑old MICU patient with hypertension, possible cardiac dysfunction, and diabetes; fluid overload risk not addressed.\",\n    \"No recent lab timestamps are provided, raising uncertainty about the timing of any future labs relative to contrast administration.\",\n    \"Potential contraindication for iodinated contrast in elderly patients with diabetes and hypertension if eGFR is <45 mL/min/1.73 m².\",\n    \"Alternative imaging (V/Q scan, MR pulmonary angiography) is mentioned but not prioritized if labs remain unavailable.\"\n  ],\n  \"recommendations\": [\n    \"Immediately obtain serum creatinine, BUN, and potassium (preferably with a rapid point‑of‑care test) to calculate eGFR before any contrast administration.\",\n    \"Record patient weight and height (or at least an estimated weight) to enable accurate weight‑based contrast dosing; if unavailable, use a reduced standard dose (e.g., 80 mL) with low/iso‑osmolar contrast.\",\n    \"If eGFR ≥45 mL/min/1.73 m² and labs are recent (<48 h), proceed with CT Pulmonary Angiography using the standard 1.5 mL/kg contrast dose (max 150 mL).\",\n    \"If eGFR 30‑44 mL/min/1.73 m², use a reduced contrast volume (~0.8 mL/kg), low‑ or iso‑osmolar contrast, and tailor hydration to cardiac status (e.g., 0.5 mL/kg/h isotonic saline if heart failure risk).\",\n    \"If eGFR <30 mL/min/1.73 m² or labs remain unavailable, avoid iodinated contrast; select a ventilation‑perfusion (V/Q) scan or MR pulmonary angiography as the primary diagnostic modality.\",\n    \"Implement allergy screening and pre‑medication protocol for contrast allergy as per institutional guidelines.\",\n    \"Schedule repeat renal function testing (creatinine, BUN, potassium) at 24 h and 48 h post‑contrast if contrast is administered.\",\n    \"Document all decisions, lab results, and hydration parameters in the electronic health record before proceeding.\"\n  ],\n  \"confidence\": 0.88\n}",
   "hallucination_analysis": {
     "statement_assessments": [
       {
-        "text": "Renal function labs (eGFR, serum creatinine, BUN, potassium) are missing; the renal tool flagged critical gaps.",
-        "type": "issue",
-        "classification": "unverified",
-        "rationale": "no direct or inferred support found"
-      },
-      {
-        "text": "The renal tool summary lists additional missing data (BMI, lab timestamps) that were not supplied in the patient record.",
-        "type": "issue",
-        "classification": "unverified",
-        "rationale": "no direct or inferred support found"
-      },
-      {
-        "text": "Agent 2 selected two contrast‑enhanced CT protocols (liver LI‑RADS and trauma torso) without a confirmed clinical indication for either study.",
-        "type": "issue",
-        "classification": "unverified",
-        "rationale": "no direct or inferred support found"
-      },
-      {
-        "text": "Both suggested protocols rely on contrast administration despite absent renal function data, which is unsafe for patients at risk of contrast‑induced nephropathy.",
-        "type": "issue",
-        "classification": "unverified",
-        "rationale": "no direct or inferred support found"
-      },
-      {
-        "text": "References cited in the protocol definitions are placeholder Wikipedia links and an internal PDF citation; they do not meet evidence‑based standards.",
-        "type": "issue",
-        "classification": "unverified",
-        "rationale": "no direct or inferred support found"
-      },
-      {
-        "text": "Patient‑level data (primary diagnosis, admission type) are placeholders (“Extracted from FHIR”), preventing any definitive assessment of urgency or appropriateness of contrast use.",
+        "text": "Critical renal function labs (serum creatinine, BUN, potassium) are missing, preventing eGFR calculation and safe contrast dosing.",
         "type": "issue",
         "classification": "supported",
-        "rationale": "matches known fact 'extracted from fhir'"
+        "rationale": "matches known fact 'f'"
       },
       {
-        "text": "Obtain STAT renal function labs (eGFR, serum creatinine, BUN, potassium) with exact timestamps before planning any contrast‑enhanced study.",
-        "type": "recommendation",
+        "text": "Patient weight, height, and BMI are unavailable, hindering weight‑based contrast volume calculation.",
+        "type": "issue",
         "classification": "unverified",
         "rationale": "no direct or inferred support found"
       },
       {
-        "text": "Clarify the precise clinical indication for imaging (e.g., suspected liver lesion, trauma evaluation, active hemorrhage) and document urgency (emergent vs. non‑emergent).",
-        "type": "recommendation",
-        "classification": "unverified",
-        "rationale": "no direct or inferred support found"
+        "text": "Hydration protocol (1 mL/kg/h) may be unsafe in a 72‑year‑old MICU patient with hypertension, possible cardiac dysfunction, and diabetes; fluid overload risk not addressed.",
+        "type": "issue",
+        "classification": "supported",
+        "rationale": "matches known fact '72'"
       },
       {
-        "text": "If the indication is non‑emergent, defer contrast‑enhanced CT until renal labs are available; consider non‑contrast CT, MRI without gadolinium, or ultrasound as alternatives.",
-        "type": "recommendation",
-        "classification": "unverified",
-        "rationale": "no direct or inferred support found"
+        "text": "No recent lab timestamps are provided, raising uncertainty about the timing of any future labs relative to contrast administration.",
+        "type": "issue",
+        "classification": "supported",
+        "rationale": "matches known fact 'f'"
       },
       {
-        "text": "If the indication is emergent (e.g., active intra‑abdominal hemorrhage), proceed with the lowest feasible iodine dose, employ split‑bolus or reduced‑volume techniques, and ensure aggressive IV hydration per KDIGO guidelines (e.g., isotonic saline 1 mL/kg/h beginning before contrast and continuing for 12 h).",
-        "type": "recommendation",
-        "classification": "unverified",
-        "rationale": "no direct or inferred support found"
+        "text": "Potential contraindication for iodinated contrast in elderly patients with diabetes and hypertension if eGFR is <45 mL/min/1.73 m².",
+        "type": "issue",
+        "classification": "supported",
+        "rationale": "matches known fact 'f'"
       },
       {
-        "text": "Select a protocol only after renal function is known: for eGFR ≥60 mL/min/1.73 m², standard contrast dosing is acceptable; for eGFR 30‑59, use reduced dose and consider iso‑osmolar contrast; for eGFR <30, avoid iodinated contrast unless life‑threatening and no alternative exists.",
-        "type": "recommendation",
-        "classification": "unverified",
-        "rationale": "egfr 60.0 not present in KB"
+        "text": "Alternative imaging (V/Q scan, MR pulmonary angiography) is mentioned but not prioritized if labs remain unavailable.",
+        "type": "issue",
+        "classification": "supported",
+        "rationale": "matches known fact 'f'"
       },
       {
-        "text": "Replace all placeholder references with peer‑reviewed sources (e.g., ACR Appropriateness Criteria, KDIGO 2024 guideline, ACR–SPR practice parameters).",
+        "text": "Immediately obtain serum creatinine, BUN, and potassium (preferably with a rapid point‑of‑care test) to calculate eGFR before any contrast administration.",
         "type": "recommendation",
-        "classification": "unverified",
-        "rationale": "no direct or inferred support found"
+        "classification": "supported",
+        "rationale": "matches known fact 'f'"
       },
       {
-        "text": "Document renal safety notes explicitly in the order set, including hydration protocol, post‑contrast monitoring, and criteria for dialysis if needed.",
+        "text": "Record patient weight and height (or at least an estimated weight) to enable accurate weight‑based contrast dosing; if unavailable, use a reduced standard dose (e.g., 80 mL) with low/iso‑osmolar contrast.",
         "type": "recommendation",
-        "classification": "unverified",
-        "rationale": "no direct or inferred support found"
+        "classification": "supported",
+        "rationale": "matches known fact '0'"
       },
       {
-        "text": "Re‑evaluate the chosen CT protocols once the indication and renal status are confirmed; for liver lesion work‑up, a non‑contrast MRI with liver‑specific contrast (gadoxetate) may be safer in renal impairment.",
+        "text": "If eGFR ≥45 mL/min/1.73 m² and labs are recent (<48 h), proceed with CT Pulmonary Angiography using the standard 1.5 mL/kg contrast dose (max 150 mL).",
         "type": "recommendation",
-        "classification": "unverified",
-        "rationale": "no direct or inferred support found"
+        "classification": "supported",
+        "rationale": "matches known fact '0'"
+      },
+      {
+        "text": "If eGFR 30‑44 mL/min/1.73 m², use a reduced contrast volume (~0.8 mL/kg), low‑ or iso‑osmolar contrast, and tailor hydration to cardiac status (e.g., 0.5 mL/kg/h isotonic saline if heart failure risk).",
+        "type": "recommendation",
+        "classification": "supported",
+        "rationale": "matches known fact '0'"
+      },
+      {
+        "text": "If eGFR <30 mL/min/1.73 m² or labs remain unavailable, avoid iodinated contrast; select a ventilation‑perfusion (V/Q) scan or MR pulmonary angiography as the primary diagnostic modality.",
+        "type": "recommendation",
+        "classification": "supported",
+        "rationale": "matches known fact '0'"
+      },
+      {
+        "text": "Implement allergy screening and pre‑medication protocol for contrast allergy as per institutional guidelines.",
+        "type": "recommendation",
+        "classification": "supported",
+        "rationale": "matches known fact 'f'"
+      },
+      {
+        "text": "Schedule repeat renal function testing (creatinine, BUN, potassium) at 24 h and 48 h post‑contrast if contrast is administered.",
+        "type": "recommendation",
+        "classification": "supported",
+        "rationale": "matches known fact 'f'"
+      },
+      {
+        "text": "Document all decisions, lab results, and hydration parameters in the electronic health record before proceeding.",
+        "type": "recommendation",
+        "classification": "supported",
+        "rationale": "matches known fact 'f'"
       }
     ],
     "counts": {
-      "supported": 1,
+      "supported": 13,
       "inferred": 0,
       "domain_safe": 0,
-      "unverified": 13,
+      "unverified": 1,
       "contradicted": 0
     },
-    "hallucination_score": 0.464,
+    "hallucination_score": 0.036,
     "recommendation": {
-      "force_revision": true,
-      "confidence_reduction": 0.25
+      "force_revision": false,
+      "confidence_reduction": 0.1
     },
     "knowledge_base_summary": {
-      "numbers": {},
+      "numbers": {
+        "subject_id": 30045678.0,
+        "age": 72.0,
+        "hadm_id": 45678912.0,
+        "hospital_expire_flag": 0.0,
+        "data_completeness_pct": 0.95
+      },
       "raw_strings_sample": [
-        "creatinine not available",
-        "egfr_ckd_epi",
-        "potassium_mmol_l",
-        "creatinine_mg_dl",
-        "fhir_based",
-        "bun_creatinine_ratio",
-        "missing bun or creatinine for ratio.",
         "potassium not available",
-        "extracted from fhir",
-        "egfr not available"
+        "medical intensive care unit (micu)",
+        "72",
+        "creatinine not available",
+        "missing bun or creatinine for ratio.",
+        "30045678",
+        "0",
+        "egfr_ckd_epi",
+        "egfr not available",
+        "shortness of breath, chest pain, history of diabetes and hypertension"
       ]
     }
   },
   "feedback": {
     "issues": [
-      "Renal function labs (eGFR, serum creatinine, BUN, potassium) are missing; the renal tool flagged critical gaps.",
-      "The renal tool summary lists additional missing data (BMI, lab timestamps) that were not supplied in the patient record.",
-      "Agent 2 selected two contrast‑enhanced CT protocols (liver LI‑RADS and trauma torso) without a confirmed clinical indication for either study.",
-      "Both suggested protocols rely on contrast administration despite absent renal function data, which is unsafe for patients at risk of contrast‑induced nephropathy.",
-      "References cited in the protocol definitions are placeholder Wikipedia links and an internal PDF citation; they do not meet evidence‑based standards.",
-      "Patient‑level data (primary diagnosis, admission type) are placeholders (“Extracted from FHIR”), preventing any definitive assessment of urgency or appropriateness of contrast use."
+      "Critical renal function labs (serum creatinine, BUN, potassium) are missing, preventing eGFR calculation and safe contrast dosing.",
+      "Patient weight, height, and BMI are unavailable, hindering weight‑based contrast volume calculation.",
+      "Hydration protocol (1 mL/kg/h) may be unsafe in a 72‑year‑old MICU patient with hypertension, possible cardiac dysfunction, and diabetes; fluid overload risk not addressed.",
+      "No recent lab timestamps are provided, raising uncertainty about the timing of any future labs relative to contrast administration.",
+      "Potential contraindication for iodinated contrast in elderly patients with diabetes and hypertension if eGFR is <45 mL/min/1.73 m².",
+      "Alternative imaging (V/Q scan, MR pulmonary angiography) is mentioned but not prioritized if labs remain unavailable."
     ],
     "recommendations": [
-      "Obtain STAT renal function labs (eGFR, serum creatinine, BUN, potassium) with exact timestamps before planning any contrast‑enhanced study.",
-      "Clarify the precise clinical indication for imaging (e.g., suspected liver lesion, trauma evaluation, active hemorrhage) and document urgency (emergent vs. non‑emergent).",
-      "If the indication is non‑emergent, defer contrast‑enhanced CT until renal labs are available; consider non‑contrast CT, MRI without gadolinium, or ultrasound as alternatives.",
-      "If the indication is emergent (e.g., active intra‑abdominal hemorrhage), proceed with the lowest feasible iodine dose, employ split‑bolus or reduced‑volume techniques, and ensure aggressive IV hydration per KDIGO guidelines (e.g., isotonic saline 1 mL/kg/h beginning before contrast and continuing for 12 h).",
-      "Select a protocol only after renal function is known: for eGFR ≥60 mL/min/1.73 m², standard contrast dosing is acceptable; for eGFR 30‑59, use reduced dose and consider iso‑osmolar contrast; for eGFR <30, avoid iodinated contrast unless life‑threatening and no alternative exists.",
-      "Replace all placeholder references with peer‑reviewed sources (e.g., ACR Appropriateness Criteria, KDIGO 2024 guideline, ACR–SPR practice parameters).",
-      "Document renal safety notes explicitly in the order set, including hydration protocol, post‑contrast monitoring, and criteria for dialysis if needed.",
-      "Re‑evaluate the chosen CT protocols once the indication and renal status are confirmed; for liver lesion work‑up, a non‑contrast MRI with liver‑specific contrast (gadoxetate) may be safer in renal impairment."
+      "Immediately obtain serum creatinine, BUN, and potassium (preferably with a rapid point‑of‑care test) to calculate eGFR before any contrast administration.",
+      "Record patient weight and height (or at least an estimated weight) to enable accurate weight‑based contrast dosing; if unavailable, use a reduced standard dose (e.g., 80 mL) with low/iso‑osmolar contrast.",
+      "If eGFR ≥45 mL/min/1.73 m² and labs are recent (<48 h), proceed with CT Pulmonary Angiography using the standard 1.5 mL/kg contrast dose (max 150 mL).",
+      "If eGFR 30‑44 mL/min/1.73 m², use a reduced contrast volume (~0.8 mL/kg), low‑ or iso‑osmolar contrast, and tailor hydration to cardiac status (e.g., 0.5 mL/kg/h isotonic saline if heart failure risk).",
+      "If eGFR <30 mL/min/1.73 m² or labs remain unavailable, avoid iodinated contrast; select a ventilation‑perfusion (V/Q) scan or MR pulmonary angiography as the primary diagnostic modality.",
+      "Implement allergy screening and pre‑medication protocol for contrast allergy as per institutional guidelines.",
+      "Schedule repeat renal function testing (creatinine, BUN, potassium) at 24 h and 48 h post‑contrast if contrast is administered.",
+      "Document all decisions, lab results, and hydration parameters in the electronic health record before proceeding."
     ],
-    "confidence": 0.16999999999999998
+    "confidence": 0.78
   }
 }

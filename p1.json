@@ -1,0 +1,141 @@
+{
+  "resourceType": "Bundle",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "20028931",
+        "gender": "female",
+        "birthDate": "1953-01-01",
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/patient-race",
+            "valueString": "WHITE"
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "34567891",
+        "status": "finished",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "EMER",
+          "display": "emergency"
+        },
+        "type": [
+          {
+            "text": "EMERGENCY"
+          }
+        ],
+        "subject": {
+          "reference": "Patient/20028931"
+        },
+        "period": {
+          "start": "2025-09-01T00:00:00Z",
+          "end": "2025-09-05T00:00:00Z"
+        },
+        "serviceProvider": {
+          "display": "Medical Intensive Care Unit (MICU)"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "id": "cond2",
+        "subject": {
+          "reference": "Patient/20028931"
+        },
+        "encounter": {
+          "reference": "Encounter/34567891"
+        },
+        "code": {
+          "text": "Right-sided chest pain with history of diabetes and hypertension"
+        },
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-labs-2",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory"
+              }
+            ]
+          }
+        ],
+        "subject": {
+          "reference": "Patient/20028931"
+        },
+        "encounter": {
+          "reference": "Encounter/34567891"
+        },
+        "component": [
+          { "code": { "text": "Creatinine" }, "valueQuantity": { "value": 1.7, "unit": "mg/dL" } },
+          { "code": { "text": "BUN" }, "valueQuantity": { "value": 34.0, "unit": "mg/dL" } },
+          { "code": { "text": "Glucose" }, "valueQuantity": { "value": 142.0, "unit": "mg/dL" } },
+          { "code": { "text": "Hemoglobin" }, "valueQuantity": { "value": 10.1, "unit": "g/dL" } },
+          { "code": { "text": "Hematocrit" }, "valueQuantity": { "value": 30.5, "unit": "%" } },
+          { "code": { "text": "Platelets" }, "valueQuantity": { "value": 210.0, "unit": "10^9/L" } },
+          { "code": { "text": "WBC" }, "valueQuantity": { "value": 12.3, "unit": "10^9/L" } },
+          { "code": { "text": "Sodium" }, "valueQuantity": { "value": 135.0, "unit": "mEq/L" } },
+          { "code": { "text": "Potassium" }, "valueQuantity": { "value": 4.6, "unit": "mEq/L" } },
+          { "code": { "text": "Chloride" }, "valueQuantity": { "value": 100.0, "unit": "mEq/L" } },
+          { "code": { "text": "Bicarbonate" }, "valueQuantity": { "value": 21.0, "unit": "mEq/L" } },
+          { "code": { "text": "eGFR (CKD-EPI)" }, "valueQuantity": { "value": 59.0, "unit": "mL/min/1.73m²" } },
+          { "code": { "text": "CKD Stage" }, "valueString": "Stage 3a (Mild-to-moderate CKD)" }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-vitals-2",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs"
+              }
+            ]
+          }
+        ],
+        "subject": {
+          "reference": "Patient/20028931"
+        },
+        "encounter": {
+          "reference": "Encounter/34567891"
+        },
+        "component": [
+          { "code": { "text": "Heart rate" }, "valueQuantity": { "value": 95, "unit": "bpm" } },
+          { "code": { "text": "Systolic BP" }, "valueQuantity": { "value": 82, "unit": "mmHg" } },
+          { "code": { "text": "Diastolic BP" }, "valueQuantity": { "value": 48, "unit": "mmHg" } },
+          { "code": { "text": "MAP" }, "valueQuantity": { "value": 59.0, "unit": "mmHg" } },
+          { "code": { "text": "Pulse pressure" }, "valueQuantity": { "value": 34.0, "unit": "mmHg" } },
+          { "code": { "text": "Temperature" }, "valueQuantity": { "value": 98.9, "unit": "°F" } },
+          { "code": { "text": "SpO₂" }, "valueQuantity": { "value": 94.0, "unit": "%" } },
+          { "code": { "text": "Respiratory rate" }, "valueQuantity": { "value": 22, "unit": "/min" } }
+        ]
+      }
+    }
+  ]
+}

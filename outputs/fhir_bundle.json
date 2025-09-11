@@ -5,54 +5,47 @@
     {
       "resource": {
         "resourceType": "CarePlan",
-        "id": "careplan-imaging-recommendations",
-        "status": "active",
+        "id": "ca4e5f6d-7c8b-9a01-2345-67890abcdeff",
+        "status": "draft",
         "intent": "plan",
-        "title": "Imaging Protocol Recommendations",
+        "description": "Clinical recommendations and rationale based on patient data and imaging protocols for acute chest pain and shortness of breath.",
         "note": [
           {
-            "text": "Patient presents with hypotension (MAP 59 mmHg), increasing risk of contrast-induced nephropathy."
+            "text": "Missing renal function data (eGFR, creatinine, BUN) prevents safe contrast administration."
           },
           {
-            "text": "eGFR of 59 mL/min/1.73m² indicates CKD, warranting renal protective measures."
+            "text": "Patient's acute presentation of shortness of breath and chest pain is concerning for PE, necessitating evaluation."
           },
           {
-            "text": "Emergency admission for chest pain necessitates prompt evaluation, but patient safety is paramount."
+            "text": "Low-dose CT chest is not indicated for acute symptoms and does not evaluate pulmonary arteries."
           },
           {
-            "text": "ACR guidelines recommend hydration and risk assessment for contrast media administration in patients with compromised renal function and hemodynamic instability."
-          },
-          {
-            "text": "Carotid CTA protocol is not indicated for the current clinical presentation."
+            "text": "Alternative non-contrast imaging (V/Q scan) is recommended for potential renal impairment."
           }
         ],
         "activity": [
           {
             "detail": {
               "kind": "Task",
-              "description": "Prioritize hemodynamic stabilization before contrast-enhanced imaging, aiming for MAP > 65 mmHg to mitigate contrast-induced nephropathy risk.",
-              "status": "not-started"
+              "description": "Obtain STAT serum creatinine and BUN to calculate eGFR. Proceed with CT Pulmonary Angiography only if eGFR is sufficient for contrast administration, with appropriate hydration."
             }
           },
           {
             "detail": {
               "kind": "Task",
-              "description": "If CT Pulmonary Angiography (CTA PE) is essential, implement pre-hydration with isotonic saline and consider a reduced or split contrast dose protocol with a lower injection rate.",
-              "status": "not-started"
+              "description": "If eGFR is < 30 mL/min/1.73m², consider Ventilation-Perfusion (V/Q) scan as an alternative for PE evaluation."
             }
           },
           {
             "detail": {
               "kind": "Task",
-              "description": "Evaluate the clinical necessity of CTA PE by assessing pre-test probability (e.g., Wells score) and consider alternative imaging modalities like V/Q scan if suspicion is low or contrast administration is contraindicated.",
-              "status": "not-started"
+              "description": "If eGFR is ≥ 30 and < 60 mL/min/1.73m², use low-osmolar contrast, minimize volume, and administer IV hydration."
             }
           },
           {
             "detail": {
               "kind": "Task",
-              "description": "Obtain baseline renal labs immediately prior to contrast administration and plan for post-procedure creatinine monitoring (24-48 hours).",
-              "status": "not-started"
+              "description": "Document a renal risk assessment and obtain informed consent prior to contrast administration."
             }
           }
         ]
@@ -61,12 +54,10 @@
     {
       "resource": {
         "resourceType": "PlanDefinition",
-        "id": "plandefinition-ct-chest-angio-pulmonary-embolism",
-        "url": "http://example.org/fhir/PlanDefinition/ct-chest-angio-pulmonary-embolism",
-        "version": "1.0",
-        "name": "CTChestAngioPulmonaryEmbolism",
-        "title": "CT Pulmonary Angiography (Chest CTA for PE)",
+        "id": "pd-ct-chest-angio-pulmonary-embolism",
         "status": "active",
+        "name": "CT_CHEST_ANGIO_PULMONARY_EMBOLISM",
+        "title": "CT Pulmonary Angiography (Chest CTA for PE)",
         "type": {
           "coding": [
             {
@@ -79,41 +70,92 @@
         "description": "CT angiography timed for pulmonary arterial phase (6–13 sec post-contrast) to evaluate pulmonary arteries for embolism.",
         "topic": [
           {
-            "text": "pulmonary embolism"
+            "coding": [
+              {
+                "display": "pulmonary embolism"
+              }
+            ]
           },
           {
-            "text": "acute chest pain"
+            "coding": [
+              {
+                "display": "acute chest pain"
+              }
+            ]
           },
           {
-            "text": "shortness of breath"
-          }
-        ],
-        "relatedArtifact": [
-          {
-            "type": "documentation",
-            "url": "http://example.org/fhir/documentation/oaicite-0",
-            "display": "Contrast CT phases overview (Wikipedia)"
-          },
-          {
-            "type": "documentation",
-            "url": "http://example.org/fhir/documentation/oaicite-1",
-            "display": "CT pulmonary angiogram practical notes (Wikipedia)"
+            "coding": [
+              {
+                "display": "shortness of breath"
+              }
+            ]
           }
         ],
         "action": [
           {
-            "title": "Contrast Timing",
-            "description": "Pulmonary arterial phase: <6–13 sec post-injection."
+            "title": "Protocol Details for CT Pulmonary Angiography",
+            "description": "Contrast timing: Pulmonary arterial phase: ~6–13 sec post-injection. Contrast dose: Weight-based; ~100–150 mL iodinated contrast (300 mg I/mL); follow ACR Manual. Renal safety notes: Ensure contrast-to-eGFR ratio <1.1 g/(mL/min); if eGFR <30, consider non-contrast alternatives or weigh risks carefully."
+          }
+        ],
+        "relatedArtifact": [
+          {
+            "type": "citation",
+            "display": "Contrast CT phases overview (Wikipedia):contentReference[oaicite:0]{index=0}"
           },
           {
-            "title": "Contrast Dose",
-            "description": "Weight-based; ~100–150 mL iodinated contrast (300 mg I/mL); follow ACR Manual."
-          },
-          {
-            "title": "Renal Safety Notes",
-            "description": "Ensure contrast-to-eGFR ratio <1.1 g/(mL/min); if eGFR <30, consider non-contrast alternatives or weigh risks carefully."
+            "type": "citation",
+            "display": "CT pulmonary angiogram practical notes (Wikipedia):contentReference[oaicite:1]{index=1}"
           }
         ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "PlanDefinition",
+        "id": "pd-ventilation-perfusion-scan",
+        "status": "active",
+        "name": "VENTILATION_PERFUSION_SCAN",
+        "title": "Ventilation-Perfusion (V/Q) Scan",
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/plan-definition-type",
+              "code": "protocol",
+              "display": "Protocol"
+            }
+          ]
+        },
+        "description": "A two-part nuclear medicine imaging study to assess for pulmonary embolism by evaluating airflow (ventilation) and blood flow (perfusion) to the lungs.",
+        "topic": [
+          {
+            "coding": [
+              {
+                "display": "pulmonary embolism evaluation"
+              }
+            ]
+          },
+          {
+            "coding": [
+              {
+                "display": "contrast allergy"
+              }
+            ]
+          },
+          {
+            "coding": [
+              {
+                "display": "renal insufficiency"
+              }
+            ]
+          }
+        ],
+        "action": [
+          {
+            "title": "Protocol Details for Ventilation-Perfusion (V/Q) Scan",
+            "description": "Contrast timing: N/A. Contrast dose: None. Renal safety notes: Non-contrast modality, suitable for patients with renal impairment."
+          }
+        ],
+        "relatedArtifact": []
       }
     }
   ]

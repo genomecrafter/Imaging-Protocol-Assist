@@ -368,23 +368,23 @@
 
                 <div id="fhirForm" style="display: none;">
                     <div class="form-group">
-                        <h3><i class="fas fa-code"></i> FHIR Patient Resource</h3>
+                        <h3><i class="fas fa-upload"></i> Upload FHIR JSON File</h3>
                         <p style="color: #7f8c8d; margin-bottom: 15px;">
-                            Paste a FHIR R4 Patient resource JSON. The system will extract relevant clinical data.
+                            Upload a FHIR R4 JSON file containing patient data. The system will extract relevant clinical data.
                         </p>
-                        <textarea id="fhirInput" rows="15" style="width: 100%; padding: 15px; border: 2px solid #e0e0e0; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 0.9em;" placeholder='{
-  "resourceType": "Patient",
-  "id": "example-patient",
-  "gender": "female",
-  "birthDate": "2002-01-01",
-  "identifier": [
-    {
-      "value": "10014729"
-    }
-  ],
-  ...
-}'></textarea>
-                        <button type="button" id="fhirSubmitBtn" class="submit-btn">
+                        <div style="border: 2px dashed #e0e0e0; border-radius: 8px; padding: 20px; text-align: center; margin-bottom: 15px; transition: border-color 0.3s;" id="fileDropZone">
+                            <i class="fas fa-cloud-upload-alt" style="font-size: 2em; color: #bdc3c7; margin-bottom: 10px;"></i>
+                            <p style="margin: 0; color: #7f8c8d;">Drop JSON file here or click to select</p>
+                            <input type="file" id="fhirFileInput" accept=".json" style="display: none;">
+                        </div>
+                        <div id="fileInfo" style="display: none; background: #e8f5e8; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
+                            <i class="fas fa-file-alt"></i>
+                            <span id="fileName"></span>
+                            <button type="button" id="clearFile" style="background: none; border: none; color: #e74c3c; float: right; cursor: pointer;">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <button type="button" id="fhirSubmitBtn" class="submit-btn" disabled>
                             <i class="fas fa-stethoscope"></i>
                             Process FHIR Data
                         </button>
@@ -624,18 +624,84 @@
             }
         });
 
+        // File Upload Functionality
+        const fileDropZone = document.getElementById('fileDropZone');
+        const fhirFileInput = document.getElementById('fhirFileInput');
+        const fileInfo = document.getElementById('fileInfo');
+        const fileName = document.getElementById('fileName');
+        const clearFile = document.getElementById('clearFile');
+        let uploadedFile = null;
+
+        // File drop zone click handler
+        fileDropZone.addEventListener('click', () => {
+            fhirFileInput.click();
+        });
+
+        // File drop handlers
+        fileDropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            fileDropZone.style.borderColor = '#3498db';
+            fileDropZone.style.backgroundColor = '#f8f9fa';
+        });
+
+        fileDropZone.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            fileDropZone.style.borderColor = '#e0e0e0';
+            fileDropZone.style.backgroundColor = 'transparent';
+        });
+
+        fileDropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            fileDropZone.style.borderColor = '#e0e0e0';
+            fileDropZone.style.backgroundColor = 'transparent';
+            
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFileSelect(files[0]);
+            }
+        });
+
+        // File input change handler
+        fhirFileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFileSelect(e.target.files[0]);
+            }
+        });
+
+        // Handle file selection
+        function handleFileSelect(file) {
+            if (!file.type.includes('json') && !file.name.endsWith('.json')) {
+                alert('Please select a JSON file');
+                return;
+            }
+
+            uploadedFile = file;
+            fileName.textContent = file.name;
+            fileInfo.style.display = 'block';
+            fileDropZone.style.display = 'none';
+            fhirSubmitBtn.disabled = false;
+        }
+
+        // Clear file handler
+        clearFile.addEventListener('click', () => {
+            uploadedFile = null;
+            fhirFileInput.value = '';
+            fileInfo.style.display = 'none';
+            fileDropZone.style.display = 'block';
+            fhirSubmitBtn.disabled = true;
+        });
+
         // FHIR Processing
         fhirSubmitBtn.addEventListener('click', async () => {
-            const fhirInput = document.getElementById('fhirInput');
-            const fhirText = fhirInput.value.trim();
-            
-            if (!fhirText) {
-                alert('Please enter FHIR data');
+            if (!uploadedFile) {
+                alert('Please select a JSON file first');
                 return;
             }
 
             try {
-                const fhirData = JSON.parse(fhirText);
+                // Read file content
+                const fileContent = await readFileAsText(uploadedFile);
+                const fhirData = JSON.parse(fileContent);
                 const extractedData = extractDataFromFHIR(fhirData);
                 
                 // Process the extracted data
@@ -667,9 +733,19 @@
                 errorMessage.style.display = 'block';
             } finally {
                 loadingIndicator.style.display = 'none';
-                fhirSubmitBtn.disabled = false;
+                fhirSubmitBtn.disabled = uploadedFile ? false : true;
             }
         });
+
+        // Helper function to read file as text
+        function readFileAsText(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = (e) => resolve(e.target.result);
+                reader.onerror = (e) => reject(e);
+                reader.readAsText(file);
+            });
+        }
 
         // Extract data from FHIR Bundle or Patient resource
         function extractDataFromFHIR(fhirData) {
@@ -847,9 +923,9 @@
             return extracted;
         }
 
-        // Sample FHIR data
+        // Sample FHIR data - creates and downloads a sample file
         function loadSampleFHIR() {
-            document.getElementById('fhirInput').value = JSON.stringify({
+            const sampleData = {
                 "resourceType": "Bundle",
                 "type": "collection",
                 "entry": [
@@ -919,7 +995,18 @@
                         }
                     }
                 ]
-            }, null, 2);
+            };
+            
+            // Create and download the sample file
+            const blob = new Blob([JSON.stringify(sampleData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'sample-fhir-data.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
         }
 
         // Add sample FHIR button
@@ -928,7 +1015,7 @@
         sampleFhirBtn.className = 'submit-btn';
         sampleFhirBtn.style.background = '#9b59b6';
         sampleFhirBtn.style.marginTop = '10px';
-        sampleFhirBtn.innerHTML = '<i class="fas fa-flask"></i> Load Sample FHIR';
+        sampleFhirBtn.innerHTML = '<i class="fas fa-download"></i> Download Sample FHIR File';
         sampleFhirBtn.onclick = loadSampleFHIR;
         fhirForm.appendChild(sampleFhirBtn);
     </script>

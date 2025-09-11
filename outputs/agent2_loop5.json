@@ -1,45 +1,49 @@
 {
   "recommendations": [
-    "Defer contrast-enhanced CT until STAT renal function labs (eGFR, creatinine, BUN, potassium) with timestamps are available. If the indication is non-emergent, consider non-contrast CT or MRI without gadolinium.",
-    "If the indication is emergent and renal labs are obtained, verify eGFR >= 30 mL/min/1.73m² before contrast. For eGFR 30-60, utilize low-dose or split-bolus protocols and adhere to KDIGO hydration guidelines.",
-    "Clarify the primary clinical indication for imaging and its urgency (emergent vs. non-emergent)."
+    "Initiate hemodynamic stabilization with fluid resuscitation and/or vasopressors to achieve SBP >90 mmHg and MAP >65 mmHg prior to contrast administration.",
+    "Administer a reduced contrast volume of 0.8-1.0 mL/kg (approximately 50-70 mL) using low-osmolar or iso-osmolar iodinated contrast.",
+    "Implement a comprehensive renal protection protocol including pre- and post-hydration with isotonic saline.",
+    "Consider a Ventilation-Perfusion (V/Q) scan if hemodynamic goals cannot be met or the patient remains unstable."
   ],
   "rationale": [
-    "Critical renal function labs are missing, preventing safe contrast administration per ACR and KDIGO guidelines.",
-    "Lack of clinical indication and urgency prevents definitive protocol selection.",
-    "Non-emergent admission allows for deferral of contrast-enhanced imaging until safety parameters are met."
+    "Patient is hypotensive (MAP 59 mmHg), increasing risk of contrast-induced renal injury and necessitating hemodynamic stabilization.",
+    "Elevated creatinine (1.7 mg/dL) and eGFR of 59 mL/min/1.73m² indicate moderate renal impairment, requiring reduced contrast dose.",
+    "Missing weight and height prevent precise weight-based contrast dosing and BMI calculation, necessitating an estimated range.",
+    "ACR guidelines advise caution with contrast in hypotensive and renally impaired patients, recommending hydration and dose adjustment."
   ],
   "protocol_selection": [
     {
-      "protocol_id": "CT_LIVER_LIRADS_MULTIPHASE",
-      "name": "Liver Lesion Characterization (LI-RADS Multiphase)",
+      "protocol_id": "CT_CHEST_ANGIO_PULMONARY_EMBOLISM",
+      "name": "CT Pulmonary Angiography (Chest CTA for PE)",
       "indications": [
-        "chronic liver disease",
-        "HCC evaluation",
-        "liver lesion follow-up"
+        "pulmonary embolism",
+        "acute chest pain",
+        "shortness of breath"
       ],
-      "description": "Includes non-contrast, arterial, portal venous, and delayed phases as per LI-RADS.",
-      "contrast_timing": "Arterial (≈35 sec), portal venous (≈70–80 sec), delayed (3–4 min).",
-      "contrast_dose": "As per abdomen protocol; adjust in renal impairment.",
-      "renal_safety_notes": "Consider MRI in patients with eGFR <30; use hydration and dose adjustment.",
+      "description": "CT angiography timed for pulmonary arterial phase (6–13 sec post-contrast) to evaluate pulmonary arteries for embolism. Modified contrast volume and hydration protocols are required.",
+      "contrast_timing": "Pulmonary arterial phase: ~6–13 sec post-injection.",
+      "contrast_dose": "Modified weight-based; ~0.8–1.0 mL/kg (approx. 50–70 mL) iodinated contrast (300 mg I/mL); follow ACR Manual and institutional guidelines for renal impairment and hypotension.",
+      "renal_safety_notes": "Requires pre-hydration, reduced contrast volume, and post-hydration. Hemodynamic stabilization is mandatory prior to contrast administration. eGFR of 59 mL/min/1.73m² and hypotension are significant risk factors.",
       "references": [
-        "Contrast CT phases overview (Wikipedia):contentReference[oaicite:4]{index=4}",
-        "LI-RADS explanation (Wikipedia):contentReference[oaicite:5]{index=5}"
+        "Contrast CT phases overview (Wikipedia):contentReference[oaicite:0]{index=0}",
+        "CT pulmonary angiogram practical notes (Wikipedia):contentReference[oaicite:1]{index=1}"
       ]
     },
     {
-      "protocol_id": "CT_TRAUMA_CHEST_ABD_PELVIS",
-      "name": "Trauma CT – Chest, Abdomen & Pelvis with Contrast",
+      "protocol_id": "V/Q_SCAN",
+      "name": "Ventilation-Perfusion (V/Q) Scan",
       "indications": [
-        "blunt/penetrating trauma",
-        "active hemorrhage evaluation"
+        "pulmonary embolism",
+        "alternative to CTPA in renal impairment",
+        "alternative to CTPA in contrast allergy",
+        "alternative to CTPA in pregnancy"
       ],
-      "description": "Contrast CT of torso with trauma-focused reformats; may include delayed images as needed.",
-      "contrast_timing": "Portal venous phase, possible delayed imaging to assess hemorrhage.",
-      "contrast_dose": "Standard contrast dose; trauma protocols may include split bolus techniques.",
-      "renal_safety_notes": "Minimize field-of-view and dose; use alternative imaging if stable and renal risk high.",
+      "description": "Radiopharmaceutical study to assess for pulmonary embolism by imaging ventilation and perfusion in the lungs. Preferred modality for patients with significant contraindications to iodinated contrast agents.",
+      "contrast_timing": "N/A (radiopharmaceutical administered).",
+      "contrast_dose": "N/A.",
+      "renal_safety_notes": "No iodinated contrast is used, making it a safe alternative for patients with renal impairment or hypotension where contrast-enhanced CT is contraindicated or high-risk.",
       "references": [
-        "UW Trauma protocol overview (PDF):contentReference[oaicite:7]{index=7}"
+        "V/Q scan procedure (RadiologyInfo):contentReference[oaicite:10]{index=10}"
       ]
     }
   ]

@@ -1,47 +1,37 @@
 {
   "recommendations": [
-    "STAT Renal Function Labs: Obtain STAT renal function labs (eGFR, serum creatinine, BUN, potassium) with documented timestamps before any contrast-enhanced study.",
-    "Defer Contrast if Non-Emergent: If the clinical scenario is non-emergent, defer contrast-enhanced CT until renal function is known; consider non-contrast CT or MRI without gadolinium in the interim.",
-    "Emergency Protocol: If the situation is emergent (e.g., active hemorrhage), proceed with the lowest feasible contrast dose, employ split-bolus or reduced-volume techniques, and ensure aggressive IV hydration per KDIGO guidelines.",
-    "Clarify Indication: Clarify the specific clinical indication (e.g., liver lesion evaluation, trauma assessment, infection work-up) before selecting a protocol."
+    "Order serum creatinine, BUN, and potassium immediately to assess renal function before contrast administration.",
+    "If eGFR is adequate (>= 45 mL/min/1.73 m²), proceed with CT Pulmonary Angiography using weight-based contrast dosing (approx. 1.5 mL/kg, max 150 mL) and standardized hydration (1 mL/kg/h starting 12 hours before and continuing 12 hours after contrast).",
+    "If eGFR is significantly reduced (30-44 mL/min/1.73 m²) or unavailable, consider reduced contrast volume (~0.8 mL/kg), low/iso-osmolar contrast, and aggressive hydration with close renal monitoring. If eGFR < 30 mL/min/1.73 m² or labs remain unavailable, avoid iodinated contrast and consider V/Q scan or MR pulmonary angiography.",
+    "Schedule repeat renal function testing 24-48 hours post-contrast administration."
   ],
   "rationale": [
-    "Missing renal function data prevents safe contrast administration.",
-    "Protocols were selected without a confirmed clinical indication.",
-    "Incomplete patient data and missing lab values lead to low confidence in current assessment.",
-    "Placeholder references require replacement with verifiable sources."
+    "Critical lack of renal function labs (creatinine, BUN, potassium) necessitates immediate ordering for safe contrast administration.",
+    "Patient's clinical presentation (shortness of breath, chest pain) strongly suggests PE, making CTA a primary consideration, but dependent on renal function.",
+    "Accurate contrast dosing requires patient weight and height, which are missing.",
+    "Specific hydration protocols are required for optimal renal protection.",
+    "Alternative imaging modalities must be considered in the presence of significant renal impairment or unavailable labs."
   ],
   "protocol_selection": [
     {
-      "protocol_id": "CT_LIVER_LIRADS_MULTIPHASE",
-      "name": "Liver Lesion Characterization (LI-RADS Multiphase)",
+      "protocol_id": "CT_CHEST_ANGIO_PULMONARY_EMBOLISM",
+      "name": "CT Pulmonary Angiography (Chest CTA for PE)",
       "indications": [
-        "chronic liver disease",
-        "HCC evaluation",
-        "liver lesion follow-up"
+        "pulmonary embolism",
+        "acute chest pain",
+        "shortness of breath"
       ],
-      "description": "Includes non-contrast, arterial, portal venous, and delayed phases as per LI-RADS.",
-      "contrast_timing": "Arterial (1/435 sec), portal venous (1/70–1/80 sec), delayed (3–4 min).",
-      "contrast_dose": "As per abdomen protocol; adjust in renal impairment.",
-      "renal_safety_notes": "Consider MRI in patients with eGFR <30; use hydration and dose adjustment.",
+      "description": "CT angiography timed for pulmonary arterial phase (6–13 sec post-contrast) to evaluate pulmonary arteries for embolism.",
+      "contrast_timing": "Pulmonary arterial phase: ≈6–13 sec post-injection.",
+      "contrast_dose": "Weight-based; ~1.5 mL/kg, maximum 150 mL (e.g., ~100–150 mL iodinated contrast, 300 mg I/mL), adjusted based on renal function per ACR Manual.",
+      "renal_safety_notes": "Essential to obtain eGFR. If eGFR < 45 mL/min/1.73 m², consider dose reduction, low/iso-osmolar contrast, and aggressive hydration. If eGFR < 30 mL/min/1.73 m², avoid iodinated contrast and consider alternative imaging.",
+      "hydration_protocol": "Isotonic saline 1 mL/kg/h starting 12 hours before and continuing 12 hours after contrast administration (adjust for cardiac status).",
+      "allergy_screening": "Screen for contrast allergy; consider pre-medication if indicated.",
+      "post_procedure_monitoring": "Repeat renal function testing (creatinine) 24-48 hours post-contrast.",
       "references": [
-        "Contrast CT phases overview (Wikipedia):contentReference[oaicite:4]{index=4}",
-        "LI-RADS explanation (Wikipedia):contentReference[oaicite:5]{index=5}"
-      ]
-    },
-    {
-      "protocol_id": "CT_TRAUMA_CHEST_ABD_PELVIS",
-      "name": "Trauma CT – Chest, Abdomen & Pelvis with Contrast",
-      "indications": [
-        "blunt/penetrating trauma",
-        "active hemorrhage evaluation"
-      ],
-      "description": "Contrast CT of torso with trauma-focused reformats; may include delayed images as needed.",
-      "contrast_timing": "Portal venous phase, possible delayed imaging to assess hemorrhage.",
-      "contrast_dose": "Standard contrast dose; trauma protocols may include split bolus techniques.",
-      "renal_safety_notes": "Minimize field-of-view and dose; use alternative imaging if stable and renal risk high.",
-      "references": [
-        "UW Trauma protocol overview (PDF):contentReference[oaicite:7]{index=7}"
+        "ACR Manual on Contrast Media",
+        "ESC Guidelines for the diagnosis and management of acute pulmonary embolism",
+        "ACCP Guidelines for the diagnosis and management of venous thromboembolism"
       ]
     }
   ]

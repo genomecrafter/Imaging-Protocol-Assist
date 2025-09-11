@@ -1,22 +1,25 @@
 {
   "issues": [
-    "Critical renal function labs (eGFR, serum creatinine, BUN, potassium) are missing, preventing safe administration of iodinated contrast.",
-    "No timestamps for any laboratory values, making it impossible to verify that labs are recent enough for decision‑making.",
-    "The primary clinical question for imaging and its urgency (emergent vs. non‑emergent) were not provided, so a specific CT protocol cannot be selected.",
-    "Potential contraindication to contrast‑enhanced CT cannot be ruled out without renal function data, increasing risk of contrast‑induced nephropathy.",
-    "Agent 2’s suggestion to apply LI‑RADS or Trauma protocols is unsupported because the indication for those protocols was not supplied."
+    "Current MAP is 59 mmHg (hypotensive); contrast administration for CTPA is unsafe until MAP ≥ 65 mmHg is achieved.",
+    "Renal function shows creatinine 1.7 mg/dL and eGFR 59 mL/min/1.73 m², placing the patient at moderate risk for contrast‑induced nephropathy, especially in the setting of hypotension.",
+    "Weight, height, and therefore BMI are missing, preventing accurate weight‑based contrast volume calculation and personalized hydration protocols.",
+    "Renal tool summary incorrectly states \"Missing BMI or creatinine\" even though creatinine is present; the comment about missing lab timestamps limits confidence in the risk assessment.",
+    "Agent 2’s renal safety note references an eGFR cutoff of <30 mL/min/1.73 m², which does not directly apply to this patient (eGFR 59), but the note does not emphasize the additional risk conferred by hypotension.",
+    "No explicit plan for immediate hemodynamic optimization (e.g., fluid bolus, vasopressor) prior to imaging is provided."
   ],
   "recommendations": [
-    "Order up‑to‑date renal function labs (eGFR, serum creatinine, BUN, potassium) and ensure the results include timestamps within the last 24‑48 hours.",
-    "Document the clinical indication for imaging (e.g., suspected renal mass, trauma, abdominal pain) and determine whether the study is emergent or can be delayed.",
-    "If the study is non‑emergent, defer contrast‑enhanced CT until renal labs are available; consider non‑contrast CT, MRI, or ultrasound as alternatives.",
-    "If the study is emergent and renal labs become available, apply KDIGO eGFR thresholds: \n   • eGFR ≥ 60 mL/min/1.73 m² – standard contrast protocol.\n   • eGFR 30–59 mL/min/1.73 m² – use low‑osmolar contrast, limit volume, consider prophylactic hydration.\n   • eGFR < 30 mL/min/1.73 m² – avoid iodinated contrast if possible; use alternative imaging or employ iso‑osmolar contrast with aggressive hydration and N‑acetylcysteine if benefit outweighs risk.",
-    "Record any prophylactic measures taken (IV hydration, N‑acetylcysteine) and obtain post‑procedure renal labs to monitor for contrast‑induced nephropathy.",
-    "Once labs and indication are confirmed, select the appropriate CT protocol (e.g., LI‑RADS for hepatic lesion evaluation, trauma protocol for blunt abdominal injury) based on the clinical scenario."
+    "Stabilize the patient hemodynamically first: aim for MAP ≥ 65 mmHg using IV crystalloid bolus (e.g., 500 mL normal saline) and, if needed, vasopressor support before any contrast‑enhanced study.",
+    "If MAP cannot be reliably achieved within a short time frame, defer CTPA and perform a ventilation‑perfusion (V/Q) scan as the primary imaging modality for suspected pulmonary embolism.",
+    "Obtain accurate weight and height now; calculate BMI to guide contrast volume (typically 1.5 mL/kg for low‑volume protocols) and hydration dosing (e.g., 1 mL/kg/hr isotonic saline for 12 h before and after contrast).",
+    "When CTPA is deemed necessary after stabilization, use a low‑osmolar or iso‑osmolar iodinated contrast agent, limit total volume to the lowest effective amount, and consider a split‑dose or diluted protocol if feasible.",
+    "Implement renal protection measures: IV isotonic hydration (1 mL/kg/hr beginning 12 h pre‑scan and continuing 6–12 h post‑scan) ± bicarbonate infusion if patient is acidotic, and avoid nephrotoxic medications.",
+    "Schedule repeat renal labs (serum creatinine and eGFR) at 24 h and 48 h post‑contrast to detect any acute kidney injury.",
+    "Document the contraindication (hypotension) and the mitigation steps taken in the radiology order set.",
+    "Consider alternative bedside diagnostics (e.g., focused cardiac ultrasound, lower‑extremity Doppler) if imaging cannot be performed promptly."
   ],
-  "confidence": 0.62,
-  "agent2_confidence": 0.88,
-  "timestamp": "2025-09-08T16:57:21.630218Z",
+  "confidence": 0.78,
+  "agent2_confidence": 0.78,
+  "timestamp": "2025-09-09T06:08:59.050770Z",
   "tool_outputs": {
     "renal": {
       "tool_id": "renal_tool_v2",
@@ -24,46 +27,44 @@
         {
           "id": "egfr_ckd_epi",
           "units": "ml/min/1.73m2",
-          "timestamp": "2025-09-08T16:57:05.404433Z",
+          "timestamp": "2025-09-09T06:08:21.925614Z",
           "priority": "critical",
-          "value": null,
-          "status": "missing",
-          "reason": "eGFR not available"
+          "value": 59.0,
+          "status": "pass",
+          "reason": "Low renal risk for contrast."
         },
         {
           "id": "creatinine_mg_dl",
           "units": "mg/dL",
-          "timestamp": "2025-09-08T16:57:05.404469Z",
+          "timestamp": "2025-09-09T06:08:21.925649Z",
           "priority": "critical",
-          "value": null,
-          "status": "missing",
-          "reason": "Creatinine not available"
+          "value": 1.7,
+          "status": "fail",
+          "reason": "Creatinine significantly elevated."
         },
         {
           "id": "bun_creatinine_ratio",
-          "timestamp": "2025-09-08T16:57:05.404487Z",
+          "timestamp": "2025-09-09T06:08:21.925667Z",
           "priority": "important",
-          "value": null,
-          "status": "missing",
-          "reason": "Missing BUN or creatinine for ratio."
+          "value": 20.0,
+          "status": "warning",
+          "reason": "BUN/Cr ratio suggests prerenal azotemia."
         },
         {
           "id": "potassium_mmol_l",
           "units": "mEq/L",
-          "timestamp": "2025-09-08T16:57:05.404503Z",
+          "timestamp": "2025-09-09T06:08:21.925695Z",
           "priority": "important",
-          "value": null,
-          "status": "missing",
-          "reason": "Potassium not available"
+          "value": 4.6,
+          "status": "pass",
+          "reason": "Potassium normal."
         }
       ],
       "summary": {
         "overall": "fail",
         "reasons": [
-          "eGFR not available",
-          "Creatinine not available",
-          "Missing BUN or creatinine for ratio.",
-          "Potassium not available",
+          "Creatinine significantly elevated.",
+          "BUN/Cr ratio suggests prerenal azotemia.",
           "Missing BMI or creatinine.",
           "No lab timestamps provided."
         ],
@@ -71,124 +72,172 @@
       },
       "metadata": {
         "version": "2.0.0",
-        "run_ts": "2025-09-08T16:57:05.404832Z"
+        "run_ts": "2025-09-09T06:08:21.925783Z"
       }
     }
   },
-  "llm_raw": "{\n  \"issues\": [\n    \"Critical renal function labs (eGFR, serum creatinine, BUN, potassium) are missing, preventing safe administration of iodinated contrast.\",\n    \"No timestamps for any laboratory values, making it impossible to verify that labs are recent enough for decision‑making.\",\n    \"The primary clinical question for imaging and its urgency (emergent vs. non‑emergent) were not provided, so a specific CT protocol cannot be selected.\",\n    \"Potential contraindication to contrast‑enhanced CT cannot be ruled out without renal function data, increasing risk of contrast‑induced nephropathy.\",\n    \"Agent 2’s suggestion to apply LI‑RADS or Trauma protocols is unsupported because the indication for those protocols was not supplied.\"\n  ],\n  \"recommendations\": [\n    \"Order up‑to‑date renal function labs (eGFR, serum creatinine, BUN, potassium) and ensure the results include timestamps within the last 24‑48 hours.\",\n    \"Document the clinical indication for imaging (e.g., suspected renal mass, trauma, abdominal pain) and determine whether the study is emergent or can be delayed.\",\n    \"If the study is non‑emergent, defer contrast‑enhanced CT until renal labs are available; consider non‑contrast CT, MRI, or ultrasound as alternatives.\",\n    \"If the study is emergent and renal labs become available, apply KDIGO eGFR thresholds: \\n   • eGFR ≥ 60 mL/min/1.73 m² – standard contrast protocol.\\n   • eGFR 30–59 mL/min/1.73 m² – use low‑osmolar contrast, limit volume, consider prophylactic hydration.\\n   • eGFR < 30 mL/min/1.73 m² – avoid iodinated contrast if possible; use alternative imaging or employ iso‑osmolar contrast with aggressive hydration and N‑acetylcysteine if benefit outweighs risk.\",\n    \"Record any prophylactic measures taken (IV hydration, N‑acetylcysteine) and obtain post‑procedure renal labs to monitor for contrast‑induced nephropathy.\",\n    \"Once labs and indication are confirmed, select the appropriate CT protocol (e.g., LI‑RADS for hepatic lesion evaluation, trauma protocol for blunt abdominal injury) based on the clinical scenario.\"\n  ],\n  \"confidence\": 0.87\n}",
+  "llm_raw": "{\n  \"issues\": [\n    \"Current MAP is 59 mmHg (hypotensive); contrast administration for CTPA is unsafe until MAP ≥ 65 mmHg is achieved.\",\n    \"Renal function shows creatinine 1.7 mg/dL and eGFR 59 mL/min/1.73 m², placing the patient at moderate risk for contrast‑induced nephropathy, especially in the setting of hypotension.\",\n    \"Weight, height, and therefore BMI are missing, preventing accurate weight‑based contrast volume calculation and personalized hydration protocols.\",\n    \"Renal tool summary incorrectly states \\\"Missing BMI or creatinine\\\" even though creatinine is present; the comment about missing lab timestamps limits confidence in the risk assessment.\",\n    \"Agent 2’s renal safety note references an eGFR cutoff of <30 mL/min/1.73 m², which does not directly apply to this patient (eGFR 59), but the note does not emphasize the additional risk conferred by hypotension.\",\n    \"No explicit plan for immediate hemodynamic optimization (e.g., fluid bolus, vasopressor) prior to imaging is provided.\"\n  ],\n  \"recommendations\": [\n    \"Stabilize the patient hemodynamically first: aim for MAP ≥ 65 mmHg using IV crystalloid bolus (e.g., 500 mL normal saline) and, if needed, vasopressor support before any contrast‑enhanced study.\",\n    \"If MAP cannot be reliably achieved within a short time frame, defer CTPA and perform a ventilation‑perfusion (V/Q) scan as the primary imaging modality for suspected pulmonary embolism.\",\n    \"Obtain accurate weight and height now; calculate BMI to guide contrast volume (typically 1.5 mL/kg for low‑volume protocols) and hydration dosing (e.g., 1 mL/kg/hr isotonic saline for 12 h before and after contrast).\",\n    \"When CTPA is deemed necessary after stabilization, use a low‑osmolar or iso‑osmolar iodinated contrast agent, limit total volume to the lowest effective amount, and consider a split‑dose or diluted protocol if feasible.\",\n    \"Implement renal protection measures: IV isotonic hydration (1 mL/kg/hr beginning 12 h pre‑scan and continuing 6–12 h post‑scan) ± bicarbonate infusion if patient is acidotic, and avoid nephrotoxic medications.\",\n    \"Schedule repeat renal labs (serum creatinine and eGFR) at 24 h and 48 h post‑contrast to detect any acute kidney injury.\",\n    \"Document the contraindication (hypotension) and the mitigation steps taken in the radiology order set.\",\n    \"Consider alternative bedside diagnostics (e.g., focused cardiac ultrasound, lower‑extremity Doppler) if imaging cannot be performed promptly.\"\n  ],\n  \"confidence\": 0.78\n}",
   "hallucination_analysis": {
     "statement_assessments": [
       {
-        "text": "Critical renal function labs (eGFR, serum creatinine, BUN, potassium) are missing, preventing safe administration of iodinated contrast.",
+        "text": "Current MAP is 59 mmHg (hypotensive); contrast administration for CTPA is unsafe until MAP ≥ 65 mmHg is achieved.",
         "type": "issue",
-        "classification": "unverified",
-        "rationale": "no direct or inferred support found"
+        "classification": "supported",
+        "rationale": "matches known fact 'f'"
       },
       {
-        "text": "No timestamps for any laboratory values, making it impossible to verify that labs are recent enough for decision‑making.",
+        "text": "Renal function shows creatinine 1.7 mg/dL and eGFR 59 mL/min/1.73 m², placing the patient at moderate risk for contrast‑induced nephropathy, especially in the setting of hypotension.",
         "type": "issue",
-        "classification": "unverified",
-        "rationale": "no direct or inferred support found"
+        "classification": "supported",
+        "rationale": "matches known fact 'f'"
       },
       {
-        "text": "The primary clinical question for imaging and its urgency (emergent vs. non‑emergent) were not provided, so a specific CT protocol cannot be selected.",
+        "text": "Weight, height, and therefore BMI are missing, preventing accurate weight‑based contrast volume calculation and personalized hydration protocols.",
         "type": "issue",
-        "classification": "unverified",
-        "rationale": "no direct or inferred support found"
+        "classification": "supported",
+        "rationale": "matches known fact 'f'"
       },
       {
-        "text": "Potential contraindication to contrast‑enhanced CT cannot be ruled out without renal function data, increasing risk of contrast‑induced nephropathy.",
+        "text": "Renal tool summary incorrectly states \"Missing BMI or creatinine\" even though creatinine is present; the comment about missing lab timestamps limits confidence in the risk assessment.",
         "type": "issue",
-        "classification": "unverified",
-        "rationale": "no direct or inferred support found"
+        "classification": "supported",
+        "rationale": "matches known fact 'f'"
       },
       {
-        "text": "Agent 2’s suggestion to apply LI‑RADS or Trauma protocols is unsupported because the indication for those protocols was not supplied.",
+        "text": "Agent 2’s renal safety note references an eGFR cutoff of <30 mL/min/1.73 m², which does not directly apply to this patient (eGFR 59), but the note does not emphasize the additional risk conferred by hypotension.",
         "type": "issue",
-        "classification": "unverified",
-        "rationale": "no direct or inferred support found"
+        "classification": "supported",
+        "rationale": "matches known fact '0'"
       },
       {
-        "text": "Order up‑to‑date renal function labs (eGFR, serum creatinine, BUN, potassium) and ensure the results include timestamps within the last 24‑48 hours.",
-        "type": "recommendation",
-        "classification": "unverified",
-        "rationale": "egfr 24.0 not present in KB"
+        "text": "No explicit plan for immediate hemodynamic optimization (e.g., fluid bolus, vasopressor) prior to imaging is provided.",
+        "type": "issue",
+        "classification": "supported",
+        "rationale": "matches known fact 'f'"
       },
       {
-        "text": "Document the clinical indication for imaging (e.g., suspected renal mass, trauma, abdominal pain) and determine whether the study is emergent or can be delayed.",
+        "text": "Stabilize the patient hemodynamically first: aim for MAP ≥ 65 mmHg using IV crystalloid bolus (e.g., 500 mL normal saline) and, if needed, vasopressor support before any contrast‑enhanced study.",
         "type": "recommendation",
-        "classification": "unverified",
-        "rationale": "no direct or inferred support found"
+        "classification": "supported",
+        "rationale": "matches known fact '0'"
       },
       {
-        "text": "If the study is non‑emergent, defer contrast‑enhanced CT until renal labs are available; consider non‑contrast CT, MRI, or ultrasound as alternatives.",
+        "text": "If MAP cannot be reliably achieved within a short time frame, defer CTPA and perform a ventilation‑perfusion (V/Q) scan as the primary imaging modality for suspected pulmonary embolism.",
         "type": "recommendation",
-        "classification": "unverified",
-        "rationale": "no direct or inferred support found"
+        "classification": "supported",
+        "rationale": "matches known fact 'f'"
       },
       {
-        "text": "If the study is emergent and renal labs become available, apply KDIGO eGFR thresholds: \n   • eGFR ≥ 60 mL/min/1.73 m² – standard contrast protocol.\n   • eGFR 30–59 mL/min/1.73 m² – use low‑osmolar contrast, limit volume, consider prophylactic hydration.\n   • eGFR < 30 mL/min/1.73 m² – avoid iodinated contrast if possible; use alternative imaging or employ iso‑osmolar contrast with aggressive hydration and N‑acetylcysteine if benefit outweighs risk.",
+        "text": "Obtain accurate weight and height now; calculate BMI to guide contrast volume (typically 1.5 mL/kg for low‑volume protocols) and hydration dosing (e.g., 1 mL/kg/hr isotonic saline for 12 h before and after contrast).",
         "type": "recommendation",
-        "classification": "unverified",
-        "rationale": "egfr 60.0 not present in KB"
+        "classification": "supported",
+        "rationale": "matches known fact 'f'"
       },
       {
-        "text": "Record any prophylactic measures taken (IV hydration, N‑acetylcysteine) and obtain post‑procedure renal labs to monitor for contrast‑induced nephropathy.",
+        "text": "When CTPA is deemed necessary after stabilization, use a low‑osmolar or iso‑osmolar iodinated contrast agent, limit total volume to the lowest effective amount, and consider a split‑dose or diluted protocol if feasible.",
         "type": "recommendation",
-        "classification": "unverified",
-        "rationale": "no direct or inferred support found"
+        "classification": "supported",
+        "rationale": "matches known fact 'f'"
       },
       {
-        "text": "Once labs and indication are confirmed, select the appropriate CT protocol (e.g., LI‑RADS for hepatic lesion evaluation, trauma protocol for blunt abdominal injury) based on the clinical scenario.",
+        "text": "Implement renal protection measures: IV isotonic hydration (1 mL/kg/hr beginning 12 h pre‑scan and continuing 6–12 h post‑scan) ± bicarbonate infusion if patient is acidotic, and avoid nephrotoxic medications.",
         "type": "recommendation",
-        "classification": "unverified",
-        "rationale": "no direct or inferred support found"
+        "classification": "supported",
+        "rationale": "matches known fact 'f'"
+      },
+      {
+        "text": "Schedule repeat renal labs (serum creatinine and eGFR) at 24 h and 48 h post‑contrast to detect any acute kidney injury.",
+        "type": "recommendation",
+        "classification": "supported",
+        "rationale": "matches known fact 'f'"
+      },
+      {
+        "text": "Document the contraindication (hypotension) and the mitigation steps taken in the radiology order set.",
+        "type": "recommendation",
+        "classification": "supported",
+        "rationale": "hemodynamic instability supported by MAP 59.0"
+      },
+      {
+        "text": "Consider alternative bedside diagnostics (e.g., focused cardiac ultrasound, lower‑extremity Doppler) if imaging cannot be performed promptly.",
+        "type": "recommendation",
+        "classification": "supported",
+        "rationale": "matches known fact 'f'"
       }
     ],
     "counts": {
-      "supported": 0,
+      "supported": 14,
       "inferred": 0,
       "domain_safe": 0,
-      "unverified": 11,
+      "unverified": 0,
       "contradicted": 0
     },
-    "hallucination_score": 0.5,
+    "hallucination_score": 0.0,
     "recommendation": {
-      "force_revision": true,
-      "confidence_reduction": 0.25
+      "force_revision": false,
+      "confidence_reduction": 0.0
     },
     "knowledge_base_summary": {
-      "numbers": {},
+      "numbers": {
+        "subject_id": 20028931.0,
+        "age": 72.0,
+        "hadm_id": 34567891.0,
+        "creatinine_mg_dl": 1.7,
+        "bun_mg_dl": 34.0,
+        "glucose_mg_dl": 142.0,
+        "hemoglobin_g_dl": 10.1,
+        "hematocrit_pct": 30.5,
+        "platelet_count": 210.0,
+        "wbc_count": 12.3,
+        "sodium_meq_l": 135.0,
+        "potassium_mmol_l": 4.6,
+        "chloride_meq_l": 100.0,
+        "bicarbonate_meq_l": 21.0,
+        "egfr_ckd_epi": 59.0,
+        "heart_rate_bpm": 95.0,
+        "systolic_bp_mmhg": 82.0,
+        "diastolic_bp_mmhg": 48.0,
+        "map_mmhg": 59.0,
+        "pulse_pressure_mmhg": 34.0,
+        "temperature_f": 98.9,
+        "spo2_pct": 94.0,
+        "respiratory_rate": 22.0,
+        "bun_creatinine_ratio": 20.0,
+        "hospital_expire_flag": 0.0,
+        "data_completeness_pct": 0.95
+      },
       "raw_strings_sample": [
-        "creatinine not available",
-        "egfr_ckd_epi",
-        "potassium_mmol_l",
-        "creatinine_mg_dl",
-        "fhir_based",
-        "bun_creatinine_ratio",
-        "missing bun or creatinine for ratio.",
-        "potassium not available",
-        "extracted from fhir",
-        "egfr not available"
+        "white",
+        "0",
+        "21",
+        "f",
+        "30.5",
+        "1.7",
+        "other",
+        "95",
+        "20.0",
+        "potassium_mmol_l"
       ]
     }
   },
   "feedback": {
     "issues": [
-      "Critical renal function labs (eGFR, serum creatinine, BUN, potassium) are missing, preventing safe administration of iodinated contrast.",
-      "No timestamps for any laboratory values, making it impossible to verify that labs are recent enough for decision‑making.",
-      "The primary clinical question for imaging and its urgency (emergent vs. non‑emergent) were not provided, so a specific CT protocol cannot be selected.",
-      "Potential contraindication to contrast‑enhanced CT cannot be ruled out without renal function data, increasing risk of contrast‑induced nephropathy.",
-      "Agent 2’s suggestion to apply LI‑RADS or Trauma protocols is unsupported because the indication for those protocols was not supplied."
+      "Current MAP is 59 mmHg (hypotensive); contrast administration for CTPA is unsafe until MAP ≥ 65 mmHg is achieved.",
+      "Renal function shows creatinine 1.7 mg/dL and eGFR 59 mL/min/1.73 m², placing the patient at moderate risk for contrast‑induced nephropathy, especially in the setting of hypotension.",
+      "Weight, height, and therefore BMI are missing, preventing accurate weight‑based contrast volume calculation and personalized hydration protocols.",
+      "Renal tool summary incorrectly states \"Missing BMI or creatinine\" even though creatinine is present; the comment about missing lab timestamps limits confidence in the risk assessment.",
+      "Agent 2’s renal safety note references an eGFR cutoff of <30 mL/min/1.73 m², which does not directly apply to this patient (eGFR 59), but the note does not emphasize the additional risk conferred by hypotension.",
+      "No explicit plan for immediate hemodynamic optimization (e.g., fluid bolus, vasopressor) prior to imaging is provided."
     ],
     "recommendations": [
-      "Order up‑to‑date renal function labs (eGFR, serum creatinine, BUN, potassium) and ensure the results include timestamps within the last 24‑48 hours.",
-      "Document the clinical indication for imaging (e.g., suspected renal mass, trauma, abdominal pain) and determine whether the study is emergent or can be delayed.",
-      "If the study is non‑emergent, defer contrast‑enhanced CT until renal labs are available; consider non‑contrast CT, MRI, or ultrasound as alternatives.",
-      "If the study is emergent and renal labs become available, apply KDIGO eGFR thresholds: \n   • eGFR ≥ 60 mL/min/1.73 m² – standard contrast protocol.\n   • eGFR 30–59 mL/min/1.73 m² – use low‑osmolar contrast, limit volume, consider prophylactic hydration.\n   • eGFR < 30 mL/min/1.73 m² – avoid iodinated contrast if possible; use alternative imaging or employ iso‑osmolar contrast with aggressive hydration and N‑acetylcysteine if benefit outweighs risk.",
-      "Record any prophylactic measures taken (IV hydration, N‑acetylcysteine) and obtain post‑procedure renal labs to monitor for contrast‑induced nephropathy.",
-      "Once labs and indication are confirmed, select the appropriate CT protocol (e.g., LI‑RADS for hepatic lesion evaluation, trauma protocol for blunt abdominal injury) based on the clinical scenario."
+      "Stabilize the patient hemodynamically first: aim for MAP ≥ 65 mmHg using IV crystalloid bolus (e.g., 500 mL normal saline) and, if needed, vasopressor support before any contrast‑enhanced study.",
+      "If MAP cannot be reliably achieved within a short time frame, defer CTPA and perform a ventilation‑perfusion (V/Q) scan as the primary imaging modality for suspected pulmonary embolism.",
+      "Obtain accurate weight and height now; calculate BMI to guide contrast volume (typically 1.5 mL/kg for low‑volume protocols) and hydration dosing (e.g., 1 mL/kg/hr isotonic saline for 12 h before and after contrast).",
+      "When CTPA is deemed necessary after stabilization, use a low‑osmolar or iso‑osmolar iodinated contrast agent, limit total volume to the lowest effective amount, and consider a split‑dose or diluted protocol if feasible.",
+      "Implement renal protection measures: IV isotonic hydration (1 mL/kg/hr beginning 12 h pre‑scan and continuing 6–12 h post‑scan) ± bicarbonate infusion if patient is acidotic, and avoid nephrotoxic medications.",
+      "Schedule repeat renal labs (serum creatinine and eGFR) at 24 h and 48 h post‑contrast to detect any acute kidney injury.",
+      "Document the contraindication (hypotension) and the mitigation steps taken in the radiology order set.",
+      "Consider alternative bedside diagnostics (e.g., focused cardiac ultrasound, lower‑extremity Doppler) if imaging cannot be performed promptly."
     ],
-    "confidence": 0.62
+    "confidence": 0.78
   }
 }

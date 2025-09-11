@@ -1,15 +1,33 @@
 {
   "recommendations": [
-    "Obtain STAT renal function labs (eGFR, serum creatinine, BUN, potassium) with precise timestamps. Do not proceed with contrast-enhanced imaging until this data is available.",
-    "Clarify the primary clinical indication for imaging and document the urgency (emergent vs. non-emergent).",
-    "If the indication is non-emergent, defer contrast-enhanced CT. Consider non-contrast CT, MRI without contrast, or ultrasound as alternatives.",
-    "If the indication is emergent, proceed with contrast-enhanced CT using the lowest feasible iodine dose, split-bolus or reduced-volume techniques, and aggressive IV hydration according to KDIGO guidelines."
+    "Proceed with CT Pulmonary Angiography (CTPA) for PE evaluation, implementing a comprehensive renal protection protocol and hemodynamic optimization.",
+    "If CTPA is contraindicated or hemodynamics cannot be stabilized, consider a Ventilation-Perfusion (V/Q) scan as an alternative for PE assessment.",
+    "Adjust contrast volume and hydration based on patient's weight and clinical status, prioritizing safety and efficacy.",
+    "Ensure correct application of renal safety metrics and logging of patient height/weight for future reference."
   ],
   "rationale": [
-    "Critical missing renal function data (eGFR, creatinine, BUN, potassium) prevents safe contrast administration.",
-    "Unclear clinical indication and urgency prevent appropriate protocol selection.",
-    "Contrast administration without known renal function poses a significant risk of contrast-induced nephropathy.",
-    "Placeholder patient data and references hinder definitive protocol selection and adherence to evidence-based standards."
+    "Patient's presentation suggests high suspicion for PE, making contrast-enhanced CTA the preferred modality if feasible.",
+    "Moderate renal impairment and hypotension necessitate careful pre-imaging management including hydration and hemodynamic stabilization.",
+    "Weight-based contrast dosing and tailored hydration are critical for optimizing contrast opacification and minimizing renal/cardiac strain.",
+    "Accurate documentation of patient biometrics and adherence to current renal safety guidelines are paramount."
   ],
-  "protocol_selection": []
+  "protocol_selection": [
+    {
+      "protocol_id": "CT_CHEST_ANGIO_PULMONARY_EMBOLISM",
+      "name": "CT Pulmonary Angiography (Chest CTA for PE)",
+      "indications": [
+        "pulmonary embolism",
+        "acute chest pain",
+        "shortness of breath"
+      ],
+      "description": "CT angiography timed for pulmonary arterial phase (6–13 sec post-contrast) to evaluate pulmonary arteries for embolism.",
+      "contrast_timing": "Pulmonary arterial phase: ~6–13 sec post-injection.",
+      "contrast_dose": "Weight-based; ~1.5 mL/kg, maximum 100 mL iodinated contrast (300 mg I/mL); follow ACR Manual and specific patient weight.",
+      "renal_safety_notes": "Assess renal risk with eGFR; implement hydration and hemodynamic optimization per recommendations. Contrast volume (mL) should be <= (eGFR x 1.5) for low-risk patients, adjust for moderate risk and clinical context.",
+      "references": [
+        "Contrast CT phases overview (Wikipedia):contentReference[oaicite:0]{index=0}",
+        "CT pulmonary angiogram practical notes (Wikipedia):contentReference[oaicite:1]{index=1}"
+      ]
+    }
+  ]
 }
