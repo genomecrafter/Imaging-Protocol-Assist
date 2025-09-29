@@ -351,23 +351,6 @@ def process_patient_data():
 - **Async Processing**: Non-blocking operations
 - **Database Connection Pooling**: Efficient resource utilization
 
-## 🧪 Testing
-
-### Unit Tests
-```bash
-pytest tests/unit/ -v --cov=agents --cov=tools --cov=utils
-```
-
-### Integration Tests
-```bash
-pytest tests/integration/ -v --cov-report=html
-```
-
-### Clinical Validation
-```bash
-python tests/clinical_validation.py --dataset=mimic-iv --subset=imaging
-```
-
 ## 📚 Clinical Evidence Base
 
 ### Guidelines Integration
@@ -395,82 +378,6 @@ The system integrates evidence from:
 4. **Push to branch**: `git push origin feature/new-protocol-type`
 5. **Create Pull Request**
 
-### Code Standards
-
-- **PEP 8**: Python code formatting
-- **Type Hints**: All functions must include type annotations
-- **Docstrings**: Google-style documentation
-- **Testing**: Minimum 90% code coverage
-
-### Pre-commit Hooks
-
-```bash
-pip install pre-commit
-pre-commit install
-```
-
-## 📋 Roadmap
-
-### Version 2.0 (Q2 2025)
-- [ ] Multi-modal imaging support (MRI, Nuclear Medicine)
-- [ ] Real-time EHR integration (Epic, Cerner)
-- [ ] Advanced ML models for outcome prediction
-- [ ] Mobile application interface
-
-### Version 2.1 (Q3 2025)
-- [ ] Multi-language support
-- [ ] Pediatric protocol specialization
-- [ ] Cloud deployment automation (AWS/Azure)
-- [ ] Advanced analytics dashboard
-
-## 🚨 Monitoring & Alerting
-
-### Health Checks
-
-```bash
-# System health endpoint
-curl http://localhost:8000/health
-
-# Agent status monitoring
-curl http://localhost:8000/agents/status
-```
-
-### Log Analysis
-
-```bash
-# View system logs
-tail -f logs/system.log
-
-# Monitor agent performance
-grep "processing_time" logs/agents.log | tail -20
-```
-
-## 📞 Support
-
-### Documentation
-- [API Reference](docs/api.md)
-- [Clinical Guidelines](docs/clinical.md)
-- [Deployment Guide](docs/deployment.md)
-- [Troubleshooting](docs/troubleshooting.md)
-
-### Contact Information
-- **Technical Support**: tech-support@medical-imaging.com
-- **Clinical Questions**: clinical@medical-imaging.com
-- **Security Issues**: security@medical-imaging.com
-
-### Issue Reporting
-
-Please use GitHub Issues for:
-- Bug reports
-- Feature requests
-- Documentation improvements
-- Performance issues
-
-Include:
-- System environment details
-- Error logs and stack traces
-- Patient data examples (de-identified)
-- Expected vs. actual behavior
 
 ## 📄 License
 
