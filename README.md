@@ -325,15 +325,6 @@ class PatientData(BaseModel):
 - **Audit Logging**: Comprehensive activity tracking
 - **FHIR R4 Compliance**: Healthcare interoperability standards
 
-### API Security
-
-```python
-# Rate limiting implementation
-@rate_limit("12/minute")
-@require_api_key
-def process_patient_data():
-    pass
-```
 
 ## 📈 Performance & Scalability
 
