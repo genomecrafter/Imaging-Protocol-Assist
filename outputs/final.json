@@ -1,15 +1,15 @@
 {
   "recommendations": [
-    "Obtain STAT serum creatinine and BUN to calculate eGFR. Proceed with CT Pulmonary Angiography only if eGFR is sufficient for contrast administration, with appropriate hydration.",
-    "If eGFR is < 30 mL/min/1.73m², consider Ventilation-Perfusion (V/Q) scan as an alternative for PE evaluation.",
-    "If eGFR is ≥ 30 and < 60 mL/min/1.73m², use low-osmolar contrast, minimize volume, and administer IV hydration.",
-    "Document a renal risk assessment and obtain informed consent prior to contrast administration."
+    "STAT serum creatinine, BUN, and electrolytes (including potassium) are required to calculate eGFR before any contrast administration.",
+    "If eGFR is sufficient (>= 45 mL/min/1.73m²), proceed with CT Pulmonary Angiography (CT_CHEST_ANGIO_PULMONARY_EMBOLISM) with weight-based low-osmolar iodinated contrast.",
+    "If eGFR is < 30 mL/min/1.73m², avoid iodinated contrast and consider a ventilation-perfusion (V/Q) scan or MR pulmonary angiography.",
+    "Re-evaluate the indication for low-dose CT chest screening; it is not currently indicated based on available patient data."
   ],
   "rationale": [
-    "Missing renal function data (eGFR, creatinine, BUN) prevents safe contrast administration.",
-    "Patient's acute presentation of shortness of breath and chest pain is concerning for PE, necessitating evaluation.",
-    "Low-dose CT chest is not indicated for acute symptoms and does not evaluate pulmonary arteries.",
-    "Alternative non-contrast imaging (V/Q scan) is recommended for potential renal impairment."
+    "Missing renal function labs preclude safe contrast administration.",
+    "PE is a strong clinical indication for CTA given the patient's symptoms.",
+    "Alternative non-contrast imaging is necessary for significant renal impairment.",
+    "Low-dose CT screening criteria are not met for this patient."
   ],
   "protocol_selection": [
     {
@@ -30,18 +30,19 @@
       ]
     },
     {
-      "protocol_id": "VENTILATION_PERFUSION_SCAN",
-      "name": "Ventilation-Perfusion (V/Q) Scan",
+      "protocol_id": "CT_CHEST_LOW_DOSE_SCREENING",
+      "name": "Low-Dose CT Chest – Lung Cancer Screening",
       "indications": [
-        "pulmonary embolism evaluation",
-        "contrast allergy",
-        "renal insufficiency"
+        "lung cancer screening",
+        "high-risk cohorts"
       ],
-      "description": "A two-part nuclear medicine imaging study to assess for pulmonary embolism by evaluating airflow (ventilation) and blood flow (perfusion) to the lungs.",
-      "contrast_timing": "N/A",
+      "description": "Low-dose CT of lungs targeting <3 mGy radiation dose while maintaining image quality.",
+      "contrast_timing": "N/A – non-contrast low-dose protocol.",
       "contrast_dose": "None.",
-      "renal_safety_notes": "Non-contrast modality, suitable for patients with renal impairment.",
-      "references": []
+      "renal_safety_notes": "Ideal in patients with renal dysfunction due to non-use of contrast.",
+      "references": [
+        "Low-dose CT screening dose benchmarks PMC:contentReference[oaicite:6]{index=6}"
+      ]
     }
   ]
 }

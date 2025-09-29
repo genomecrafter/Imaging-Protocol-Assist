@@ -1,16 +1,15 @@
 {
   "recommendations": [
-    "Perform CT Pulmonary Angiography (Chest CTA for PE) to rule out pulmonary embolism.",
-    "Obtain recent eGFR before administering contrast for CT Pulmonary Angiography.",
-    "If eGFR is < 30 mL/min/1.73m², consider non-contrast CT of the chest for alternative imaging if clinically appropriate, or proceed with caution and hydration as per ACR guidelines.",
-    "Consider a low-dose non-contrast CT chest if the primary concern shifts to lung cancer screening and renal function is a significant contraindication to contrast."
+    "Administer CT Pulmonary Angiography (Chest CTA for PE) protocol.",
+    "Verify patient's eGFR prior to contrast administration. If eGFR is < 30 mL/min/1.73m², consult renal safety notes and consider alternatives.",
+    "Ensure adequate hydration prior to contrast administration as per ACR guidelines.",
+    "Consider Low-Dose CT Chest for lung cancer screening if patient has a history of smoking, although not explicitly stated, it is a common comorbidity with the given patient profile."
   ],
   "rationale": [
-    "Patient presents with shortness of breath and chest pain, which are primary indications for CT Pulmonary Angiography.",
-    "Absence of eGFR necessitates verification to assess contrast safety, aligning with KDIGO and ACR guidelines.",
-    "Patient's history of diabetes and hypertension are risk factors for renal impairment, increasing the importance of eGFR assessment before contrast.",
-    "Non-emergency admission allows for standard protocol preparation and risk assessment.",
-    "Low-dose non-contrast CT chest is a viable alternative if contrast administration is contraindicated due to renal insufficiency and the clinical question can be addressed."
+    "Patient presents with shortness of breath and chest pain, which are primary indications for CT Pulmonary Angiography to rule out pulmonary embolism.",
+    "eGFR is unknown and needs to be assessed before administering contrast media, as per KDIGO and ACR guidelines, especially given the patient's age and history of diabetes and hypertension which are risk factors for renal impairment.",
+    "ACR guidelines emphasize hydration protocols to mitigate risks associated with contrast media administration.",
+    "Low-dose CT chest is a non-contrast study, making it a safe alternative in case of compromised renal function and is a standard screening tool for lung cancer in patients with comorbidities like diabetes and hypertension, which can be associated with smoking history."
   ],
   "protocol_selection": [
     {
