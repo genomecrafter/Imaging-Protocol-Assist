@@ -86,7 +86,6 @@ Required environment variables:
 GEMINI_API_KEY=your_gemini_api_key
 GROQ_API_KEY=your_groq_api_key
 SERPAPI_API_KEY=your_serpapi_key
-MODEL=llama-3.3-70b-versatile
 ```
 
 5. **Initialize the system**
