@@ -1,15 +1,15 @@
-# Advanced Medical Imaging Protocol System
+# Medical Imaging Protocol System
 
 [![Python Version](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://python.org)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.116.1-009688.svg)](https://fastapi.tiangolo.com)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Code Style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-## 🏥 Overview
+## Overview
 
 The Advanced Medical Imaging Protocol System is an industry-grade, AI-powered multi-agent system designed to optimize medical imaging protocols for healthcare institutions. The system leverages machine learning, clinical guidelines (KDIGO, ACR), and real-time patient data analysis to provide evidence-based imaging recommendations with comprehensive safety assessments.
 
-### 🎯 Key Features
+### Key Features
 
 - **Multi-Agent Architecture**: Distributed processing with specialized agents for protocol selection, review, and FHIR compliance
 - **Clinical Guideline Integration**: KDIGO and ACR Manual on Contrast Media compliance
@@ -20,7 +20,7 @@ The Advanced Medical Imaging Protocol System is an industry-grade, AI-powered mu
 - **Hallucination Detection**: AI output validation for clinical accuracy
 - **Enterprise Security**: Production-ready authentication and data protection
 
-## 🏗️ System Architecture
+## System Architecture
 
 ```mermaid
 graph TD
@@ -48,7 +48,7 @@ graph TD
 | **Agent 3** | Clinical review, safety validation | Groq LLM, Renal Tools, Hallucination Detection |
 | **FHIR Converter** | Healthcare standard compliance | FHIR R4, Pydantic Models |
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -76,10 +76,6 @@ pip install -r requirements.txt
 ```
 
 4. **Configure environment variables**
-```bash
-cp .env.example .env
-# Edit .env with your API keys
-```
 
 Required environment variables:
 ```env
@@ -102,7 +98,7 @@ uvicorn main:app --reload --host 0.0.0.0 --port 8000
 http://localhost:8000
 ```
 
-## 📋 Usage
+## Usage
 
 ### Web Interface
 
@@ -170,7 +166,7 @@ protocol_result = run_agent2_2(
 review_result = run_review_agent(patient_data, protocol_result)
 ```
 
-## 🧠 Agent Details
+## Agent Details
 
 ### APS1 (Advanced Protocol Search)
 
@@ -214,7 +210,7 @@ review_result = run_review_agent(patient_data, protocol_result)
 - **Field Normalization**: Consistent clinical data handling
 - **Priority-based Validation**: Critical vs. optional parameter handling
 
-## 🔧 Configuration
+## Configuration
 
 ### Clinical Parameters
 
@@ -244,7 +240,7 @@ VECTOR_DIMENSIONS = 384
 TOP_K_RESULTS = 3
 ```
 
-## 📊 Data Models
+## Data Models
 
 ### Patient Schema
 
@@ -314,7 +310,7 @@ class PatientData(BaseModel):
 }
 ```
 
-## 🔒 Security & Compliance
+## Security & Compliance
 
 ### Healthcare Data Protection
 
@@ -325,7 +321,7 @@ class PatientData(BaseModel):
 - **FHIR R4 Compliance**: Healthcare interoperability standards
 
 
-## 📈 Performance & Scalability
+## Performance & Scalability
 
 ### System Metrics
 
@@ -341,7 +337,7 @@ class PatientData(BaseModel):
 - **Async Processing**: Non-blocking operations
 - **Database Connection Pooling**: Efficient resource utilization
 
-## 📚 Clinical Evidence Base
+## Clinical Evidence Base
 
 ### Guidelines Integration
 
@@ -358,7 +354,7 @@ The system integrates evidence from:
 - Institutional protocols from major medical centers
 - FDA safety communications
 
-## 🔄 Development Workflow
+## Development Workflow
 
 ### Contributing
 
@@ -369,11 +365,11 @@ The system integrates evidence from:
 5. **Create Pull Request**
 
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **MIMIC-IV Database**: Critical care data for system validation
 - **American College of Radiology**: Clinical guideline integration
@@ -383,7 +379,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 **Disclaimer**: This system is designed for clinical decision support only. All imaging protocol decisions should be reviewed by qualified healthcare professionals. The system does not replace clinical judgment and should be used as part of comprehensive patient care.
-
-**Version**: 1.0.0
-**Last Updated**: 2025-01-29
-**Minimum Python Version**: 3.8+
